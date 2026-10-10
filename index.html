@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<!--
+  ============================================================================
+  Scopone-fara-frontiere
+  Autor: Alexandru-Ionuț Chiuță (Alexio · „Ecoul Stringurilor") · alexio@trom.tf
+  Aplicație single-file, offline, fără telemetrie, fără dependențe externe.
+  Licență: nedeclarată (decizia autorului).
+
+  Sprijin voluntar (opțional, niciodată obligatoriu):
+    Patreon:         https://www.patreon.com/c/alexio_tf
+    Buy Me a Coffee: https://buymeacoffee.com/echo.of.the.strings
+  ============================================================================
+-->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-QjKn0N/KQFtrYEikG0VbHnaLZqokt7NpActVY9QjxCU='; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Atlas al familiei Scopa/Scopone cu pachetul italian de 40 de cărți: Scopa, Scopone (9+4 și 10 cărți), Scopa a 15, Cirulla, Rubamazzo și altele, jucabile contra AI, offline.">
+<meta name="theme-color" content="#0d0a08">
+<meta property="og:title" content="Scopone fără frontiere">
+<meta property="og:description" content="Atlas al familiei Scopa/Scopone, jucabil contra AI, într-un singur fișier HTML offline.">
+<meta property="og:type" content="website">
+<meta name="referrer" content="no-referrer">
+<title>Scopone fără frontiere</title>
+<style>
+:root{--bg:#0d0a08;--bg2:#1a140d;--bg3:#2a2010;--ink:#f0e6d0;--muted:#c2b497;--gold:#c8832a;--gold2:#e8c87a;--line:#c8832a40;--felt:#123524;--felt2:#0b2418;--red:#ff9c8c;--ok:#9be39b;--focus:#7cc4ff;
+--fd:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;--fb:'Iowan Old Style',Georgia,'Times New Roman',serif;--fm:'SF Mono','Cascadia Code',ui-monospace,Menlo,Consolas,monospace;--fu:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--cw:clamp(54px,min(8vw,10vh),104px);--r:14px}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fb);font-size:17px;line-height:1.55;min-height:100vh;background-image:radial-gradient(1000px 600px at 85% -10%,#3a2a1055,transparent 60%),radial-gradient(900px 500px at 5% 0,#2a201055,transparent 55%);padding-bottom:84px}
+a{color:var(--gold2)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+button,select,input{font:inherit;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+header.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:14px 0 10px;border-bottom:1px solid var(--line)}
+.brand{font-family:var(--fd);font-size:1.15rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold2);margin:0;font-weight:600}
+.brand small{display:block;letter-spacing:.12em;font-size:.72rem;color:var(--muted);text-transform:none;font-style:italic;margin-top:2px}
+.ctrls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--fu);font-size:.9rem}
+.ctrls label{color:var(--muted)}
+select,.btn,input[type=text],input[type=number]{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:0 12px;min-height:44px;color:var(--ink)}
+select{padding-right:8px}
+.btn{cursor:pointer;font-family:var(--fu);font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;background:linear-gradient(#2a2010,#1a140d)}
+.btn:hover{border-color:var(--gold)}
+.btn.pri{background:linear-gradient(#c8832a,#9a6218);color:#140c02;border-color:#e8c87a}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+nav.tabs{display:flex;gap:6px;padding:12px 0;overflow-x:auto;border-bottom:1px solid var(--line)}
+nav.tabs .btn[aria-selected=true]{background:linear-gradient(#c8832a,#9a6218);color:#140c02;border-color:#e8c87a}
+h1,h2,h3{font-family:var(--fd);font-weight:600;line-height:1.15}
+.hero{text-align:center;padding:26px 0 8px}
+.hero h1{font-size:clamp(2rem,7vw,3.6rem);margin:.1em 0;letter-spacing:.02em;background:linear-gradient(180deg,#fbf0d0,#e8c87a 55%,#c8832a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);max-width:720px;margin:6px auto;font-family:var(--fu);font-size:.98rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{font-family:var(--fu);font-size:.74rem;border:1px solid var(--line);border-radius:999px;padding:2px 10px;color:var(--muted);background:#00000030}
+.chip.ok{color:var(--ok);border-color:#9be39b55}.chip.warn{color:#ffd27a;border-color:#ffd27a66}.chip.at{color:#b9c9ff;border-color:#b9c9ff55}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:14px;margin:10px 0 30px}
+.fiche{background:linear-gradient(#1f180e,#151008);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.fiche h3{margin:.1em 0 .2em;font-size:1.3rem;color:var(--gold2)}
+.fiche p,.fiche li{font-size:.97rem}
+.fiche .meta{font-family:var(--fu);font-size:.85rem;color:var(--muted)}
+.fiche ul{padding-left:1.1em;margin:.3em 0}
+.fiche .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.fiche details{margin-top:8px}
+.fiche summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-family:var(--fu);font-weight:600;color:var(--gold2)}
+.warnbox{border-left:3px solid #ffd27a;background:#ffd27a14;padding:6px 10px;margin:8px 0;font-size:.92rem}
+.enote{font-family:var(--fu);font-size:.75rem;color:var(--muted);font-style:italic}
+.panel{background:linear-gradient(#1f180e,#151008);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:14px 0}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px;font-family:var(--fu)}
+.form .f{display:flex;flex-direction:column;gap:4px}
+.form .f.chk{flex-direction:row;align-items:center;gap:10px;min-height:44px}
+.form .f.chk input{width:22px;height:22px}
+.form small{color:var(--muted)}
+/* tabla */
+.board{background:radial-gradient(900px 500px at 50% 40%,var(--felt),var(--felt2));border:1px solid var(--line);border-radius:18px;padding:12px;margin:12px 0}
+.scorebar{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;justify-content:space-between;font-family:var(--fu);font-size:.9rem;background:#0008;border-radius:12px;padding:8px 12px}
+.scorebar b{font-family:var(--fm);color:var(--gold2)}
+.scorebar .sc{display:flex;gap:14px;flex-wrap:wrap}
+.seats{display:grid;gap:10px;grid-template-columns:minmax(64px,1fr) minmax(0,4fr) minmax(64px,1fr);grid-template-areas:". top ." "left tbl right";margin-top:10px;align-items:center}
+.seats.two{grid-template-columns:1fr;grid-template-areas:"top" "tbl"}
+.seat{text-align:center;font-family:var(--fu);font-size:.82rem;color:var(--muted)}
+.seat.top{grid-area:top}.seat.left{grid-area:left}.seat.right{grid-area:right}
+.seat.turn .nm{color:var(--gold2);text-shadow:0 0 8px #e8c87a88}
+.seat .nm{font-weight:700}
+.fan{display:flex;justify-content:center;margin:6px 0;min-height:30px;flex-wrap:nowrap}
+.fan .card{--cw:34px;margin-left:-20px}.fan .card:first-child{margin-left:0}
+.seat.left .fan,.seat.right .fan{flex-direction:column;align-items:center}
+.seat.left .fan .card,.seat.right .fan .card{margin-left:0;margin-top:-38px}.seat.left .fan .card:first-child,.seat.right .fan .card:first-child{margin-top:0}
+.fan.open .card{--cw:46px;margin-left:-26px}
+.seat.left .fan.open .card,.seat.right .fan.open .card{margin-left:0;margin-top:-56px}
+.tblarea{grid-area:tbl;min-height:calc(var(--cw)*1.6 + 24px);background:#0a1f15;border:1px dashed #e8c87a44;border-radius:14px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-content:center}
+.tblarea .empty{color:var(--muted);font-family:var(--fu);font-style:italic;align-self:center}
+.card{display:block;width:var(--cw);aspect-ratio:5/8;padding:0;border:0;background:none;position:relative;border-radius:calc(var(--cw)*.09);filter:drop-shadow(0 3px 5px #0009);transition:transform .15s}
+.card svg{display:block;width:100%;height:100%}
+button.card{cursor:pointer}
+button.card:hover{transform:translateY(-4px)}
+.card.sel{transform:translateY(-14px);outline:3px solid var(--gold2);outline-offset:1px}
+.card.can{outline:3px dashed #e8c87a}
+.card.act{outline:4px solid #ffd54a;box-shadow:0 0 0 4px #ffd54a55,0 0 18px 4px #ffd54a99;transform:translateY(-6px)}
+.card.tsel::after{content:"✓";position:absolute;top:2px;right:2px;background:#ffd54a;color:#1a1000;width:22px;height:22px;border-radius:50%;font:700 15px/22px var(--fu);text-align:center}
+.card.bad{outline:4px solid #ff6b57}
+.card[aria-disabled=true]{filter:drop-shadow(0 3px 5px #0009) saturate(.7)}
+.hand{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:14px 4px 6px}
+.actbar{background:#0009;border-radius:12px;padding:10px 12px;margin-top:8px;font-family:var(--fu)}
+.actbar .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px}
+.opts{display:flex;flex-direction:column;gap:6px;margin:6px 0}
+.opt{display:flex;align-items:center;gap:8px;text-align:left;justify-content:flex-start;padding:6px 12px;width:100%}
+.opt[aria-checked=true]{border-color:#ffd54a;background:#3a2c08;box-shadow:inset 0 0 0 2px #ffd54a}
+.opt .n{font-family:var(--fm);color:var(--gold2)}
+.status{font-family:var(--fu);margin:8px 0;min-height:1.6em;color:var(--ink)}
+.log{font-family:var(--fu);font-size:.85rem;color:var(--muted);max-height:9.5em;overflow:auto;margin:6px 0;padding:6px 10px;background:#0006;border-radius:10px}
+.log div:last-child{color:var(--ink)}
+.help{font-family:var(--fu);font-size:.8rem;color:var(--muted)}
+.endpanel{background:#0b0805ee;border:2px solid var(--gold);border-radius:14px;padding:14px;margin:10px 0;font-family:var(--fu)}
+.endpanel table{width:100%;border-collapse:collapse;margin:8px 0}
+.endpanel th,.endpanel td{padding:5px 8px;border-bottom:1px solid var(--line);text-align:right}
+.endpanel th:first-child,.endpanel td:first-child{text-align:left}
+.endpanel tr.tot td{font-weight:700;color:var(--gold2)}
+.endpanel .big{font-family:var(--fd);font-size:1.4rem;color:var(--gold2)}
+.mem{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:3px;margin-top:8px;font-family:var(--fm);font-size:.72rem}
+.mem span{border:1px solid var(--line);border-radius:5px;text-align:center;padding:3px 0;background:#f6f0df;color:#222}
+.mem span.out{opacity:.28}
+.mem span.f0,.mem span.f1{color:#b3201a}
+.tblwrap{overflow-x:auto;max-width:100%}
+.tbl{width:100%;border-collapse:collapse;font-family:var(--fu);font-size:.95rem}
+.tbl th,.tbl td{padding:6px 6px;border-bottom:1px solid var(--line);text-align:left}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:10px;margin:10px 0}
+.gallery .card{--cw:100%;width:100%}
+.stats{font-family:var(--fu);font-size:.88rem;color:var(--muted)}
+.legend{font-family:var(--fu);font-size:.8rem;color:var(--muted)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+noscript .ns{padding:20px;font-family:var(--fu);color:var(--gold2)}
+footer.pg{font-family:var(--fu);font-size:.8rem;color:var(--muted);text-align:center;padding:20px 0}
+.mini{display:inline-flex;align-items:center;gap:2px;font-family:var(--fm);font-size:.85rem;background:#f6f0df;color:#222;border-radius:5px;padding:0 5px;min-height:22px}
+.mini svg{width:14px;height:14px}
+.mini.m0,.mini.m1.fr{color:#b3201a}
+@media (max-width:640px){
+  body{font-size:16px}
+  .seats{grid-template-columns:minmax(50px,1fr) minmax(0,5fr) minmax(50px,1fr)}
+  .fan .card{--cw:26px;margin-left:-15px}.fan.open .card{--cw:34px;margin-left:-19px}
+  .seat.left .fan .card,.seat.right .fan .card{margin-top:-30px}
+  .tblarea{gap:6px;padding:8px 4px}
+  .hand{gap:6px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+@media (forced-colors:active){.card.sel,.card.act,.card.can{outline:3px solid Highlight}}
+
+#app{max-width:1180px;margin:0 auto;padding:0 16px}
+#actwrap{position:sticky;bottom:0;z-index:30}
+.actbar{max-height:48vh;overflow:auto;border:1px solid var(--line);background:#0d0a08f2}
+.board{padding:8px}
+.hand{padding:10px 4px 2px}
+.scorebar .btn{min-height:44px}
+.opts{flex-direction:row;flex-wrap:wrap}
+.opt{width:auto}
+.actbar .row{margin-top:2px}
+
+</style>
+</head>
+<body>
+<a class="sr" href="#main">Skip</a>
+<div id="app"></div>
+<noscript><p class="ns">Această aplicație are nevoie de JavaScript (rulează local, fără rețea). · This app needs JavaScript (runs locally, no network). · Cette application nécessite JavaScript. · Questa app richiede JavaScript. · Esta aplicación necesita JavaScript. · Esta aplicação precisa de JavaScript. · Diese App benötigt JavaScript.</p></noscript>
+<script>
+/* ===== MOTOR (funcții pure + stare simplă; testabil în Node) =====
+   Cărți: id 0..39. Semn = floor(id/10): 0 Denari, 1 Coppe, 2 Spade, 3 Bastoni.
+   Rang = id%10+1: 1=Asso, 2..7, 8=Fante, 9=Cavallo, 10=Re. Valoare de captură = rang. */
+const SC = (function () {
+'use strict';
+const SUITS = ['denari', 'coppe', 'spade', 'bastoni'];
+const PRIM = [0, 16, 12, 13, 14, 15, 18, 21, 10, 10, 10]; /* valorile primierei, după rang */
+const SETTEBELLO = 6, REBELLO = 9, MATTA = 16; /* 7 denari, Re denari, 7 coppe (matta la Cirulla) */
+const suit = id => (id / 10) | 0;
+const rank = id => (id % 10) + 1;
+const team = p => p % 2;
+
+/* ---------- RNG: crypto (rejection sampling) sau seed (mulberry32) ---------- */
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0);
+  };
+}
+function hashSeed(s) { /* FNV-1a pe șir -> uint32 */
+  s = String(s); let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193); }
+  return h >>> 0;
+}
+function makeRNG(seed) {
+  let u32, seeded = seed !== undefined && seed !== null && seed !== '';
+  if (seeded) { u32 = mulberry32(typeof seed === 'number' ? seed >>> 0 : hashSeed(seed)); }
+  else {
+    const buf = new Uint32Array(64); let k = 64;
+    const cr = (typeof globalThis !== 'undefined' && globalThis.crypto) || null;
+    if (!cr || !cr.getRandomValues) throw new Error('crypto.getRandomValues indisponibil');
+    u32 = function () { if (k >= 64) { cr.getRandomValues(buf); k = 0; } return buf[k++]; };
+  }
+  function int(n) { /* uniform în [0,n), fără bias modulo */
+    if (n <= 1) return 0;
+    const lim = Math.floor(4294967296 / n) * n; let r;
+    do { r = u32(); } while (r >= lim);
+    return r % n;
+  }
+  function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = int(i + 1); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  return { int, u32, shuffle, seeded };
+}
+
+/* ---------- Variante (set de reguli) ---------- */
+/* cap: 'std' (egal are prioritate, altfel sumă), 'f15a' (doar suma 15), 'f15b' (egal sau 15), 'cir' (Cirulla)
+   ace: null | 'apt' (asso piglia tutto, cu scopa) | 'dassi' (scopa d'assi, fără scopa la as) */
+const RULESETS = {
+  scopa:     { id: 'scopa',     players: 2, per: 3,  table: 4, refill: true,  redealKings: 3, cap: 'std',  ace: null,    targets: [11, 21, 31], target: 11 },
+  scopone:   { id: 'scopone',   players: 4, per: 9,  table: 4, refill: false, redealKings: 3, cap: 'std',  ace: null,    targets: [11, 21], target: 11 },
+  scopone_s: { id: 'scopone_s', players: 4, per: 10, table: 0, refill: false, redealKings: 0, cap: 'std',  ace: null,    targets: [11, 21], target: 11 },
+  scopa15:   { id: 'scopa15',   players: 2, per: 3,  table: 4, refill: true,  redealKings: 3, cap: 'f15a', ace: null,    targets: [11, 21, 31], target: 11 },
+  apt:       { id: 'apt',       players: 2, per: 3,  table: 4, refill: true,  redealKings: 3, cap: 'std',  ace: 'apt',   targets: [11, 21, 31], target: 11 },
+  dassi:     { id: 'dassi',     players: 4, per: 10, table: 0, refill: false, redealKings: 0, cap: 'std',  ace: 'dassi', targets: [11, 21], target: 11 },
+  cirulla:   { id: 'cirulla',   players: 2, per: 3,  table: 4, refill: true,  redealKings: 0, redealAces: 2, cap: 'cir', ace: 'cir', targets: [51, 31, 21], target: 51, cirulla: true }
+};
+const DEFAULT_OPTS = { target: null, reBello: false, napola: false, lastSweep: false, cap15: 'a' };
+
+function rulesFor(id, opts) {
+  const base = RULESETS[id]; if (!base) throw new Error('variantă necunoscută: ' + id);
+  const o = Object.assign({}, DEFAULT_OPTS, opts || {});
+  const r = Object.assign({}, base);
+  if (id === 'scopa15' && o.cap15 === 'b') r.cap = 'f15b';
+  r.opts = o; r.winTarget = o.target || base.target;
+  return r;
+}
+
+/* ---------- Capturi legale ---------- */
+/* toate submulțimile de cărți de pe masă cu suma rangurilor = t (dimensiune >= minSize) ; DFS cu tăiere */
+function subsetsSum(table, t, minSize) {
+  const out = [], n = table.length, cur = [];
+  const rk = table.map(rank);
+  (function go(i, left) {
+    if (left === 0) { if (cur.length >= minSize) out.push(cur.slice()); return; }
+    if (left < 0 || i >= n) return;
+    for (let j = i; j < n; j++) {
+      if (rk[j] > left) continue;
+      cur.push(table[j]); go(j + 1, left - rk[j]); cur.pop();
+    }
+  })(0, t);
+  return out;
+}
+function keyOf(set) { return set.slice().sort((a, b) => a - b).join(','); }
+function uniqSets(sets) { const seen = new Set(), out = []; for (const s of sets) { const k = keyOf(s); if (!seen.has(k)) { seen.add(k); out.push(s); } } return out; }
+
+/* returnează lista capturilor posibile (fiecare = listă de id-uri de pe masă); [] => cartea se pune pe masă */
+function legalTakes(rules, cardId, table) {
+  const v = rank(cardId), cap = rules.cap, ace = rules.ace;
+  if (!table.length) return [];
+  const eq = table.filter(t => rank(t) === v);
+  /* Pagat: „asul ia tot dacă nu e niciun as pe masă; dacă e, ia doar acel as” (la mai mulți ași: alegi unul, ca la Scopa) */
+  if ((ace === 'apt' || ace === 'dassi') && v === 1) {
+    return eq.length ? eq.map(x => [x]) : [table.slice()];
+  }
+  switch (cap) {
+    case 'std':
+      return eq.length ? eq.map(x => [x]) : subsetsSum(table, v, 2);
+    case 'f15a':
+      return subsetsSum(table, 15 - v, 1);
+    case 'f15b': /* Pagat v.2: carte egală SAU set de valoare egală SAU set care cu cartea face 15 */
+      return uniqSets(eq.map(x => [x]).concat(subsetsSum(table, v, 2), subsetsSum(table, 15 - v, 1)));
+    case 'cir': {
+      let res = eq.map(x => [x]).concat(subsetsSum(table, v, 2), subsetsSum(table, 15 - v, 1));
+      if (v === 1 && !eq.length) res.push(table.slice());
+      return uniqSets(res);
+    }
+  }
+  throw new Error('cap necunoscut');
+}
+/* referință: enumerare brută 2^n (pentru teste) */
+function legalTakesBrute(rules, cardId, table) {
+  const v = rank(cardId), n = table.length, cap = rules.cap, ace = rules.ace, all = [];
+  if (!n) return [];
+  for (let m = 1; m < (1 << n); m++) {
+    const s = []; let sum = 0;
+    for (let i = 0; i < n; i++) if (m & (1 << i)) { s.push(table[i]); sum += rank(table[i]); }
+    all.push({ s, sum });
+  }
+  const eq = table.filter(t => rank(t) === v);
+  if ((ace === 'apt' || ace === 'dassi') && v === 1) return eq.length ? eq.map(x => [x]) : [table.slice()];
+  const pick = f => all.filter(f).map(x => x.s);
+  switch (cap) {
+    case 'std': return eq.length ? eq.map(x => [x]) : pick(x => x.sum === v && x.s.length >= 2);
+    case 'f15a': return pick(x => x.sum === 15 - v);
+    case 'f15b': return uniqSets(eq.map(x => [x]).concat(pick(x => x.sum === v && x.s.length >= 2), pick(x => x.sum === 15 - v)));
+    case 'cir': {
+      let res = eq.map(x => [x]).concat(pick(x => x.sum === v && x.s.length >= 2), pick(x => x.sum === 15 - v));
+      if (v === 1 && !eq.length) res.push(table.slice());
+      return uniqSets(res);
+    }
+  }
+}
+
+/* ---------- Starea unei mâini ---------- */
+function cloneState(s) {
+  return {
+    rules: s.rules, n: s.n, dealer: s.dealer, turn: s.turn,
+    hands: s.hands.map(h => h.slice()), table: s.table.slice(), stock: s.stock.slice(),
+    piles: [s.piles[0].slice(), s.piles[1].slice()], scope: s.scope.slice(), bonus: s.bonus.slice(),
+    lastCap: s.lastCap, over: s.over, history: null, plays: s.plays, round: s.round, scopaCards: s.scopaCards ? s.scopaCards.slice() : null
+  };
+}
+
+function cirullaHandBonus(cards) { /* 3 cărți: barsega (suma<=9) = 3, barsegon (trei egale) = 10; matta (7 coppe) e joker doar pentru bonus */
+  if (cards.length !== 3) return 0;
+  const hasM = cards.indexOf(MATTA) >= 0;
+  const rk = cards.map(rank);
+  const nm = cards.filter(c => c !== MATTA).map(rank); /* fără matta */
+  /* trei egale */
+  if (rk[0] === rk[1] && rk[1] === rk[2]) return 10;
+  if (hasM && nm.length === 2 && nm[0] === nm[1]) return 10;
+  /* suma <= 9 (matta numără 1 dacă e util) */
+  let sum = 0; for (const c of cards) sum += (c === MATTA ? 1 : rank(c));
+  if (sum <= 9) return 3;
+  return 0;
+}
+
+/* împarte o mână. rng: obiect makeRNG. dealer: indice. */
+function dealHand(rules, dealer, rng) {
+  const n = rules.players;
+  for (let tries = 0; tries < 1000; tries++) {
+    const deck = rng.shuffle(Array.from({ length: 40 }, (_, i) => i));
+    const hands = [];
+    let pos = 0;
+    const order = []; for (let i = 1; i <= n; i++) order.push((dealer + i) % n);
+    for (let i = 0; i < n; i++) hands.push([]);
+    for (const p of order) { hands[p] = deck.slice(pos, pos + rules.per); pos += rules.per; }
+    const table = deck.slice(pos, pos + rules.table); pos += rules.table;
+    const stock = deck.slice(pos);
+    if (rules.redealKings && table.filter(c => rank(c) === 10).length >= rules.redealKings) continue;
+    if (rules.redealAces && table.filter(c => rank(c) === 1).length >= rules.redealAces) continue;
+    return { hands, table, stock, redeals: tries };
+  }
+  throw new Error('prea multe re-împărțiri');
+}
+
+function newHand(rules, dealer, rng) {
+  const d = dealHand(rules, dealer, rng);
+  const st = {
+    rules, n: rules.players, dealer, turn: (dealer + 1) % rules.players,
+    hands: d.hands, table: d.table, stock: d.stock,
+    piles: [[], []], scope: [0, 0], bonus: [0, 0], lastCap: -1, over: false,
+    history: [], plays: 0, round: 1, scopaCards: [], events: [], redeals: d.redeals
+  };
+  /* Cirulla: bonus de dealer (masa = 15 sau 30) și bonusuri de mână */
+  if (rules.cirulla) {
+    const sum = st.table.reduce((a, c) => a + rank(c), 0);
+    if (sum === 15 || sum === 30) {
+      const t = team(dealer);
+      st.piles[t].push(...st.table); st.table = [];
+      st.scope[t] += sum === 15 ? 1 : 2; st.lastCap = t;
+      st.events.push({ type: 'dealerBonus', p: dealer, pts: sum === 15 ? 1 : 2 });
+    }
+    applyHandBonuses(st);
+  }
+  return st;
+}
+function applyHandBonuses(st) {
+  if (!st.rules.cirulla) return;
+  for (let p = 0; p < st.n; p++) {
+    const b = cirullaHandBonus(st.hands[p]);
+    if (b) { st.bonus[team(p)] += b; if (st.events) st.events.push({ type: 'handBonus', p, pts: b, cards: st.hands[p].slice() }); }
+  }
+}
+
+function isLastPlay(st) { return st.stock.length === 0 && st.hands.every(h => h.length === 0); }
+
+/* mutări legale pentru jucătorul la rând: [{card, take:[...]}] */
+function legalMoves(st, p) {
+  if (p === undefined) p = st.turn;
+  const out = [];
+  for (const c of st.hands[p]) {
+    const takes = legalTakes(st.rules, c, st.table);
+    if (!takes.length) out.push({ card: c, take: [] });
+    else for (const t of takes) out.push({ card: c, take: t });
+  }
+  return out;
+}
+function sameSet(a, b) { return a.length === b.length && keyOf(a) === keyOf(b); }
+
+/* aplică o mutare (mută pe loc starea). check=true => aruncă dacă e ilegală */
+function applyMove(st, mv, check) {
+  if (st.over) throw new Error('mâna s-a terminat');
+  const p = st.turn, h = st.hands[p];
+  const ci = h.indexOf(mv.card);
+  if (ci < 0) throw new Error('cartea nu e în mână');
+  if (check) {
+    const takes = legalTakes(st.rules, mv.card, st.table);
+    if (!takes.length) { if (mv.take.length) throw new Error('captură ilegală (nu există captură)'); }
+    else if (!takes.some(t => sameSet(t, mv.take))) throw new Error('captură ilegală');
+  }
+  h.splice(ci, 1);
+  const t = team(p); let sweep = false;
+  if (!mv.take.length) {
+    st.table.push(mv.card);
+  } else {
+    const rem = new Set(mv.take);
+    const before = st.table.length;
+    st.table = st.table.filter(c => !rem.has(c));
+    if (before - st.table.length !== mv.take.length) throw new Error('captură cu cărți absente de pe masă');
+    st.piles[t].push(mv.card, ...mv.take);
+    st.lastCap = t;
+    if (st.table.length === 0) {
+      const last = isLastPlay(st);
+      const aceNoScopa = st.rules.ace === 'dassi' && rank(mv.card) === 1;
+      if (!aceNoScopa && (!last || st.rules.opts.lastSweep)) { st.scope[t]++; sweep = true; if (st.scopaCards) st.scopaCards.push(mv.card); }
+    }
+  }
+  st.plays++;
+  if (st.history) st.history.push({ p, card: mv.card, take: mv.take.slice(), sweep });
+  /* avansare */
+  st.turn = (p + 1) % st.n;
+  if (st.hands.every(x => x.length === 0)) {
+    if (st.stock.length) {
+      const per = st.rules.per;
+      for (let i = 1; i <= st.n; i++) { const q = (st.dealer + i) % st.n; st.hands[q] = st.stock.splice(0, per); }
+      st.round++;
+      st.turn = (st.dealer + 1) % st.n;
+      if (st.rules.cirulla) applyHandBonuses(st);
+    } else {
+      if (st.table.length && st.lastCap >= 0) { st.piles[st.lastCap].push(...st.table); st.table = []; st.leftoverTo = st.lastCap; }
+      st.over = true;
+    }
+  }
+  return { sweep };
+}
+
+/* ---------- Scorare ---------- */
+function primieraOf(pile) { /* null dacă lipsește vreun semn */
+  const best = [0, 0, 0, 0];
+  for (const c of pile) { const v = PRIM[rank(c)]; if (v > best[suit(c)]) best[suit(c)] = v; }
+  if (best.some(x => x === 0)) return null;
+  return best[0] + best[1] + best[2] + best[3];
+}
+function napolaLen(pile) { /* lungimea secvenței A,2,3,... de denari */
+  const has = new Set(pile.filter(c => suit(c) === 0).map(rank));
+  let k = 0; while (k < 10 && has.has(k + 1)) k++;
+  return k;
+}
+function compareMaj(a, b) { return a > b ? [1, 0] : b > a ? [0, 1] : [0, 0]; }
+
+/* st: starea (piles complete). Returnează {teams:[{...}], total:[a,b], instant: null|team} */
+function scoreHand(st) {
+  const rules = st.rules, o = rules.opts, P = st.piles;
+  const T = [{}, {}];
+  const cards = [P[0].length, P[1].length];
+  const den = [0, 1].map(i => P[i].filter(c => suit(c) === 0).length);
+  const cm = compareMaj(cards[0], cards[1]), dm = compareMaj(den[0], den[1]);
+  const pr = [primieraOf(P[0]), primieraOf(P[1])];
+  let pm = [0, 0];
+  if (pr[0] !== null && pr[1] !== null) pm = compareMaj(pr[0], pr[1]);
+  else if (pr[0] !== null) pm = [1, 0]; else if (pr[1] !== null) pm = [0, 1];
+  let instant = null;
+  for (let i = 0; i < 2; i++) {
+    const t = T[i];
+    t.scope = st.scope[i] + (st.bonus[i] || 0); t.scopeOnly = st.scope[i]; t.handBonus = st.bonus[i] || 0;
+    t.carte = cm[i]; t.denari = dm[i]; t.sette = P[i].indexOf(SETTEBELLO) >= 0 ? 1 : 0; t.prim = pm[i];
+    t.cards = cards[i]; t.den = den[i]; t.primVal = pr[i];
+    t.reBello = (o.reBello && P[i].indexOf(REBELLO) >= 0) ? 1 : 0;
+    const nl = napolaLen(P[i]);
+    t.napola = 0;
+    if (rules.cirulla) {
+      /* piccola: >=3 denari consecutivi de la Asso, 1 pct/carte (maxim 6); grande: Re+Cavallo+Fante de denari = 5 */
+      t.piccola = nl >= 3 ? Math.min(nl, 6) : 0;
+      t.grande = (P[i].indexOf(9) >= 0 && P[i].indexOf(8) >= 0 && P[i].indexOf(7) >= 0) ? 5 : 0;
+      /* NOTĂ: în Cirulla (Pagat) Re=10, Cavallo=9, Fante=8: id denari rang 10=9, rang 9=8, rang 8=7 */
+      if (den[i] === 10) instant = i; /* cappotto */
+    } else {
+      t.piccola = 0; t.grande = 0;
+      if (o.napola) { t.napola = nl >= 3 ? nl : 0; if (nl === 10) instant = i; }
+    }
+    t.total = t.scope + t.carte + t.denari + t.sette + t.prim + t.reBello + t.napola + t.piccola + t.grande;
+  }
+  return { teams: T, total: [T[0].total, T[1].total], instant };
+}
+
+/* ---------- Meci ---------- */
+function newMatch(id, opts, rng) {
+  const rules = rulesFor(id, opts);
+  return { rules, scores: [0, 0], dealer: rng.int(rules.players), hands: 0, winner: -1, rounds: [] };
+}
+function startHand(match, rng) { match.hands++; return newHand(match.rules, match.dealer, rng); }
+function finishHand(match, st) {
+  const sc = scoreHand(st);
+  match.scores[0] += sc.total[0]; match.scores[1] += sc.total[1];
+  match.rounds.push({ score: sc, dealer: match.dealer });
+  match.dealer = (match.dealer + 1) % match.rules.players;
+  let w = -1;
+  if (sc.instant !== null) w = sc.instant;
+  else if (match.scores[0] >= match.rules.winTarget || match.scores[1] >= match.rules.winTarget) {
+    if (match.scores[0] > match.scores[1]) w = 0; else if (match.scores[1] > match.scores[0]) w = 1;
+  }
+  match.winner = w;
+  return sc;
+}
+
+/* ---------- Observație (ce are voie să vadă un jucător) ---------- */
+function observe(st, p) {
+  return {
+    rules: st.rules, n: st.n, me: p, dealer: st.dealer, turn: st.turn,
+    hand: st.hands[p].slice(), table: st.table.slice(),
+    handSizes: st.hands.map(h => h.length), stockSize: st.stock.length,
+    piles: [st.piles[0].slice(), st.piles[1].slice()], scope: st.scope.slice(), bonus: st.bonus.slice(),
+    lastCap: st.lastCap, round: st.round
+  };
+}
+function unseenOf(obs) {
+  const known = new Set(obs.hand); for (const c of obs.table) known.add(c);
+  for (const pl of obs.piles) for (const c of pl) known.add(c);
+  const u = []; for (let i = 0; i < 40; i++) if (!known.has(i)) u.push(i);
+  return u;
+}
+function determinize(obs, rng) {
+  const u = rng.shuffle(unseenOf(obs));
+  const hands = []; let pos = 0;
+  for (let q = 0; q < obs.n; q++) {
+    if (q === obs.me) { hands.push(obs.hand.slice()); continue; }
+    hands.push(u.slice(pos, pos + obs.handSizes[q])); pos += obs.handSizes[q];
+  }
+  const stock = u.slice(pos, pos + obs.stockSize);
+  if (pos + obs.stockSize !== u.length) throw new Error('determinize: carduri nevăzute inconsistente');
+  return {
+    rules: obs.rules, n: obs.n, dealer: obs.dealer, turn: obs.turn, hands, table: obs.table.slice(), stock,
+    piles: [obs.piles[0].slice(), obs.piles[1].slice()], scope: obs.scope.slice(), bonus: obs.bonus.slice(),
+    lastCap: obs.lastCap, over: false, history: null, plays: 0, round: obs.round, scopaCards: null
+  };
+}
+
+/* ---------- AI ---------- */
+const PW = [0, 0.8, 0.3, 0.4, 0.5, 0.7, 1.1, 1.7, 0, 0, 0];
+function cardUtil(c, o) {
+  let u = 0.35 + PW[rank(c)];
+  if (suit(c) === 0) u += 0.85;
+  if (c === SETTEBELLO) u += 7;
+  if (o && o.reBello && c === REBELLO) u += 7;
+  return u;
+}
+const SCOPA_U = 7;
+function gainOf(rules, mv, tableAfterEmpty, last) {
+  let g = cardUtil(mv.card, rules.opts);
+  for (const c of mv.take) g += cardUtil(c, rules.opts);
+  if (mv.take.length && tableAfterEmpty && (!last || rules.opts.lastSweep) && !(rules.ace === 'dassi' && rank(mv.card) === 1)) g += SCOPA_U;
+  return g;
+}
+/* politică ieftină pentru rollout-uri */
+function cheapPick(st, rng) {
+  const p = st.turn, rules = st.rules, o = rules.opts, hand = st.hands[p];
+  let best = null, bestV = -1e9;
+  const last = st.stock.length === 0 && st.hands.reduce((a, h) => a + h.length, 0) === 1;
+  for (let i = 0; i < hand.length; i++) {
+    const c = hand[i];
+    const takes = legalTakes(rules, c, st.table);
+    if (!takes.length) {
+      const v = -cardUtil(c, o) * 0.5 + rng.int(100) * 0.0004;
+      if (v > bestV) { bestV = v; best = { card: c, take: [] }; }
+    } else {
+      for (const t of takes) {
+        const mv = { card: c, take: t };
+        let v = gainOf(rules, mv, t.length === st.table.length, last);
+        let rest = 0; /* expunere: ce rămâne pe masă */
+        if (t.length < st.table.length) { const rs = new Set(t); for (const x of st.table) if (!rs.has(x)) rest += cardUtil(x, o); }
+        v -= rest * 0.2; v += rng.int(100) * 0.0004;
+        if (v > bestV) { bestV = v; best = mv; }
+      }
+    }
+  }
+  return best;
+}
+/* distribuția cărților nevăzute pe rang, pentru estimarea riscului de scopa */
+function sweepProb(rules, tableAfter, obs, unseen) {
+  if (!tableAfter.length) return 0;
+  const U = unseen.length; if (!U) return 0;
+  const byRank = new Array(11).fill(0); for (const c of unseen) byRank[rank(c)]++;
+  let k = 0;
+  for (let r = 1; r <= 10; r++) {
+    if (!byRank[r]) continue;
+    /* o carte reprezentativă a rangului r (semn 1) */
+    const rep = 10 * 1 + (r - 1);
+    const takes = legalTakes(rules, rep, tableAfter);
+    if (takes.some(t => t.length === tableAfter.length)) k += byRank[r];
+  }
+  if (!k) return 0;
+  const h = Math.max(1, Math.min(obs.handSizes[(obs.me + 1) % obs.n], U));
+  return 1 - Math.pow(1 - k / U, h);
+}
+/* euristică 1-ply cu estimarea riscului (nivel „Euristic") */
+function scoreMovesHeuristic(obs, moves, unseen) {
+  const rules = obs.rules, o = rules.opts;
+  const last = obs.stockSize === 0 && obs.handSizes.reduce((a, b) => a + b, 0) === 1;
+  const res = [];
+  for (const mv of moves) {
+    const rs = new Set(mv.take);
+    const rest = obs.table.filter(c => !rs.has(c));
+    if (!mv.take.length) rest.push(mv.card);
+    let v = mv.take.length ? gainOf(rules, mv, rest.length === 0, last) : 0;
+    let exp = 0; for (const x of rest) exp += cardUtil(x, o);
+    v -= exp * 0.3;
+    if (!last) v -= SCOPA_U * sweepProb(rules, rest, obs, unseen);
+    res.push(v);
+  }
+  return res;
+}
+function obsMoves(obs) {
+  const out = [];
+  for (const c of obs.hand) {
+    const takes = legalTakes(obs.rules, c, obs.table);
+    if (!takes.length) out.push({ card: c, take: [] }); else for (const t of takes) out.push({ card: c, take: t });
+  }
+  return out;
+}
+/* alegerea mutării. level: 'h' (euristic) | 'mc' (determinizări + rollout). obs conține DOAR ce vede jucătorul. */
+function chooseMove(obs, level, rng, samples) {
+  const moves = obsMoves(obs);
+  if (moves.length === 1) return moves[0];
+  const unseen = unseenOf(obs);
+  const hv = scoreMovesHeuristic(obs, moves, unseen);
+  if (level !== 'mc') {
+    let bi = 0, bv = -1e9;
+    for (let i = 0; i < moves.length; i++) { const v = hv[i] + rng.int(1000) * 1e-6; if (v > bv) { bv = v; bi = i; } }
+    return moves[bi];
+  }
+  /* buget determinist de muncă (nu de timp): nr. eșantioane scade când sunt multe mutări și multe cărți rămase, ca să nu blocheze UI-ul (>200 ms) */
+  const remaining = obs.handSizes.reduce((x, y) => x + y, 0) + obs.stockSize;
+  const S = Math.max(8, Math.min(samples || 40, Math.floor(10000 / (moves.length * Math.max(1, remaining) * (1 + obs.table.length / 5))))), me = team(obs.me);
+  const tot = new Array(moves.length).fill(0);
+  for (let s = 0; s < S; s++) {
+    const base = determinize(obs, rng);
+    const seed = rng.u32();
+    for (let i = 0; i < moves.length; i++) {
+      const st = cloneState(base); st.rules = obs.rules;
+      const r2 = makeRNG(seed + i * 0 + 1);
+      applyMove(st, moves[i], false);
+      let guard = 0;
+      while (!st.over && guard++ < 100) applyMove(st, cheapPick(st, r2), false);
+      const sc = scoreHand(st);
+      tot[i] += (sc.total[me] - sc.total[1 - me]) + (sc.instant !== null ? (sc.instant === me ? 30 : -30) : 0);
+    }
+  }
+  let bi = 0, bv = -1e9;
+  for (let i = 0; i < moves.length; i++) {
+    const v = tot[i] / S + hv[i] * 0.02; /* euristica ca departajare */
+    if (v > bv) { bv = v; bi = i; }
+  }
+  return moves[bi];
+}
+
+/* ---------- Joc complet AI vs AI (pentru teste) ---------- */
+function playHandAI(st, levels, rng, onMove) {
+  let guard = 0;
+  while (!st.over) {
+    if (guard++ > 100) throw new Error('mâna nu se termină');
+    const p = st.turn;
+    const obs = observe(st, p);
+    const mv = chooseMove(obs, levels[p], rng, levels.samples);
+    applyMove(st, mv, true);
+    if (onMove) onMove(st, p, mv);
+  }
+  return st;
+}
+
+/* ---------- Rubamazzo (⚠ reguli regionale; 2 jucători) ---------- */
+const RUBA = {
+  deal(rng, dealer) {
+    const deck = rng.shuffle(Array.from({ length: 40 }, (_, i) => i));
+    const first = 1 - dealer;
+    const hands = [[], []]; hands[first] = deck.slice(0, 3); hands[dealer] = deck.slice(3, 6);
+    return { dealer, turn: first, hands, table: deck.slice(6, 10), stock: deck.slice(10), piles: [[], []], lastCap: -1, over: false, round: 1, plays: 0 };
+  },
+  moves(st, p) {
+    p = p === undefined ? st.turn : p;
+    const out = [], opp = st.piles[1 - p], top = opp.length ? opp[opp.length - 1] : -1;
+    for (const c of st.hands[p]) {
+      let any = false;
+      for (const t of st.table) if (rank(t) === rank(c)) { out.push({ card: c, kind: 'table', target: t }); any = true; }
+      if (top >= 0 && rank(top) === rank(c)) { out.push({ card: c, kind: 'steal' }); any = true; }
+      if (!any) out.push({ card: c, kind: 'place' });
+    }
+    return out;
+  },
+  apply(st, mv, check) {
+    const p = st.turn, h = st.hands[p], i = h.indexOf(mv.card);
+    if (i < 0) throw new Error('cartea nu e în mână');
+    if (check && !RUBA.moves(st, p).some(m => m.card === mv.card && m.kind === mv.kind && (m.target === mv.target))) throw new Error('mutare ilegală');
+    h.splice(i, 1);
+    if (mv.kind === 'place') st.table.push(mv.card);
+    else if (mv.kind === 'table') { st.table.splice(st.table.indexOf(mv.target), 1); st.piles[p].push(mv.target, mv.card); st.lastCap = p; }
+    else { const stolen = st.piles[1 - p]; st.piles[1 - p] = []; st.piles[p] = st.piles[p].concat(stolen, [mv.card]); st.lastCap = p; }
+    st.plays++;
+    st.turn = 1 - p;
+    if (st.hands[0].length === 0 && st.hands[1].length === 0) {
+      if (st.stock.length) { st.hands[1 - st.dealer] = st.stock.splice(0, 3); st.hands[st.dealer] = st.stock.splice(0, 3); st.round++; st.turn = 1 - st.dealer; }
+      else { if (st.table.length && st.lastCap >= 0) { st.piles[st.lastCap].push(...st.table); st.table = []; } st.over = true; }
+    }
+  },
+  /* observația: nu include mâna adversarului */
+  observe(st, p) { return { me: p, hand: st.hands[p].slice(), table: st.table.slice(), piles: [st.piles[0].slice(), st.piles[1].slice()], opHand: st.hands[1 - p].length, stock: st.stock.length, turn: st.turn }; },
+  choose(obs, rng) {
+    const me = obs.me, fake = { hands: [[], []], table: obs.table, piles: obs.piles };
+    fake.hands[me] = obs.hand;
+    const mv = RUBA.moves(fake, me);
+    if (mv.length === 1) return mv[0];
+    /* cărți cunoscute: tot ce e în mâna mea, pe masă, în grămezi */
+    let best = null, bv = -1e9;
+    const opp = obs.piles[1 - me], oppTop = opp.length ? opp[opp.length - 1] : -1;
+    for (const m of mv) {
+      let v = rng.int(100) * 0.001;
+      if (m.kind === 'steal') v += 2 + opp.length;
+      else if (m.kind === 'table') v += 1 + (suit(m.target) === 0 ? 0.1 : 0);
+      else {
+        /* pune pe masă: evită rangurile pe care adversarul le poate lua (puține necunoscute) sau care potrivesc vârful grămezii mele */
+        v -= 0.2;
+        const known = new Set(obs.hand.concat(obs.table)); for (const pl of obs.piles) for (const c of pl) known.add(c);
+        let unseenSame = 0; for (let c = 0; c < 40; c++) if (!known.has(c) && rank(c) === rank(m.card)) unseenSame++;
+        v -= unseenSame * 0.3;
+        const mine = obs.piles[me]; if (mine.length) { if (rank(mine[mine.length - 1]) === rank(m.card)) v -= 0.8; }
+      }
+      /* protejează grămada proprie: vârful grămezii mele e rang r; adversarul poate fura dacă are r */
+      if (v > bv) { bv = v; best = m; }
+    }
+    return best;
+  },
+  winner(st) { const a = st.piles[0].length, b = st.piles[1].length; return a > b ? 0 : b > a ? 1 : -1; }
+};
+
+return {
+  SUITS, PRIM, SETTEBELLO, REBELLO, MATTA, suit, rank, team,
+  makeRNG, hashSeed, RULESETS, DEFAULT_OPTS, rulesFor,
+  subsetsSum, legalTakes, legalTakesBrute, legalMoves, applyMove, cloneState,
+  dealHand, newHand, scoreHand, primieraOf, napolaLen, cirullaHandBonus,
+  newMatch, startHand, finishHand, observe, unseenOf, determinize, chooseMove, playHandAI, isLastPlay,
+  RUBA
+};
+})();
+
+
+/* ===== I18N: interfața în 7 limbi (RO/EN/FR/IT/ES/PT/DE). Textele lungi (atlas, reguli) doar RO+EN. ===== */
+const LANGS = ['ro', 'en', 'fr', 'it', 'es', 'pt', 'de'];
+const LANG_NAMES = { ro: 'Română', en: 'English', fr: 'Français', it: 'Italiano', es: 'Español', pt: 'Português', de: 'Deutsch' };
+const UI = {
+  ro: {
+    'brand': 'fără frontiere', 'sub': 'Atlasul familiei Scopa · jucabil contra AI · Centrul StrING',
+    'tab.atlas': 'Atlas', 'tab.play': 'Joacă', 'tab.deck': 'Pachetul', 'tab.about': 'Despre',
+    'lang': 'Limbă', 'deck.label': 'Semne', 'deck.it': 'Italiene', 'deck.fr': 'Franceze ♦♥♠♣',
+    'note.en': 'text în engleză', 'note.nojs': 'Această aplicație are nevoie de JavaScript (rulează local, fără rețea).',
+    'btn.play': '▶ Joacă', 'btn.rules': 'Reguli și note', 'btn.hide': 'Ascunde', 'btn.start': '▶ Începe meciul', 'btn.confirm': 'Confirmă', 'btn.cancel': 'Anulează',
+    'btn.place': 'Pune cartea pe masă', 'btn.next': 'Mâna următoare', 'btn.newmatch': 'Meci nou', 'btn.setup': '← Alegere variantă', 'btn.close': 'Închide',
+    'tag.playable': 'jucabil', 'tag.atlas': 'doar în atlas', 'tag.approx': '⚠ aproximare', 'tag.faithful': 'fidel regulilor citate',
+    'lbl.players': 'Jucători', 'lbl.origin': 'Origine', 'lbl.rules': 'Reguli', 'lbl.regional': 'Diferențe regionale', 'lbl.approx': 'Ce lipsește / aproximări', 'lbl.sources': 'Surse', 'lbl.deal': 'Împărțire',
+    'setup.title': 'Alege varianta', 'setup.variant': 'Variantă', 'setup.level': 'Nivel AI', 'setup.lvl.h': 'Euristic (rapid)', 'setup.lvl.mc': 'Monte-Carlo (mai atent)',
+    'setup.lvl.h.d': 'Evaluează fiecare mutare cu o regulă de valoare și estimează riscul de scopa folosind cărțile încă nevăzute.',
+    'setup.lvl.mc.d': 'Pe lângă euristică, simulează zeci de distribuții posibile ale cărților nevăzute și alege mutarea cu rezultatul mediu mai bun. Mai lent; în testele noastre a câștigat 56–68% din meciuri contra nivelului euristic, în funcție de variantă (la Scopone cu 10 cărți avantajul nu e demonstrat statistic).',
+    'setup.target': 'Scor-țintă', 'setup.options': 'Opțiuni de regulă', 'setup.seed': 'Seed (opțional)', 'setup.seedHint': 'Gol = amestec aleator criptografic. Cu seed, aceeași serie de împărțiri se repetă.',
+    'setup.showHands': 'Arată mâinile AI (mod de învățare)', 'setup.showMem': 'Arată cărțile ieșite (ajutor de memorie)', 'setup.cap15': 'Mod captură 15',
+    'cap15.a': 'a) doar suma 15', 'cap15.b': 'b) egal sau suma 15',
+    'opt.reBello': 'Re bello: Regele de denari = 1 punct', 'opt.napola': 'Napola: A-2-3… de denari; 10 denari = victorie', 'opt.lastSweep': 'Scopa contează și la ultima carte',
+    'play.you': 'Tu', 'play.ai': 'AI', 'play.partner': 'Partener AI', 'play.oppL': 'Adversar stânga', 'play.oppR': 'Adversar dreapta', 'play.teamYou': 'Echipa ta', 'play.teamOpp': 'Adversarii',
+    'play.table': 'Masa', 'play.hand': 'Mâna ta', 'play.pile': 'Pliu', 'play.cards': 'cărți', 'play.scope': 'scope', 'play.stock': 'Pachet', 'play.score': 'Scor', 'play.target': 'țintă', 'play.dealer': 'Dealer',
+    'play.yourTurn': 'E rândul tău. Alege o carte din mână.', 'play.aiThinking': 'AI se gândește…', 'play.selected': 'Carte aleasă: {c}.',
+    'play.opt1': 'Captură: {t}. Confirmă cu Enter.', 'play.optN': '{n} capturi posibile. Alege una (săgeți sus/jos sau cifre 1-9), apoi Enter.', 'play.noCap': 'Nicio captură posibilă: cartea se pune pe masă.',
+    'play.mustCap': 'Captura e obligatorie dacă se poate.', 'play.invalid': 'Selecție de masă care nu corespunde niciunei capturi legale pentru {c}.', 'play.pickOpt': 'Alege una dintre capturi.',
+    'play.emptyTable': 'masă goală', 'play.optLabel': 'Ia', 'play.optsTitle': 'Capturi posibile',
+    'log.place': '{p} pune {c} pe masă.', 'log.take': '{p} joacă {c} și ia {t}.', 'log.scopa': 'SCOPA pentru {p}!', 'log.leftover': 'Cărțile rămase pe masă merg la {p}.', 'log.dealerBonus': 'Bonus dealer: {p} ia masa ({n} scope).', 'log.handBonus': 'Bonus de mână pentru {p}: {n} scope.',
+    'log.newHand': 'Mână nouă. Dealer: {p}.', 'log.redeal': 'Împărțire refăcută (reguli: trei regi/doi asi pe masă).',
+    'end.hand': 'Sfârșit de mână', 'end.match': 'Sfârșit de meci', 'end.youWin': 'Ai câștigat meciul!', 'end.youLose': 'AI a câștigat meciul.', 'end.draw': 'Egalitate: se joacă încă o mână.', 'end.instant': 'Victorie imediată (cappotto / napoleone).',
+    'sc.scope': 'Scope', 'sc.carte': 'Carte (cele mai multe)', 'sc.denari': 'Denari (cei mai mulți)', 'sc.sette': 'Settebello (7 denari)', 'sc.prim': 'Primiera', 'sc.reBello': 'Re bello', 'sc.napola': 'Napola', 'sc.handBonus': 'Bonus de mână', 'sc.piccola': 'La piccola', 'sc.grande': 'La grande', 'sc.total': 'Total mână', 'sc.match': 'Total meci',
+    'sc.detail': 'cărți {c} · denari {d} · primiera {p}', 'sc.noPrim': 'fără primiera', 'sc.colYou': 'Tu / echipa ta', 'sc.colOpp': 'AI / adversari',
+    'mem.title': 'Cărți ieșite (memorie)', 'mem.legend': 'estompat = ieșit, plin = încă nevăzut de tine',
+    'help.keys': 'Tastatură: ← → alege cartea · Enter/Spațiu selectează · ↑ ↓ sau 1-9 alege captura · Enter confirmă · Esc anulează · Tab trece la masă (Spațiu bifează cărți).',
+    'ruba.steal': 'Fură grămada', 'ruba.take': 'Ia de pe masă', 'ruba.place': 'Pune pe masă', 'ruba.pile': 'grămadă',
+    'stats.title': 'Statistici locale', 'stats.none': 'Încă nicio partidă.', 'stats.wl': 'câștigate {w} · pierdute {l}',
+    'about.title': 'Despre', 'deck.title': 'Pachetul italian de 40 de cărți', 'deck.prime': 'Valorile primierei', 'deck.cap': 'Valoarea la captură', 'deck.gallery': 'Galerie',
+    'footer.local': 'Rulează local · fără rețea · fără cont · fără telemetrie.'
+  },
+  en: {
+    'brand': 'without borders', 'sub': 'Atlas of the Scopa family · playable against AI · StrING Center',
+    'tab.atlas': 'Atlas', 'tab.play': 'Play', 'tab.deck': 'The deck', 'tab.about': 'About',
+    'lang': 'Language', 'deck.label': 'Suits', 'deck.it': 'Italian', 'deck.fr': 'French ♦♥♠♣',
+    'note.en': 'text in English', 'note.nojs': 'This app needs JavaScript (it runs locally, no network).',
+    'btn.play': '▶ Play', 'btn.rules': 'Rules and notes', 'btn.hide': 'Hide', 'btn.start': '▶ Start match', 'btn.confirm': 'Confirm', 'btn.cancel': 'Cancel',
+    'btn.place': 'Put the card on the table', 'btn.next': 'Next hand', 'btn.newmatch': 'New match', 'btn.setup': '← Choose variant', 'btn.close': 'Close',
+    'tag.playable': 'playable', 'tag.atlas': 'atlas only', 'tag.approx': '⚠ approximation', 'tag.faithful': 'faithful to the cited rules',
+    'lbl.players': 'Players', 'lbl.origin': 'Origin', 'lbl.rules': 'Rules', 'lbl.regional': 'Regional differences', 'lbl.approx': 'Missing / approximations', 'lbl.sources': 'Sources', 'lbl.deal': 'Deal',
+    'setup.title': 'Choose a variant', 'setup.variant': 'Variant', 'setup.level': 'AI level', 'setup.lvl.h': 'Heuristic (fast)', 'setup.lvl.mc': 'Monte-Carlo (more careful)',
+    'setup.lvl.h.d': 'Scores each move with a value rule and estimates sweep risk from the cards not yet seen.',
+    'setup.lvl.mc.d': 'On top of the heuristic, simulates dozens of possible distributions of the unseen cards and picks the move with the better average result. Slower; in our tests it won 56–68% of matches against the heuristic level depending on the variant (not statistically established for 10-card Scopone).',
+    'setup.target': 'Target score', 'setup.options': 'Rule options', 'setup.seed': 'Seed (optional)', 'setup.seedHint': 'Empty = cryptographic shuffle. With a seed the same series of deals repeats.',
+    'setup.showHands': 'Show AI hands (learning mode)', 'setup.showMem': 'Show cards played (memory aid)', 'setup.cap15': '15-capture mode',
+    'cap15.a': 'a) sum of 15 only', 'cap15.b': 'b) equal or sum 15',
+    'opt.reBello': 'Re bello: King of coins = 1 point', 'opt.napola': 'Napola: A-2-3… of coins; all 10 coins wins', 'opt.lastSweep': 'A sweep on the very last card counts',
+    'play.you': 'You', 'play.ai': 'AI', 'play.partner': 'AI partner', 'play.oppL': 'Left opponent', 'play.oppR': 'Right opponent', 'play.teamYou': 'Your team', 'play.teamOpp': 'Opponents',
+    'play.table': 'Table', 'play.hand': 'Your hand', 'play.pile': 'Pile', 'play.cards': 'cards', 'play.scope': 'sweeps', 'play.stock': 'Stock', 'play.score': 'Score', 'play.target': 'target', 'play.dealer': 'Dealer',
+    'play.yourTurn': 'Your turn. Pick a card from your hand.', 'play.aiThinking': 'AI is thinking…', 'play.selected': 'Card chosen: {c}.',
+    'play.opt1': 'Capture: {t}. Confirm with Enter.', 'play.optN': '{n} possible captures. Pick one (up/down arrows or digits 1-9), then Enter.', 'play.noCap': 'No capture possible: the card goes on the table.',
+    'play.mustCap': 'Capturing is compulsory when possible.', 'play.invalid': 'Table selection does not match any legal capture for {c}.', 'play.pickOpt': 'Pick one of the captures.',
+    'play.emptyTable': 'empty table', 'play.optLabel': 'Take', 'play.optsTitle': 'Possible captures',
+    'log.place': '{p} puts {c} on the table.', 'log.take': '{p} plays {c} and takes {t}.', 'log.scopa': 'SCOPA for {p}!', 'log.leftover': 'The cards left on the table go to {p}.', 'log.dealerBonus': 'Dealer bonus: {p} takes the table ({n} sweeps).', 'log.handBonus': 'Hand bonus for {p}: {n} sweeps.',
+    'log.newHand': 'New hand. Dealer: {p}.', 'log.redeal': 'Deal redone (rule: three kings / two aces on the table).',
+    'end.hand': 'End of hand', 'end.match': 'End of match', 'end.youWin': 'You won the match!', 'end.youLose': 'The AI won the match.', 'end.draw': 'Tied: another hand is played.', 'end.instant': 'Instant win (cappotto / napoleone).',
+    'sc.scope': 'Sweeps', 'sc.carte': 'Cards (most)', 'sc.denari': 'Coins (most)', 'sc.sette': 'Settebello (7 of coins)', 'sc.prim': 'Primiera', 'sc.reBello': 'Re bello', 'sc.napola': 'Napola', 'sc.handBonus': 'Hand bonus', 'sc.piccola': 'La piccola', 'sc.grande': 'La grande', 'sc.total': 'Hand total', 'sc.match': 'Match total',
+    'sc.detail': 'cards {c} · coins {d} · primiera {p}', 'sc.noPrim': 'no primiera', 'sc.colYou': 'You / your team', 'sc.colOpp': 'AI / opponents',
+    'mem.title': 'Cards played (memory)', 'mem.legend': 'dimmed = played, bright = not yet seen by you',
+    'help.keys': 'Keyboard: ← → pick card · Enter/Space select · ↑ ↓ or 1-9 pick capture · Enter confirm · Esc cancel · Tab to the table (Space toggles cards).',
+    'ruba.steal': 'Steal the pile', 'ruba.take': 'Take from the table', 'ruba.place': 'Put on the table', 'ruba.pile': 'pile',
+    'stats.title': 'Local statistics', 'stats.none': 'No games yet.', 'stats.wl': 'won {w} · lost {l}',
+    'about.title': 'About', 'deck.title': 'The 40-card Italian pack', 'deck.prime': 'Primiera values', 'deck.cap': 'Capture value', 'deck.gallery': 'Gallery',
+    'footer.local': 'Runs locally · no network · no account · no telemetry.'
+  },
+  fr: {
+    'brand': 'sans frontières', 'sub': 'Atlas de la famille Scopa · jouable contre l’IA · Centre StrING',
+    'tab.atlas': 'Atlas', 'tab.play': 'Jouer', 'tab.deck': 'Le jeu', 'tab.about': 'À propos',
+    'note.en': 'texte en anglais', 'note.nojs': 'Cette application nécessite JavaScript (elle fonctionne en local, sans réseau).',
+    'lang': 'Langue', 'deck.label': 'Couleurs', 'deck.it': 'Italiennes', 'deck.fr': 'Françaises ♦♥♠♣',
+    'btn.play': '▶ Jouer', 'btn.rules': 'Règles et notes', 'btn.hide': 'Masquer', 'btn.start': '▶ Commencer', 'btn.confirm': 'Confirmer', 'btn.cancel': 'Annuler',
+    'btn.place': 'Poser la carte sur la table', 'btn.next': 'Main suivante', 'btn.newmatch': 'Nouvelle partie', 'btn.setup': '← Choisir la variante', 'btn.close': 'Fermer',
+    'tag.playable': 'jouable', 'tag.atlas': 'atlas seulement', 'tag.approx': '⚠ approximation', 'tag.faithful': 'fidèle aux règles citées',
+    'lbl.players': 'Joueurs', 'lbl.origin': 'Origine', 'lbl.rules': 'Règles', 'lbl.regional': 'Différences régionales', 'lbl.approx': 'Manques / approximations', 'lbl.sources': 'Sources', 'lbl.deal': 'Distribution',
+    'setup.title': 'Choisir une variante', 'setup.variant': 'Variante', 'setup.level': 'Niveau de l’IA', 'setup.lvl.h': 'Heuristique (rapide)', 'setup.lvl.mc': 'Monte-Carlo (plus attentif)',
+    'setup.lvl.h.d': 'Évalue chaque coup avec une règle de valeur et estime le risque de scopa d’après les cartes non encore vues.',
+    'setup.lvl.mc.d': 'En plus de l’heuristique, simule des dizaines de répartitions possibles des cartes non vues. Plus lent ; dans nos tests il a gagné 56–68 % des parties contre le niveau heuristique selon la variante (avantage non établi statistiquement pour le Scopone à 10 cartes).',
+    'setup.target': 'Score à atteindre', 'setup.options': 'Options de règle', 'setup.seed': 'Graine (facultatif)', 'setup.seedHint': 'Vide = mélange cryptographique. Avec une graine, la même série de donnes se répète.',
+    'setup.showHands': 'Montrer les mains de l’IA (apprentissage)', 'setup.showMem': 'Montrer les cartes sorties (aide-mémoire)', 'setup.cap15': 'Mode capture 15',
+    'cap15.a': 'a) somme 15 seulement', 'cap15.b': 'b) égale ou somme 15',
+    'opt.reBello': 'Re bello : roi de deniers = 1 point', 'opt.napola': 'Napola : A-2-3… de deniers ; 10 deniers = victoire', 'opt.lastSweep': 'La scopa compte aussi à la dernière carte',
+    'play.you': 'Vous', 'play.ai': 'IA', 'play.partner': 'Partenaire IA', 'play.oppL': 'Adversaire gauche', 'play.oppR': 'Adversaire droit', 'play.teamYou': 'Votre équipe', 'play.teamOpp': 'Adversaires',
+    'play.table': 'Table', 'play.hand': 'Votre main', 'play.pile': 'Tas', 'play.cards': 'cartes', 'play.scope': 'scope', 'play.stock': 'Talon', 'play.score': 'Score', 'play.target': 'objectif', 'play.dealer': 'Donneur',
+    'play.yourTurn': 'À vous. Choisissez une carte.', 'play.aiThinking': 'L’IA réfléchit…', 'play.selected': 'Carte choisie : {c}.',
+    'play.opt1': 'Prise : {t}. Confirmez avec Entrée.', 'play.optN': '{n} prises possibles. Choisissez (flèches haut/bas ou chiffres 1-9), puis Entrée.', 'play.noCap': 'Aucune prise possible : la carte va sur la table.',
+    'play.mustCap': 'La prise est obligatoire quand elle est possible.', 'play.invalid': 'La sélection ne correspond à aucune prise légale pour {c}.', 'play.pickOpt': 'Choisissez une des prises.',
+    'play.emptyTable': 'table vide', 'play.optLabel': 'Prendre', 'play.optsTitle': 'Prises possibles',
+    'log.place': '{p} pose {c} sur la table.', 'log.take': '{p} joue {c} et prend {t}.', 'log.scopa': 'SCOPA pour {p} !', 'log.leftover': 'Les cartes restantes vont à {p}.', 'log.dealerBonus': 'Bonus du donneur : {p} prend la table ({n} scope).', 'log.handBonus': 'Bonus de main pour {p} : {n} scope.',
+    'log.newHand': 'Nouvelle main. Donneur : {p}.', 'log.redeal': 'Donne refaite (trois rois / deux as sur la table).',
+    'end.hand': 'Fin de la main', 'end.match': 'Fin de la partie', 'end.youWin': 'Vous avez gagné !', 'end.youLose': 'L’IA a gagné la partie.', 'end.draw': 'Égalité : une main de plus.', 'end.instant': 'Victoire immédiate (cappotto / napoleone).',
+    'sc.scope': 'Scope', 'sc.carte': 'Cartes (plus)', 'sc.denari': 'Deniers (plus)', 'sc.sette': 'Settebello (7 de deniers)', 'sc.prim': 'Primiera', 'sc.reBello': 'Re bello', 'sc.napola': 'Napola', 'sc.handBonus': 'Bonus de main', 'sc.piccola': 'La piccola', 'sc.grande': 'La grande', 'sc.total': 'Total de la main', 'sc.match': 'Total de la partie',
+    'sc.detail': 'cartes {c} · deniers {d} · primiera {p}', 'sc.noPrim': 'pas de primiera', 'sc.colYou': 'Vous / équipe', 'sc.colOpp': 'IA / adversaires',
+    'mem.title': 'Cartes sorties (mémoire)', 'mem.legend': 'estompé = sorti, clair = pas encore vu par vous',
+    'help.keys': 'Clavier : ← → carte · Entrée/Espace sélectionne · ↑ ↓ ou 1-9 prise · Entrée confirme · Échap annule · Tab vers la table (Espace coche).',
+    'ruba.steal': 'Voler le tas', 'ruba.take': 'Prendre sur la table', 'ruba.place': 'Poser sur la table', 'ruba.pile': 'tas',
+    'stats.title': 'Statistiques locales', 'stats.none': 'Aucune partie.', 'stats.wl': 'gagnées {w} · perdues {l}',
+    'about.title': 'À propos', 'deck.title': 'Le jeu italien de 40 cartes', 'deck.prime': 'Valeurs de la primiera', 'deck.cap': 'Valeur de prise', 'deck.gallery': 'Galerie',
+    'footer.local': 'Fonctionne en local · sans réseau · sans compte · sans télémétrie.'
+  },
+  it: {
+    'brand': 'senza frontiere', 'sub': 'Atlante della famiglia Scopa · giocabile contro l’IA · Centro StrING',
+    'tab.atlas': 'Atlante', 'tab.play': 'Gioca', 'tab.deck': 'Il mazzo', 'tab.about': 'Info',
+    'note.en': 'testo in inglese', 'note.nojs': 'Questa app richiede JavaScript (funziona in locale, senza rete).',
+    'lang': 'Lingua', 'deck.label': 'Semi', 'deck.it': 'Italiani', 'deck.fr': 'Francesi ♦♥♠♣',
+    'btn.play': '▶ Gioca', 'btn.rules': 'Regole e note', 'btn.hide': 'Nascondi', 'btn.start': '▶ Inizia', 'btn.confirm': 'Conferma', 'btn.cancel': 'Annulla',
+    'btn.place': 'Metti la carta sul tavolo', 'btn.next': 'Mano successiva', 'btn.newmatch': 'Nuova partita', 'btn.setup': '← Scegli variante', 'btn.close': 'Chiudi',
+    'tag.playable': 'giocabile', 'tag.atlas': 'solo atlante', 'tag.approx': '⚠ approssimazione', 'tag.faithful': 'fedele alle regole citate',
+    'lbl.players': 'Giocatori', 'lbl.origin': 'Origine', 'lbl.rules': 'Regole', 'lbl.regional': 'Differenze regionali', 'lbl.approx': 'Mancanze / approssimazioni', 'lbl.sources': 'Fonti', 'lbl.deal': 'Distribuzione',
+    'setup.title': 'Scegli una variante', 'setup.variant': 'Variante', 'setup.level': 'Livello IA', 'setup.lvl.h': 'Euristico (veloce)', 'setup.lvl.mc': 'Monte-Carlo (più attento)',
+    'setup.lvl.h.d': 'Valuta ogni mossa con una regola di valore e stima il rischio di scopa dalle carte non ancora viste.',
+    'setup.lvl.mc.d': 'Oltre all’euristica, simula decine di distribuzioni possibili delle carte non viste. Più lento; nei nostri test ha vinto il 56–68% delle partite contro il livello euristico, secondo la variante (vantaggio non dimostrato statisticamente per lo Scopone a 10 carte).',
+    'setup.target': 'Punteggio obiettivo', 'setup.options': 'Opzioni di regola', 'setup.seed': 'Seme (facoltativo)', 'setup.seedHint': 'Vuoto = mescolata crittografica. Con un seme la stessa serie di distribuzioni si ripete.',
+    'setup.showHands': 'Mostra le mani dell’IA (apprendimento)', 'setup.showMem': 'Mostra le carte uscite (aiuto memoria)', 'setup.cap15': 'Modo presa 15',
+    'cap15.a': 'a) solo somma 15', 'cap15.b': 'b) uguale o somma 15',
+    'opt.reBello': 'Re bello: re di denari = 1 punto', 'opt.napola': 'Napola: A-2-3… di denari; 10 denari = vittoria', 'opt.lastSweep': 'La scopa vale anche all’ultima carta',
+    'play.you': 'Tu', 'play.ai': 'IA', 'play.partner': 'Compagno IA', 'play.oppL': 'Avversario sinistro', 'play.oppR': 'Avversario destro', 'play.teamYou': 'La tua squadra', 'play.teamOpp': 'Avversari',
+    'play.table': 'Tavolo', 'play.hand': 'La tua mano', 'play.pile': 'Mazzetto', 'play.cards': 'carte', 'play.scope': 'scope', 'play.stock': 'Mazzo', 'play.score': 'Punti', 'play.target': 'obiettivo', 'play.dealer': 'Mazziere',
+    'play.yourTurn': 'Tocca a te. Scegli una carta.', 'play.aiThinking': 'L’IA sta pensando…', 'play.selected': 'Carta scelta: {c}.',
+    'play.opt1': 'Presa: {t}. Conferma con Invio.', 'play.optN': '{n} prese possibili. Scegline una (frecce su/giù o cifre 1-9), poi Invio.', 'play.noCap': 'Nessuna presa possibile: la carta va sul tavolo.',
+    'play.mustCap': 'La presa è obbligatoria quando è possibile.', 'play.invalid': 'La selezione non corrisponde a nessuna presa legale per {c}.', 'play.pickOpt': 'Scegli una delle prese.',
+    'play.emptyTable': 'tavolo vuoto', 'play.optLabel': 'Prendi', 'play.optsTitle': 'Prese possibili',
+    'log.place': '{p} mette {c} sul tavolo.', 'log.take': '{p} gioca {c} e prende {t}.', 'log.scopa': 'SCOPA per {p}!', 'log.leftover': 'Le carte rimaste vanno a {p}.', 'log.dealerBonus': 'Bonus mazziere: {p} prende il tavolo ({n} scope).', 'log.handBonus': 'Bonus di mano per {p}: {n} scope.',
+    'log.newHand': 'Nuova mano. Mazziere: {p}.', 'log.redeal': 'Distribuzione rifatta (tre re / due assi sul tavolo).',
+    'end.hand': 'Fine della mano', 'end.match': 'Fine della partita', 'end.youWin': 'Hai vinto la partita!', 'end.youLose': 'L’IA ha vinto la partita.', 'end.draw': 'Pareggio: si gioca un’altra mano.', 'end.instant': 'Vittoria immediata (cappotto / napoleone).',
+    'sc.scope': 'Scope', 'sc.carte': 'Carte (più)', 'sc.denari': 'Denari (più)', 'sc.sette': 'Settebello', 'sc.prim': 'Primiera', 'sc.reBello': 'Re bello', 'sc.napola': 'Napola', 'sc.handBonus': 'Bonus di mano', 'sc.piccola': 'La piccola', 'sc.grande': 'La grande', 'sc.total': 'Totale mano', 'sc.match': 'Totale partita',
+    'sc.detail': 'carte {c} · denari {d} · primiera {p}', 'sc.noPrim': 'niente primiera', 'sc.colYou': 'Tu / squadra', 'sc.colOpp': 'IA / avversari',
+    'mem.title': 'Carte uscite (memoria)', 'mem.legend': 'sfumato = uscito, pieno = non ancora visto da te',
+    'help.keys': 'Tastiera: ← → carta · Invio/Spazio seleziona · ↑ ↓ o 1-9 presa · Invio conferma · Esc annulla · Tab al tavolo (Spazio spunta).',
+    'ruba.steal': 'Ruba il mazzetto', 'ruba.take': 'Prendi dal tavolo', 'ruba.place': 'Metti sul tavolo', 'ruba.pile': 'mazzetto',
+    'stats.title': 'Statistiche locali', 'stats.none': 'Nessuna partita.', 'stats.wl': 'vinte {w} · perse {l}',
+    'about.title': 'Info', 'deck.title': 'Il mazzo italiano da 40 carte', 'deck.prime': 'Valori della primiera', 'deck.cap': 'Valore di presa', 'deck.gallery': 'Galleria',
+    'footer.local': 'In locale · senza rete · senza account · senza telemetria.'
+  },
+  es: {
+    'brand': 'sin fronteras', 'sub': 'Atlas de la familia Scopa · jugable contra la IA · Centro StrING',
+    'tab.atlas': 'Atlas', 'tab.play': 'Jugar', 'tab.deck': 'La baraja', 'tab.about': 'Acerca de',
+    'note.en': 'texto en inglés', 'note.nojs': 'Esta aplicación necesita JavaScript (funciona en local, sin red).',
+    'lang': 'Idioma', 'deck.label': 'Palos', 'deck.it': 'Italianos', 'deck.fr': 'Franceses ♦♥♠♣',
+    'btn.play': '▶ Jugar', 'btn.rules': 'Reglas y notas', 'btn.hide': 'Ocultar', 'btn.start': '▶ Empezar', 'btn.confirm': 'Confirmar', 'btn.cancel': 'Cancelar',
+    'btn.place': 'Poner la carta en la mesa', 'btn.next': 'Siguiente mano', 'btn.newmatch': 'Partida nueva', 'btn.setup': '← Elegir variante', 'btn.close': 'Cerrar',
+    'tag.playable': 'jugable', 'tag.atlas': 'solo atlas', 'tag.approx': '⚠ aproximación', 'tag.faithful': 'fiel a las reglas citadas',
+    'lbl.players': 'Jugadores', 'lbl.origin': 'Origen', 'lbl.rules': 'Reglas', 'lbl.regional': 'Diferencias regionales', 'lbl.approx': 'Falta / aproximaciones', 'lbl.sources': 'Fuentes', 'lbl.deal': 'Reparto',
+    'setup.title': 'Elige una variante', 'setup.variant': 'Variante', 'setup.level': 'Nivel de la IA', 'setup.lvl.h': 'Heurístico (rápido)', 'setup.lvl.mc': 'Monte-Carlo (más cuidadoso)',
+    'setup.lvl.h.d': 'Puntúa cada jugada con una regla de valor y estima el riesgo de escoba con las cartas aún no vistas.',
+    'setup.lvl.mc.d': 'Además de la heurística, simula decenas de repartos posibles de las cartas no vistas. Más lento; en nuestras pruebas ganó el 56–68 % de las partidas frente al nivel heurístico según la variante (ventaja no demostrada estadísticamente en el Scopone de 10 cartas).',
+    'setup.target': 'Puntuación objetivo', 'setup.options': 'Opciones de regla', 'setup.seed': 'Semilla (opcional)', 'setup.seedHint': 'Vacío = barajado criptográfico. Con semilla se repite la misma serie de repartos.',
+    'setup.showHands': 'Mostrar manos de la IA (aprendizaje)', 'setup.showMem': 'Mostrar cartas jugadas (ayuda de memoria)', 'setup.cap15': 'Modo captura 15',
+    'cap15.a': 'a) solo suma 15', 'cap15.b': 'b) igual o suma 15',
+    'opt.reBello': 'Re bello: rey de oros = 1 punto', 'opt.napola': 'Napola: A-2-3… de oros; 10 oros = victoria', 'opt.lastSweep': 'La escoba cuenta también en la última carta',
+    'play.you': 'Tú', 'play.ai': 'IA', 'play.partner': 'Compañero IA', 'play.oppL': 'Rival izquierdo', 'play.oppR': 'Rival derecho', 'play.teamYou': 'Tu equipo', 'play.teamOpp': 'Rivales',
+    'play.table': 'Mesa', 'play.hand': 'Tu mano', 'play.pile': 'Montón', 'play.cards': 'cartas', 'play.scope': 'escobas', 'play.stock': 'Mazo', 'play.score': 'Puntos', 'play.target': 'objetivo', 'play.dealer': 'Repartidor',
+    'play.yourTurn': 'Tu turno. Elige una carta.', 'play.aiThinking': 'La IA está pensando…', 'play.selected': 'Carta elegida: {c}.',
+    'play.opt1': 'Captura: {t}. Confirma con Intro.', 'play.optN': '{n} capturas posibles. Elige una (flechas arriba/abajo o cifras 1-9) y pulsa Intro.', 'play.noCap': 'No hay captura posible: la carta va a la mesa.',
+    'play.mustCap': 'Capturar es obligatorio cuando se puede.', 'play.invalid': 'La selección no corresponde a ninguna captura legal para {c}.', 'play.pickOpt': 'Elige una de las capturas.',
+    'play.emptyTable': 'mesa vacía', 'play.optLabel': 'Llevar', 'play.optsTitle': 'Capturas posibles',
+    'log.place': '{p} pone {c} en la mesa.', 'log.take': '{p} juega {c} y se lleva {t}.', 'log.scopa': '¡ESCOBA para {p}!', 'log.leftover': 'Las cartas que quedan van a {p}.', 'log.dealerBonus': 'Bonus del repartidor: {p} se lleva la mesa ({n} escobas).', 'log.handBonus': 'Bonus de mano para {p}: {n} escobas.',
+    'log.newHand': 'Mano nueva. Repartidor: {p}.', 'log.redeal': 'Reparto repetido (tres reyes / dos ases en la mesa).',
+    'end.hand': 'Fin de la mano', 'end.match': 'Fin de la partida', 'end.youWin': '¡Has ganado la partida!', 'end.youLose': 'La IA ganó la partida.', 'end.draw': 'Empate: se juega otra mano.', 'end.instant': 'Victoria inmediata (cappotto / napoleone).',
+    'sc.scope': 'Escobas', 'sc.carte': 'Cartas (más)', 'sc.denari': 'Oros (más)', 'sc.sette': 'Settebello (7 de oros)', 'sc.prim': 'Primiera', 'sc.reBello': 'Re bello', 'sc.napola': 'Napola', 'sc.handBonus': 'Bonus de mano', 'sc.piccola': 'La piccola', 'sc.grande': 'La grande', 'sc.total': 'Total de la mano', 'sc.match': 'Total de la partida',
+    'sc.detail': 'cartas {c} · oros {d} · primiera {p}', 'sc.noPrim': 'sin primiera', 'sc.colYou': 'Tú / equipo', 'sc.colOpp': 'IA / rivales',
+    'mem.title': 'Cartas jugadas (memoria)', 'mem.legend': 'atenuado = jugado, claro = aún no visto por ti',
+    'help.keys': 'Teclado: ← → carta · Intro/Espacio selecciona · ↑ ↓ o 1-9 captura · Intro confirma · Esc cancela · Tab a la mesa (Espacio marca).',
+    'ruba.steal': 'Robar el montón', 'ruba.take': 'Llevar de la mesa', 'ruba.place': 'Poner en la mesa', 'ruba.pile': 'montón',
+    'stats.title': 'Estadísticas locales', 'stats.none': 'Aún sin partidas.', 'stats.wl': 'ganadas {w} · perdidas {l}',
+    'about.title': 'Acerca de', 'deck.title': 'La baraja italiana de 40 cartas', 'deck.prime': 'Valores de la primiera', 'deck.cap': 'Valor de captura', 'deck.gallery': 'Galería',
+    'footer.local': 'Local · sin red · sin cuenta · sin telemetría.'
+  },
+  pt: {
+    'brand': 'sem fronteiras', 'sub': 'Atlas da família Scopa · jogável contra a IA · Centro StrING',
+    'tab.atlas': 'Atlas', 'tab.play': 'Jogar', 'tab.deck': 'O baralho', 'tab.about': 'Sobre',
+    'note.en': 'texto em inglês', 'note.nojs': 'Esta aplicação precisa de JavaScript (funciona localmente, sem rede).',
+    'lang': 'Idioma', 'deck.label': 'Naipes', 'deck.it': 'Italianos', 'deck.fr': 'Franceses ♦♥♠♣',
+    'btn.play': '▶ Jogar', 'btn.rules': 'Regras e notas', 'btn.hide': 'Ocultar', 'btn.start': '▶ Começar', 'btn.confirm': 'Confirmar', 'btn.cancel': 'Cancelar',
+    'btn.place': 'Pôr a carta na mesa', 'btn.next': 'Próxima mão', 'btn.newmatch': 'Nova partida', 'btn.setup': '← Escolher variante', 'btn.close': 'Fechar',
+    'tag.playable': 'jogável', 'tag.atlas': 'só no atlas', 'tag.approx': '⚠ aproximação', 'tag.faithful': 'fiel às regras citadas',
+    'lbl.players': 'Jogadores', 'lbl.origin': 'Origem', 'lbl.rules': 'Regras', 'lbl.regional': 'Diferenças regionais', 'lbl.approx': 'Falta / aproximações', 'lbl.sources': 'Fontes', 'lbl.deal': 'Distribuição',
+    'setup.title': 'Escolha uma variante', 'setup.variant': 'Variante', 'setup.level': 'Nível da IA', 'setup.lvl.h': 'Heurístico (rápido)', 'setup.lvl.mc': 'Monte-Carlo (mais cuidadoso)',
+    'setup.lvl.h.d': 'Avalia cada jogada com uma regra de valor e estima o risco de vassoura pelas cartas ainda não vistas.',
+    'setup.lvl.mc.d': 'Além da heurística, simula dezenas de distribuições possíveis das cartas não vistas. Mais lento; nos nossos testes ganhou 56–68 % das partidas contra o nível heurístico, consoante a variante (vantagem não demonstrada estatisticamente no Scopone de 10 cartas).',
+    'setup.target': 'Pontuação-alvo', 'setup.options': 'Opções de regra', 'setup.seed': 'Semente (opcional)', 'setup.seedHint': 'Vazio = baralhar criptográfico. Com semente repete-se a mesma série de distribuições.',
+    'setup.showHands': 'Mostrar mãos da IA (aprendizagem)', 'setup.showMem': 'Mostrar cartas já saídas (ajuda de memória)', 'setup.cap15': 'Modo captura 15',
+    'cap15.a': 'a) só soma 15', 'cap15.b': 'b) igual ou soma 15',
+    'opt.reBello': 'Re bello: rei de ouros = 1 ponto', 'opt.napola': 'Napola: A-2-3… de ouros; 10 ouros = vitória', 'opt.lastSweep': 'A vassoura conta também na última carta',
+    'play.you': 'Você', 'play.ai': 'IA', 'play.partner': 'Parceiro IA', 'play.oppL': 'Adversário esquerdo', 'play.oppR': 'Adversário direito', 'play.teamYou': 'A sua equipa', 'play.teamOpp': 'Adversários',
+    'play.table': 'Mesa', 'play.hand': 'A sua mão', 'play.pile': 'Monte', 'play.cards': 'cartas', 'play.scope': 'vassouras', 'play.stock': 'Baralho', 'play.score': 'Pontos', 'play.target': 'alvo', 'play.dealer': 'Distribuidor',
+    'play.yourTurn': 'A sua vez. Escolha uma carta.', 'play.aiThinking': 'A IA está a pensar…', 'play.selected': 'Carta escolhida: {c}.',
+    'play.opt1': 'Captura: {t}. Confirme com Enter.', 'play.optN': '{n} capturas possíveis. Escolha uma (setas cima/baixo ou dígitos 1-9) e Enter.', 'play.noCap': 'Nenhuma captura possível: a carta vai para a mesa.',
+    'play.mustCap': 'Capturar é obrigatório quando é possível.', 'play.invalid': 'A seleção não corresponde a nenhuma captura legal para {c}.', 'play.pickOpt': 'Escolha uma das capturas.',
+    'play.emptyTable': 'mesa vazia', 'play.optLabel': 'Levar', 'play.optsTitle': 'Capturas possíveis',
+    'log.place': '{p} põe {c} na mesa.', 'log.take': '{p} joga {c} e leva {t}.', 'log.scopa': 'VASSOURA para {p}!', 'log.leftover': 'As cartas que sobram vão para {p}.', 'log.dealerBonus': 'Bónus do distribuidor: {p} leva a mesa ({n} vassouras).', 'log.handBonus': 'Bónus de mão para {p}: {n} vassouras.',
+    'log.newHand': 'Nova mão. Distribuidor: {p}.', 'log.redeal': 'Distribuição repetida (três reis / dois ases na mesa).',
+    'end.hand': 'Fim da mão', 'end.match': 'Fim da partida', 'end.youWin': 'Ganhou a partida!', 'end.youLose': 'A IA ganhou a partida.', 'end.draw': 'Empate: joga-se outra mão.', 'end.instant': 'Vitória imediata (cappotto / napoleone).',
+    'sc.scope': 'Vassouras', 'sc.carte': 'Cartas (mais)', 'sc.denari': 'Ouros (mais)', 'sc.sette': 'Settebello (7 de ouros)', 'sc.prim': 'Primiera', 'sc.reBello': 'Re bello', 'sc.napola': 'Napola', 'sc.handBonus': 'Bónus de mão', 'sc.piccola': 'La piccola', 'sc.grande': 'La grande', 'sc.total': 'Total da mão', 'sc.match': 'Total da partida',
+    'sc.detail': 'cartas {c} · ouros {d} · primiera {p}', 'sc.noPrim': 'sem primiera', 'sc.colYou': 'Você / equipa', 'sc.colOpp': 'IA / adversários',
+    'mem.title': 'Cartas saídas (memória)', 'mem.legend': 'esbatido = saído, claro = ainda não visto por si',
+    'help.keys': 'Teclado: ← → carta · Enter/Espaço seleciona · ↑ ↓ ou 1-9 captura · Enter confirma · Esc cancela · Tab para a mesa (Espaço marca).',
+    'ruba.steal': 'Roubar o monte', 'ruba.take': 'Levar da mesa', 'ruba.place': 'Pôr na mesa', 'ruba.pile': 'monte',
+    'stats.title': 'Estatísticas locais', 'stats.none': 'Ainda sem partidas.', 'stats.wl': 'ganhas {w} · perdidas {l}',
+    'about.title': 'Sobre', 'deck.title': 'O baralho italiano de 40 cartas', 'deck.prime': 'Valores da primiera', 'deck.cap': 'Valor de captura', 'deck.gallery': 'Galeria',
+    'footer.local': 'Local · sem rede · sem conta · sem telemetria.'
+  },
+  de: {
+    'brand': 'ohne Grenzen', 'sub': 'Atlas der Scopa-Familie · spielbar gegen die KI · StrING-Zentrum',
+    'tab.atlas': 'Atlas', 'tab.play': 'Spielen', 'tab.deck': 'Das Blatt', 'tab.about': 'Info',
+    'note.en': 'Text auf Englisch', 'note.nojs': 'Diese App benötigt JavaScript (läuft lokal, ohne Netzwerk).',
+    'lang': 'Sprache', 'deck.label': 'Farben', 'deck.it': 'Italienisch', 'deck.fr': 'Französisch ♦♥♠♣',
+    'btn.play': '▶ Spielen', 'btn.rules': 'Regeln und Notizen', 'btn.hide': 'Ausblenden', 'btn.start': '▶ Start', 'btn.confirm': 'Bestätigen', 'btn.cancel': 'Abbrechen',
+    'btn.place': 'Karte auf den Tisch legen', 'btn.next': 'Nächste Runde', 'btn.newmatch': 'Neues Spiel', 'btn.setup': '← Variante wählen', 'btn.close': 'Schließen',
+    'tag.playable': 'spielbar', 'tag.atlas': 'nur im Atlas', 'tag.approx': '⚠ Näherung', 'tag.faithful': 'treu zu den zitierten Regeln',
+    'lbl.players': 'Spieler', 'lbl.origin': 'Herkunft', 'lbl.rules': 'Regeln', 'lbl.regional': 'Regionale Unterschiede', 'lbl.approx': 'Fehlt / Näherungen', 'lbl.sources': 'Quellen', 'lbl.deal': 'Geben',
+    'setup.title': 'Variante wählen', 'setup.variant': 'Variante', 'setup.level': 'KI-Stufe', 'setup.lvl.h': 'Heuristisch (schnell)', 'setup.lvl.mc': 'Monte-Carlo (sorgfältiger)',
+    'setup.lvl.h.d': 'Bewertet jeden Zug mit einer Wertregel und schätzt das Besen-Risiko aus den noch ungesehenen Karten.',
+    'setup.lvl.mc.d': 'Simuliert zusätzlich Dutzende mögliche Verteilungen der ungesehenen Karten. Langsamer; in unseren Tests gewann es je nach Variante 56–68 % der Spiele gegen die heuristische Stufe (beim 10-Karten-Scopone statistisch nicht gesichert).',
+    'setup.target': 'Zielpunktzahl', 'setup.options': 'Regeloptionen', 'setup.seed': 'Seed (optional)', 'setup.seedHint': 'Leer = kryptografisches Mischen. Mit Seed wiederholt sich dieselbe Reihe von Gaben.',
+    'setup.showHands': 'KI-Hände zeigen (Lernmodus)', 'setup.showMem': 'Gespielte Karten zeigen (Gedächtnishilfe)', 'setup.cap15': '15er-Nehmen',
+    'cap15.a': 'a) nur Summe 15', 'cap15.b': 'b) gleich oder Summe 15',
+    'opt.reBello': 'Re bello: Münz-König = 1 Punkt', 'opt.napola': 'Napola: A-2-3… in Münzen; alle 10 = Sieg', 'opt.lastSweep': 'Besen zählt auch bei der letzten Karte',
+    'play.you': 'Du', 'play.ai': 'KI', 'play.partner': 'KI-Partner', 'play.oppL': 'Gegner links', 'play.oppR': 'Gegner rechts', 'play.teamYou': 'Dein Team', 'play.teamOpp': 'Gegner',
+    'play.table': 'Tisch', 'play.hand': 'Deine Hand', 'play.pile': 'Stapel', 'play.cards': 'Karten', 'play.scope': 'Besen', 'play.stock': 'Talon', 'play.score': 'Punkte', 'play.target': 'Ziel', 'play.dealer': 'Geber',
+    'play.yourTurn': 'Du bist dran. Wähle eine Karte.', 'play.aiThinking': 'Die KI denkt nach…', 'play.selected': 'Gewählte Karte: {c}.',
+    'play.opt1': 'Nehmen: {t}. Mit Eingabe bestätigen.', 'play.optN': '{n} Möglichkeiten zum Nehmen. Wähle eine (Pfeile auf/ab oder Ziffern 1-9), dann Eingabe.', 'play.noCap': 'Nichts zu nehmen: Die Karte kommt auf den Tisch.',
+    'play.mustCap': 'Nehmen ist Pflicht, wenn es möglich ist.', 'play.invalid': 'Die Auswahl passt zu keiner legalen Nehm-Möglichkeit für {c}.', 'play.pickOpt': 'Wähle eine der Möglichkeiten.',
+    'play.emptyTable': 'leerer Tisch', 'play.optLabel': 'Nimm', 'play.optsTitle': 'Mögliche Aufnahmen',
+    'log.place': '{p} legt {c} auf den Tisch.', 'log.take': '{p} spielt {c} und nimmt {t}.', 'log.scopa': 'BESEN für {p}!', 'log.leftover': 'Die übrigen Karten gehen an {p}.', 'log.dealerBonus': 'Geber-Bonus: {p} nimmt den Tisch ({n} Besen).', 'log.handBonus': 'Hand-Bonus für {p}: {n} Besen.',
+    'log.newHand': 'Neue Runde. Geber: {p}.', 'log.redeal': 'Neu gegeben (drei Könige / zwei Asse auf dem Tisch).',
+    'end.hand': 'Ende der Runde', 'end.match': 'Ende des Spiels', 'end.youWin': 'Du hast gewonnen!', 'end.youLose': 'Die KI hat gewonnen.', 'end.draw': 'Gleichstand: noch eine Runde.', 'end.instant': 'Sofortsieg (cappotto / napoleone).',
+    'sc.scope': 'Besen', 'sc.carte': 'Karten (meiste)', 'sc.denari': 'Münzen (meiste)', 'sc.sette': 'Settebello (Münz-7)', 'sc.prim': 'Primiera', 'sc.reBello': 'Re bello', 'sc.napola': 'Napola', 'sc.handBonus': 'Hand-Bonus', 'sc.piccola': 'La piccola', 'sc.grande': 'La grande', 'sc.total': 'Summe Runde', 'sc.match': 'Summe Spiel',
+    'sc.detail': 'Karten {c} · Münzen {d} · Primiera {p}', 'sc.noPrim': 'keine Primiera', 'sc.colYou': 'Du / Team', 'sc.colOpp': 'KI / Gegner',
+    'mem.title': 'Gespielte Karten (Gedächtnis)', 'mem.legend': 'abgedunkelt = gespielt, hell = von dir noch ungesehen',
+    'help.keys': 'Tastatur: ← → Karte · Eingabe/Leertaste wählt · ↑ ↓ oder 1-9 Auswahl · Eingabe bestätigt · Esc bricht ab · Tab zum Tisch (Leertaste markiert).',
+    'ruba.steal': 'Stapel stehlen', 'ruba.take': 'Vom Tisch nehmen', 'ruba.place': 'Auf den Tisch legen', 'ruba.pile': 'Stapel',
+    'stats.title': 'Lokale Statistik', 'stats.none': 'Noch keine Spiele.', 'stats.wl': 'gewonnen {w} · verloren {l}',
+    'about.title': 'Info', 'deck.title': 'Das italienische 40-Karten-Blatt', 'deck.prime': 'Primiera-Werte', 'deck.cap': 'Nehmwert', 'deck.gallery': 'Galerie',
+    'footer.local': 'Lokal · ohne Netz · ohne Konto · ohne Telemetrie.'
+  }
+};
+/* completare: lipsurile din non-RO/EN cad pe EN (key-parity verificată de script) */
+const SUIT_NAMES = {
+  ro: ['Denari', 'Cupe', 'Spade', 'Bastoane'], en: ['Coins', 'Cups', 'Swords', 'Batons'], fr: ['Deniers', 'Coupes', 'Épées', 'Bâtons'],
+  it: ['Denari', 'Coppe', 'Spade', 'Bastoni'], es: ['Oros', 'Copas', 'Espadas', 'Bastos'], pt: ['Ouros', 'Copas', 'Espadas', 'Paus'], de: ['Münzen', 'Kelche', 'Schwerter', 'Stäbe']
+};
+const SUIT_SYM = ['♦', '♥', '♠', '♣'];
+
+/* ===== ATLAS: fișe de variante. Texte lungi: RO + EN. Statut: play = jucabil; approx = ⚠ aproximări listate. ===== */
+const ATLAS = [
+  {
+    id: 'scopa', play: true, approx: false, players: '2 (3 sau 4 în perechi: doar în atlas)', tags: ['Italia', 'pescuit', 'clasic'],
+    ro: {
+      name: 'Scopa', origin: 'Italia (în toată țara; cel mai răspândit joc de cărți italian). Se joacă cu pachetul de 40 de cărți (Denari, Coppe, Spade, Bastoni).',
+      deal: 'Dealerul dă 3 cărți fiecărui jucător și 4 cărți vizibile pe masă; restul rămâne stoc. După ce se joacă cele 3 cărți se mai dau câte 3, fără alte cărți pe masă, până se termină stocul (la doi jucători: 6 runde). Dacă pe masă apar 3 sau 4 regi, se amestecă și se dă din nou.',
+      rules: ['Valori la captură: As 1, 2–7 valoarea lor, Fante 8, Cavallo 9, Re 10.', 'La rând, jucătorul pune o carte. O carte egală cu o carte de pe masă o ia (dacă sunt mai multe egale, alegi una). Doar dacă nu există carte egală, poți lua un set de cărți a căror sumă e egală cu cartea ta (prioritatea cărții egale). Altfel cartea rămâne pe masă.', 'Captura este obligatorie dacă se poate; alegerea cărții pe care o joci e liberă.', 'Dacă prinzi toate cărțile de pe masă faci scopa (1 punct). Captura finală, de la ultima carte a mâinii, nu e scopa. La sfârșit, cărțile rămase pe masă merg la ultimul jucător care a capturat.', 'Punctaj la sfârșitul mâinii: scope; Carte (mai multe cărți); Denari (mai multe cărți de denari); Settebello (7 de denari); Primiera (cea mai bună primiera: una din fiecare semn, valori 7=21, 6=18, As=16, 5=15, 4=14, 3=13, 2=12, figuri=10; cine nu are toate cele 4 semne nu poate puncta primiera). Egalitatea nu dă punct.', 'Se joacă la 11 puncte (21 sau 31 convenit); dacă ambii depășesc ținta în aceeași mână, câștigă scorul mai mare; la egalitate se mai joacă o mână.', 'La doi jucători, adversarul dealerului joacă primul, iar donul trece la celălalt la fiecare mână.'],
+      regional: ['În nord-est se folosesc cărți cu semne franceze (carouri, cupe-inimi, pică, treflă) cu Re, Donna/Cal, Fante.', 'Scări regionale de primiera: unele zone numără 2–7 la valoarea nominală, Asul 5½ și figurile ½.', 'Opțional: Re bello (Regele de denari +1) și Napola (A-2-3… de denari) — disponibile ca opțiuni.', '„Chiamarsi fuori” (declararea țintei înainte de sfârșitul mâinii) nu este implementat.'],
+      approx: []
+    },
+    en: {
+      name: 'Scopa', origin: 'Italy (nation-wide; the most widespread Italian card game). Played with the 40-card Italian pack (coins, cups, swords, batons).',
+      deal: 'The dealer gives 3 cards to each player and places 4 cards face up on the table; the rest is the stock. After the 3 cards are played, 3 more are dealt each, nothing more to the table, until the stock is gone (two players: 6 rounds). If 3 or 4 kings are on the table, reshuffle and deal again.',
+      rules: ['Capture values: Ace 1, 2–7 face value, Fante (jack) 8, Cavallo (horse/queen) 9, Re (king) 10.', 'A turn is playing one card. A card equal to a table card captures it (if several, you choose). Only if no single card matches may you take a set of table cards adding up to your card (equal-card priority). Otherwise the card stays on the table.', 'Capture is compulsory when possible; the choice of which card to play is free.', 'Capturing every table card is a scopa (sweep, 1 point). A capture made with the very last card of the hand is never a scopa. At the end, cards left on the table go to the last player who captured.', 'Hand scoring: sweeps; Carte (most cards); Denari (most coins); Settebello (7 of coins); Primiera (best prime: one card per suit, values 7=21, 6=18, Ace=16, 5=15, 4=14, 3=13, 2=12, court cards=10; a side missing any suit cannot score it). Ties score nothing.', 'Played to 11 points (21 or 31 by agreement); if both pass the target in the same hand the higher score wins; if tied, another hand is played.', 'With two players the dealer’s opponent plays first and the deal alternates every hand.'],
+      regional: ['The north-east uses French-suited cards with King, Queen, Jack.', 'Regional primiera scales: some areas count 2–7 at face value, Ace 5½ and court cards ½.', 'Optional: Re bello (King of coins +1) and Napola (A-2-3… of coins) — available as options.', '"Chiamarsi fuori" (claiming the target before the end of the hand) is not implemented.'],
+      approx: []
+    },
+    src: ['pagat.com/fishing/scopa.html']
+  },
+  {
+    id: 'scopone', play: true, approx: true, players: '4 (două perechi)', tags: ['Italia', 'perechi', '9+4'],
+    ro: {
+      name: 'Scopone 9+4 (în Wikipedia: „scientifico”)', origin: 'Italia. Varianta pentru patru jucători în perechi (parteneri față în față), cu 4 cărți pe masă la început.',
+      deal: 'Fiecare jucător primește 9 cărți și pe masă se pun 4 cărți vizibile (36 + 4 = 40). Dacă pe masă sunt 3 sau 4 regi, se amestecă și se dă din nou. Primul joacă jucătorul din dreapta dealerului; jocul merge în sens invers acelor de ceasornic.',
+      rules: ['Capturile, scopa, ultima mână și scorarea sunt ca la Scopa; cărțile câștigate se adună în pliul comun al perechii.', 'Scopa făcută la ultima carte a mâinii nu se numără (opțiune: se poate activa).', 'Ținta: 11 puncte (opțional 21); dacă ambele perechi depășesc ținta în aceeași mână, câștigă scorul mai mare; la egalitate se mai joacă mâini.'],
+      regional: ['⚠ DENUMIRE DISPUTATĂ: Pagat și un ghid italian (Aranzulla) numesc 9+4 „Scopone” și 10 cărți cu masa goală „Scopone scientifico”; Wikipedia italiană și cea engleză fac invers (scientifico = 9 cărți + 4 pe masă; varianta cu 10 = „Scopone a 10 carte”). Regulile jucate sunt aceleași indiferent de nume; regulamentul federației n-a putut fi consultat. De aceea varianta e etichetată aici după numărul de cărți.', 'Țintă 21 în unele surse (Wikipedia italiană); 11 la Pagat (implicit aici, 21 ca opțiune).'],
+      approx: ['⚠ Regulile sunt cele din surse; doar DENUMIREA (Scopone / Scopone scientifico) diferă între surse — vezi „Regional”.']
+    },
+    en: {
+      name: 'Scopone 9+4 (Wikipedia: “scientifico”)', origin: 'Italy. The four-player partnership version (partners sit opposite), with 4 cards on the table at the start.',
+      deal: 'Each player gets 9 cards and 4 cards go face up on the table (36 + 4 = 40). With 3 or 4 kings on the table, reshuffle and redeal. The player to the dealer’s right leads; play is anticlockwise.',
+      rules: ['Captures, sweeps, the last-hand rule and scoring are as in Scopa; won cards go to the partnership’s common pile.', 'A sweep made with the last card of the hand does not count (an option can enable it).', 'Target: 11 points (optionally 21); if both sides pass it in the same hand the higher score wins; if tied, more hands are played.'],
+      regional: ['⚠ DISPUTED NAME: Pagat and an Italian guide (Aranzulla) call 9+4 "Scopone" and 10 cards with an empty table "Scopone scientifico"; Italian and English Wikipedia assign it the other way round (scientifico = 9 cards + 4 on the table; the 10-card game is "Scopone a 10 carte"). The rules played are the same whatever the name; the federation rulebook could not be read. The variant is therefore labelled here by card count.', 'Target 21 in some sources (Italian Wikipedia); 11 at Pagat (default here, 21 as an option).'],
+      approx: ['⚠ The rules follow the sources; only the NAME (Scopone / Scopone scientifico) differs between sources — see “Regional”.']
+    },
+    src: ['pagat.com/fishing/scopone.html', 'it.wikipedia.org/wiki/Scopone_scientifico']
+  },
+  {
+    id: 'scopone_s', play: true, approx: true, players: '4 (două perechi)', tags: ['Italia', 'perechi', 'informație perfectă în amintire', '10 cărți'],
+    ro: {
+      name: 'Scopone 10 cărți, masa goală (Pagat: „scientifico”)', origin: 'Italia. Considerat jocul „intelectual” al familiei: se dau toate cele 40 de cărți (10 fiecăruia), masa începe goală, iar un jucător atent poate număra cărțile (toate cărțile ieșite sunt, în principiu, vizibile în amintire).',
+      deal: 'Fiecare jucător primește 10 cărți; masa începe goală. Primul joacă jucătorul din dreapta dealerului; sens invers acelor de ceasornic. Parteneri față în față (locurile 0–2 contra 1–3).',
+      rules: ['Capturile ca la Scopa (carte egală cu prioritate, altfel sumă); captura e obligatorie dacă se poate.', 'Scopa (masa golită) = 1 punct, dar NU la ultima carte a mâinii. Unii jucători acordă totuși punct de scopa perechii dealerului la ultima carte (opțiune: „Scopa contează și la ultima carte”).', 'Punctaj pe mână: scope + până la 4 puncte (Carte, Denari, Settebello, Primiera). Nu există un total constant per mână: scorul unei mâini depinde de scope. Ținta jocului (11 sau 21) este cea care se numește uneori „11 puncte”.', 'Opțiuni: Re bello (+1), Napola (A-2-3… de denari, valoare = lungimea secvenței), Napoleone (toate cele 10 denari = victorie).', 'Pe parcursul jocului cele 40 de cărți ajung în pliurile perechilor; la final toate 40 sunt în pliuri.'],
+      regional: ['⚠ DENUMIRE DISPUTATĂ: Pagat și Aranzulla numesc această variantă (10 cărți, masa goală) „Scopone scientifico”; Wikipedia italiană/engleză o numesc „Scopone a 10 carte”, iar „scientifico” = 9+4. Regulile sunt aceleași. „9 cărți și masa goală” e imposibil (4×9=36).', 'Scopa la ultima carte a dealerului este disputată (Pagat: „unii consideră că echipa dealerului primește punctul”); implicit nu se numără.', 'Federația Italiană Scopone există (federazionescopone.it); regulile ei n-au putut fi citite în acest proiect — se folosește Pagat. Ținta oficială (11 vs 21) variază după sursă.'],
+      approx: ['⚠ Regulile sunt cele din surse; doar DENUMIREA diferă între surse — vezi „Regional”.']
+    },
+    en: {
+      name: 'Scopone 10 cards, empty table (Pagat: “scientifico”)', origin: 'Italy. The "intellectual" member of the family: all 40 cards are dealt (10 each), the table starts empty, and an attentive player can count cards (all played cards are, in principle, visible in memory).',
+      deal: 'Each player gets 10 cards; the table starts empty. The player to the dealer’s right leads; anticlockwise. Partners sit opposite (seats 0–2 vs 1–3).',
+      rules: ['Captures as in Scopa (equal card has priority, otherwise a sum); capturing is compulsory when possible.', 'A sweep (table cleared) is 1 point, but NOT with the last card of the hand. Some players still award a sweep to the dealer’s side on the last card (option: "A sweep on the very last card counts").', 'Hand scoring: sweeps plus up to 4 points (Carte, Denari, Settebello, Primiera). There is no constant per-hand total: a hand’s score depends on sweeps. The game target (11 or 21) is what is sometimes called "11 points".', 'Options: Re bello (+1), Napola (A-2-3… of coins, value = length of the run), Napoleone (all 10 coins wins).', 'During play the 40 cards end up in the partnerships’ piles; at the end all 40 are in piles.'],
+      regional: ['⚠ DISPUTED NAME: Pagat and Aranzulla call this variant (10 cards, empty table) "Scopone scientifico"; Italian/English Wikipedia call it "Scopone a 10 carte" and reserve "scientifico" for 9+4. The rules are the same. "9 cards and an empty table" is impossible (4×9=36).', 'A sweep on the dealer’s last card is disputed (Pagat: "some hold the dealer’s team scores"); by default it does not count.', 'A Federazione Italiana Scopone exists (federazionescopone.it); its rulebook could not be read for this project — Pagat is used. The official target (11 vs 21) varies by source.'],
+      approx: ['⚠ The rules follow the sources; only the NAME differs between sources — see “Regional”.']
+    },
+    src: ['pagat.com/fishing/scopone.html', 'it.wikipedia.org/wiki/Scopone_scientifico', 'federazionescopone.it (doar menționată)']
+  },
+  {
+    id: 'scopa15', play: true, approx: false, players: '2', tags: ['Italia', 'suma 15', 'variantă'],
+    ro: {
+      name: 'Scopa a 15 (Scopa di quindici)', origin: 'Italia. Scopa în care suma țintă este 15, nu valoarea cărții jucate. Pagat descrie trei versiuni; sunt implementate primele două.',
+      deal: 'Ca la Scopa: 3 cărți fiecare, 4 pe masă, 3 re-date, re-împărțire la 3–4 regi.',
+      rules: ['Versiunea a (implicită): se pot lua DOAR cărți de pe masă care, împreună cu cartea jucată, fac exact 15. O carte nu poate lua o carte egală singură (ex. 5 poate lua un 10).', 'Versiunea b: cartea jucată poate lua fie o carte egală, fie un set cu suma egală cu a ei, fie un set care, cu ea, face 15 (fără prioritate fixă între ele: alegi tu).', 'Captura e obligatorie dacă se poate; scopa, ultima carte, scorarea și ținta ca la Scopa (la 11/21/31).'],
+      regional: ['Versiunea 3 din Pagat (a doua + Asul ia tot ca scopa, de obicei la 31) este doar în atlas.', 'Unii joacă regula „minimum de cărți luate” (la versiunea 2) — neimplementat.', 'Înrudit cu escoba spaniolă / jocuri similare; nu verificat aici.'],
+      approx: ['Versiunea 3 și regula „minimum de cărți” lipsesc (nu sunt incluse în joc; marcate doar în atlas).']
+    },
+    en: {
+      name: 'Scopa a 15 (Scopa di quindici)', origin: 'Italy. Scopa where the target sum is 15 rather than the value of the played card. Pagat describes three versions; the first two are implemented.',
+      deal: 'As in Scopa: 3 cards each, 4 on the table, re-deals of 3, redeal on 3–4 kings.',
+      rules: ['Version a (default): you may take ONLY table cards that, together with the played card, make exactly 15. A card cannot capture an equal card by itself (e.g. a 5 can take a 10).', 'Version b: the played card may capture either an equal card, a set of equal total value, or a set that makes 15 with it (no fixed priority: you choose).', 'Capture is compulsory when possible; sweep, last card, scoring and target as in Scopa (11/21/31).'],
+      regional: ['Pagat’s version 3 (the second plus Ace-takes-all as a sweep, usually to 31) is atlas-only.', 'Some play a "fewest cards" rule (in version 2) — not implemented.', 'Related to Spanish escoba and similar games; not verified here.'],
+      approx: ['Version 3 and the "fewest cards" rule are missing (atlas only).']
+    },
+    src: ['pagat.com/fishing/scopa.html']
+  },
+  {
+    id: 'apt', play: true, approx: true, players: '2', tags: ['Italia', 'asul ia tot'],
+    ro: {
+      name: 'Asso piglia tutto (Asul ia tot)', origin: 'Italia. Scopa în care Asul are puteri speciale.',
+      deal: 'Ca la Scopa (3+4, re-date de 3, re-împărțire la 3–4 regi).',
+      rules: ['Un As jucat pe o masă fără alt As ia toate cărțile de pe masă și face scopa. Dacă pe masă este deja un As, asul jucat ia doar acel As (la mai mulți ași alegi unul). Pe o masă goală asul rămâne acolo.', 'Celelalte cărți se joacă ca la Scopa. Scorare ca la Scopa.'],
+      regional: ['Pagat descrie regula pe scurt; cazul cu mai mulți ași pe masă nu e spus; aici se aplică regula Scopei (alegi un singur as egal).', 'Wikipedia italiană adaugă o regulă facultativă „del vile” (primul de mână nu poate juca un as pe masă goală) — neimplementată.'],
+      approx: ['⚠ Descrierea Pagat e scurtă; când pe masă sunt mai mulți ași, asul jucat ia doar unul, la alegere (interpretare; Pagat nu spune).']
+    },
+    en: {
+      name: 'Asso piglia tutto (Ace takes all)', origin: 'Italy. Scopa in which the Ace has special powers.',
+      deal: 'As in Scopa (3+4, re-deals of 3, redeal on 3–4 kings).',
+      rules: ['An Ace played onto a table with no other Ace takes every table card and scores a scopa. If an Ace is already on the table, the played Ace takes only that Ace (with several Aces you choose one). On an empty table the Ace stays there.', 'Other cards play as in Scopa. Scoring as in Scopa.'],
+      regional: ['Pagat describes the rule briefly; the case of several Aces on the table is not stated; the ordinary Scopa rule is applied here (you pick one equal Ace).', 'Italian Wikipedia adds an optional "del vile" rule (the first player may not play an Ace on an empty table) — not implemented.'],
+      approx: ['⚠ Pagat’s description is short; when several Aces are on the table the played Ace takes just one, your choice (interpretation; Pagat is silent).']
+    },
+    src: ['pagat.com/fishing/scopa.html', 'it.wikipedia.org/wiki/Scopone_scientifico']
+  },
+  {
+    id: 'dassi', play: true, approx: true, players: '4 (două perechi)', tags: ['Italia', 'perechi', 'asul ia tot'],
+    ro: {
+      name: 'Scopa d’assi', origin: 'Italia. Ca Asso piglia tutto, dar asul care ia tot nu dă punct de scopa; se joacă adesea în patru, în perechi, cu 9–10 cărți.',
+      deal: 'Implementat: 4 jucători în perechi, 10 cărți fiecare, masa goală, fără re-împărțire (Wikipedia italiană). Primul joacă jucătorul din dreapta dealerului.',
+      rules: ['Un As jucat pe o masă fără alt As ia toate cărțile de pe masă și NU face scopa; dacă pe masă este un As, asul jucat ia doar acel As (ca la Asso piglia tutto). Pe masă goală asul rămâne acolo.', 'Celelalte cărți: ca la Scopa (egal cu prioritate, altfel sumă); o scopa făcută cu o carte care nu e As se numără.', 'Scorare: Carte, Denari, Settebello, Primiera (+ scope), ținta 11/21.'],
+      regional: ['Pagat: variante — asul pe masă goală se ia pe sine; re-împărțire dacă apare un As în aranjamentul inițial. Nu sunt implementate.', 'Pagat definește Scopa d’assi ca Asso piglia tutto fără punct de scopa pentru asul care ia tot; se aplică același tratament al asului când pe masă e deja un As.'],
+      approx: ['⚠ Sursele diferă în detalii (asul pe masă goală, scopa cu non-ași, 9 vs 10 cărți); aici: 10 cărți, asul ia tot (fără alt As pe masă) fără scopa, scopa cu altă carte numără, asul pe masă goală rămâne.']
+    },
+    en: {
+      name: 'Scopa d’assi', origin: 'Italy. Like Asso piglia tutto, but the Ace that takes all does not score a sweep; often played by four in partnerships with 9–10 cards.',
+      deal: 'Implemented: 4 players in partnerships, 10 cards each, empty table, no redeal condition (Italian Wikipedia). The player to the dealer’s right leads.',
+      rules: ['An Ace played onto a table with no Ace takes every table card and does NOT score a sweep; if an Ace is on the table the played Ace takes only that Ace (as in Asso piglia tutto). On an empty table the Ace stays there.', 'Other cards: as in Scopa (equal card has priority, otherwise a sum); a sweep made with a non-Ace does count.', 'Scoring: Carte, Denari, Settebello, Primiera (+ sweeps), target 11/21.'],
+      regional: ['Pagat variants: an Ace played to an empty table takes itself; redeal if an Ace appears in the initial layout. Not implemented.', 'Pagat defines Scopa d’assi as Asso piglia tutto without a sweep point for the Ace that takes all; the same Ace treatment applies when an Ace is already on the table.'],
+      approx: ['⚠ Sources differ in details (Ace on an empty table, sweeps by non-Aces, 9 vs 10 cards); here: 10 cards, an Ace takes all (when no Ace is on the table) without a sweep, sweeps by other cards count, Ace on an empty table stays.']
+    },
+    src: ['pagat.com/fishing/scopa.html', 'it.wikipedia.org/wiki/Scopone_scientifico']
+  },
+  {
+    id: 'cirulla', play: true, approx: true, players: '2 (3 sau 4 în atlas)', tags: ['Liguria', 'suma 15', 'combinații'],
+    ro: {
+      name: 'Cirulla', origin: 'Liguria (Genova) și Piemontul de jos. Se joacă tradițional cu cărți genoveze cu semne franceze; aici cu orice pachet de 40.',
+      deal: 'Se dau 3 cărți fiecărui jucător și 4 pe masă; se re-dă dacă pe masă sunt 2 sau mai mulți asi. Dacă cele 4 cărți de pe masă fac exact 15 (1 scopa) sau 30 (2 scope), dealerul le ia imediat.',
+      rules: ['Capturi (la alegere): carte egală; set cu aceeași sumă; cărți care împreună cu cartea jucată fac 15; un As ia toată masa dacă nu e As pe masă. Scopa = masa golită (1 punct); la sfârșit, restul mesei merge la ultimul care a capturat, fără scopa.', 'Bonusuri de mână: trei cărți cu suma ≤ 9 = 3 scope („barsega”); trei cărți egale = 10 scope („barsegon”); 7 de coppe (inimi) e joker (matta) doar pentru bonus.', 'Punctaj: scope, Carte, Denari, Settebello, Primiera, La piccola (A-2-3… de denari, 1 punct pe carte, minim 3, maxim 6), La grande (Re+Cavallo+Fante de denari = 5). Cele 10 denari = „cappotto”: victorie imediată.', 'Ținta: 51 (alternativ 31/21); mâna se termină oricum.'],
+      regional: ['Pagat notează mai multe momente permise pentru declararea bonusurilor (bătaie în masă: la începutul rândului, între dare și prima carte, imediat după dare).', 'Cirullone (Liguria) și Cicera (Brescia) sunt jocuri apropiate/separate — doar menționate.', 'Varianta de turneu (cappotto și pentru patru cărți de același rang pe masă) lipsește.'],
+      approx: ['⚠ Bonusurile de mână se declară automat la începutul fiecărei împărțiri de 3 cărți (fără bătaie în masă, fără bluf/retragere), pentru ambii jucători; matta se alege automat spre cel mai bun rezultat.', '⚠ „La piccola” plafonat la 6 și „La grande” = 5 conform rezumatului din Pagat; valorile exacte nu au fost confirmate din altă sursă.', '⚠ Captura e obligatorie pentru cartea jucată dacă ea poate captura (Pagat nu o spune la fel de clar).']
+    },
+    en: {
+      name: 'Cirulla', origin: 'Liguria (Genoa) and Lower Piedmont. Traditionally played with Genoese French-suited cards; here with any 40-card pack.',
+      deal: '3 cards each and 4 on the table; redeal if 2 or more Aces are on the table. If the 4 table cards total exactly 15 (1 sweep) or 30 (2 sweeps), the dealer takes them at once.',
+      rules: ['Captures (your choice): an equal card; a set with the same sum; cards that with the played card make 15; an Ace takes the whole table if no Ace is on it. Sweep = table cleared (1 point); at the end the table remainder goes to the last capturer without a sweep.', 'Hand bonuses: three cards totalling ≤ 9 = 3 sweeps ("barsega"); three equal cards = 10 sweeps ("barsegon"); the 7 of cups (hearts) is a wild card (matta) for the bonus only.', 'Scoring: sweeps, Carte, Denari, Settebello, Primiera, La piccola (A-2-3… of coins, 1 point per card, minimum 3, at most 6), La grande (King+Horse+Jack of coins = 5). All 10 coins = "cappotto": immediate win.', 'Target: 51 (alternatively 31/21); the hand is finished anyway.'],
+      regional: ['Pagat notes several allowed moments for declaring bonuses (knocking: at the start of the turn, between deal and first card, immediately after the deal).', 'Cirullone (Liguria) and Cicera (Brescia) are related/separate games — only mentioned.', 'The tournament variant (cappotto also for four equal ranks on the table) is missing.'],
+      approx: ['⚠ Hand bonuses are declared automatically at the start of each 3-card deal (no knocking, bluffing or retraction), for both players; the matta is chosen automatically for the best result.', '⚠ "La piccola" capped at 6 and "La grande" = 5 per Pagat’s summary; the exact values were not confirmed by a second source.', '⚠ Capture is compulsory for the played card if it can capture (Pagat is less explicit).']
+    },
+    src: ['pagat.com/fishing/cirulla.html']
+  },
+  {
+    id: 'rubamazzo', play: true, approx: true, players: '2', tags: ['Italia', 'furt', 'copii'],
+    ro: {
+      name: 'Rubamazzo (Rubamazzetto)', origin: 'Italia. Variantă simplificată a Scopei în care poți fura teancul adversarului.',
+      deal: '3 cărți fiecărui jucător, 4 pe masă, re-date de 3 până se termină stocul. Adversarul dealerului joacă primul.',
+      rules: ['Joci o carte. Dacă are același rang cu o carte de pe masă, o iei (pui cartea peste pliul tău). Dacă are același rang cu cartea de deasupra pliului adversarului (ultima capturată, mereu vizibilă), poți fura întreg pliul. Dacă ambele sunt posibile, alegi.', 'Captura sau furtul sunt obligatorii dacă se pot; altfel cartea rămâne pe masă.', 'La sfârșit cărțile rămase pe masă merg la ultimul care a capturat; câștigă cine are cele mai multe cărți (20–20 = egalitate).'],
+      regional: ['Regulile locale variază mult (asul care fură; cine poate fura din propriul pliu; reguli „pe ultima mână”).', 'Sursele citite (Wikipedia italiană, un ghid italian) nu descriu protecția suplimentară a pliului sau punctaje speciale.'],
+      approx: ['⚠ Reguli regionale variabile; implementat nucleul comun din două surse. Fără varianta cu asul, fără alte puncte. AI simplu (euristic, nu Monte-Carlo).']
+    },
+    en: {
+      name: 'Rubamazzo (Rubamazzetto)', origin: 'Italy. A simplified Scopa-like game in which you can steal the opponent’s pile.',
+      deal: '3 cards each, 4 on the table, re-deals of 3 until the stock is exhausted. The dealer’s opponent leads.',
+      rules: ['Play a card. If it has the same rank as a table card, you take it (placing your card on top of your pile). If it has the same rank as the top card of the opponent’s pile (the last one captured, always visible), you may steal the whole pile. If both are possible, you choose.', 'Capturing or stealing is compulsory when possible; otherwise the card stays on the table.', 'At the end the table remainder goes to the last capturer; the player with most cards wins (20–20 = draw).'],
+      regional: ['Local rules vary a lot (the stealing Ace; who may steal from their own pile; last-hand rules).', 'The sources read (Italian Wikipedia, an Italian guide) describe no extra pile protection or special points.'],
+      approx: ['⚠ Regional rules vary; the common core of two sources is implemented. No Ace variant, no extra points. Simple AI (heuristic, not Monte-Carlo).']
+    },
+    src: ['it.wikipedia.org/wiki/Rubamazzetto', 'qualcherisposta.it/come-si-gioca-rubamazzo']
+  },
+  /* ---- doar în atlas ---- */
+  { id: 'bazzica', play: false, players: '2', tags: ['Italia', 'combinații'], ro: { name: 'Scopa Bazzica', origin: 'Italia (doi jucători).', deal: '', rules: ['Imediat după împărțirea celor 3 cărți se pot declara combinații: Bazzica (trei cărți cu suma ≤ 9, figurile 10) = 3 puncte; Bazzicotto (trei cărți de același rang) = 10 puncte. Doar cea mai bună se punctează; la bazzica câștigă suma mai mică; la bazzicotto rangul mai mic. Jocul se face la 21 sau 31.'], regional: [], approx: [] }, en: { name: 'Scopa Bazzica', origin: 'Italy (two players).', deal: '', rules: ['Right after the 3-card deal combinations may be declared: Bazzica (three cards totalling ≤ 9, court cards 10) = 3 points; Bazzicotto (three cards of the same rank) = 10 points. Only the better one scores; for bazzica the lower total wins, for bazzicotto the lower rank. Games to 21 or 31.'], regional: [], approx: [] }, src: ['pagat.com/fishing/scopa.html'] },
+  { id: 'scalette', play: false, players: '2–4', tags: ['Italia', 'secvențe'], ro: { name: 'Scopa con le scalette / Napola', origin: 'Italia.', deal: '', rules: ['Secvențe de denari: scaletta bassa (A-2-3, 3 puncte, extinsă până la Cavallo = 9) și scaletta alta (Re-Cavallo-Fante, 5 puncte, extinsă în jos până la 2 = 11). Toate denarii = „Scala”: victorie. Napola: A-2-3… de denari, un punct pe carte.'], regional: ['Napola și Re bello sunt disponibile ca opțiuni în Scopa/Scopone; scalette doar în atlas.'], approx: [] }, en: { name: 'Scopa with scalette / Napola', origin: 'Italy.', deal: '', rules: ['Sequences of coins: low ladder (A-2-3, 3 points, extended up to the Horse = 9) and high ladder (King-Horse-Jack, 5 points, extended downward to the 2 = 11). All coins = "Scala": a win. Napola: A-2-3… of coins, one point per card.'], regional: ['Napola and Re bello are options in Scopa/Scopone; scalette is atlas only.'], approx: [] }, src: ['pagat.com/fishing/scopa.html'] },
+  { id: 'sbarazzina', play: false, players: '2', tags: ['Emilia'], ro: { name: 'Sbarazzina și Piva', origin: 'Emilia (Italia).', deal: '', rules: ['Sbarazzina: asul ia tot fără scopa; Re bello valorează un punct; bazzica 2 puncte (rangurile diferite) sau 3 (cu pereche); trei egale = 7; joc la 41. Piva: variantă pentru doi, cu cărți piacentine, unde 2 de bastoni dă −5 puncte; jocuri la 21 sau 31, scorul poate deveni negativ.'], regional: [], approx: [] }, en: { name: 'Sbarazzina and Piva', origin: 'Emilia (Italy).', deal: '', rules: ['Sbarazzina: Ace takes all without a sweep; Re bello is a point; bazzica 2 points (all ranks different) or 3 (with a pair); three of a kind = 7; game to 41. Piva: two-player variant with Piacentine cards in which taking the 2 of batons is −5 points; games to 21 or 31, scores can go negative.'], regional: [], approx: [] }, src: ['pagat.com/fishing/scopa.html'] },
+  { id: 'corsa', play: false, players: '2 sau 4', tags: ['Corsica'], ro: { name: 'Scopa corsă', origin: 'Corsica.', deal: '', rules: ['Pachet de 36 de cărți (fără 2). Doi jucători: împărțiri de 3,3,3,3,4,4; patru jucători în perechi fixe. Captura nu e obligatorie. Jocuri la 21 (sau 16/11).'], regional: [], approx: [] }, en: { name: 'Corsican Scopa', origin: 'Corsica.', deal: '', rules: ['36-card pack (no 2s). Two players: deals of 3,3,3,3,4,4; four players in fixed partnerships. Capturing is not compulsory. Games to 21 (or 16/11).'], regional: [], approx: [] }, src: ['pagat.com/fishing/scopa.html'] },
+  { id: 'chkobba', play: false, players: '2–4', tags: ['Tunisia', 'Franța'], ro: { name: 'Chkobba', origin: 'Tunisia; popular și în Franța.', deal: '', rules: ['Pachet francez de 40 (fără 8, 9, 10; Valet 9, Dame 8). Prima carte tăiată poate fi păstrată sau pusă pe masă. Captura obligatorie; chkobba = masa golită, nu la ultima carte a dealerului. Punctaj: kārṭa (cele mai multe cărți), dīnārī (carouri), barmīla (cei mai mulți 7, apoi 6), sabʿa l-ḥayya (7 de carouri), plus chkobba. Țintă 21 (sau 11/31).'], regional: [], approx: [] }, en: { name: 'Chkobba', origin: 'Tunisia; popular in France too.', deal: '', rules: ['French 40-card pack (no 8, 9, 10; Jack 9, Queen 8). The cut card may be kept or placed on the table. Capture compulsory; chkobba = table cleared, not on the dealer’s last card. Scoring: kārṭa (most cards), dīnārī (diamonds), barmīla (most sevens, then sixes), sabʿa l-ḥayya (7 of diamonds), plus chkobba. Target 21 (or 11/31).'], regional: [], approx: [] }, src: ['pagat.com/fishing/scopa.html'] },
+  { id: 'hurrikan', play: false, players: '2', tags: ['Germania'], ro: { name: 'Hurrikan', origin: 'Germania, anii 1930.', deal: '', rules: ['Trei sub-mâini de câte șase cărți; inimile sunt culoarea bonus (7 de inimi = 1 punct, 6 sau mai multe inimi = 1 punct). Țintă 16; dublu dacă perdantul are sub 8.'], regional: [], approx: [] }, en: { name: 'Hurrikan', origin: 'Germany, 1930s.', deal: '', rules: ['Three sub-deals of six cards; hearts are the bonus suit (7 of hearts = 1 point, six or more hearts = 1 point). Target 16; double game if the loser has under 8.'], regional: [], approx: [] }, src: ['pagat.com/fishing/scopa.html'] },
+  { id: 'cicera', play: false, players: '2–4', tags: ['Brescia', 'Liguria'], ro: { name: 'Cicera, Cirullone', origin: 'Brescia (Cicera), Liguria (Cirullone).', deal: '', rules: ['Jocuri apropiate de Cirulla/Scopone, cu pagini separate la Pagat; nu am putut citi regulile lor complete aici, de aceea nu sunt descrise și nu sunt implementate.'], regional: [], approx: [] }, en: { name: 'Cicera, Cirullone', origin: 'Brescia (Cicera), Liguria (Cirullone).', deal: '', rules: ['Games close to Cirulla/Scopone with separate pages at Pagat; their full rules could not be read here, so they are neither described nor implemented.'], regional: [], approx: [] }, src: ['pagat.com/fishing/scopone.html (mențiune)'] }
+];
+
+/* ===== GRAFICĂ: cărți desenate în SVG (design propriu, nu copiază pachete regionale). Doar date numerice interne intră în markup. ===== */
+const CARDS = (function () {
+  const SPRITE = '<svg id="sprite" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>' +
+    /* semne italiene */
+    '<symbol id="s0" viewBox="-12 -12 24 24"><circle r="10.5" fill="#e0a82e" stroke="#6b4a0c" stroke-width="1.3"/><circle r="7.2" fill="none" stroke="#7a5410" stroke-width="1"/><circle r="3" fill="#f6dd8a" stroke="#7a5410" stroke-width=".8"/><path d="M0-7.2V-4M0 7.2V4M-7.2 0H-4M7.2 0H4M-5.1-5.1L-2.8-2.8M5.1 5.1L2.8 2.8M5.1-5.1L2.8-2.8M-5.1 5.1L-2.8 2.8" stroke="#7a5410" stroke-width=".9" fill="none"/></symbol>' +
+    '<symbol id="s1" viewBox="-12 -12 24 24"><path d="M-8-8.5H8C8 0 4.6 3.6 1.4 5V8.6H5.6V11H-5.6V8.6H-1.4V5C-4.6 3.6-8 0-8-8.5Z" fill="#c23b30" stroke="#5a1410" stroke-width="1.2" stroke-linejoin="round"/><ellipse cx="0" cy="-8.5" rx="8" ry="1.8" fill="#e98a7d" stroke="#5a1410" stroke-width="1"/><path d="M-4.5-4.5C-4-1-2.5.5-1 1.3" stroke="#f0b2a8" stroke-width="1" fill="none"/></symbol>' +
+    '<symbol id="s2" viewBox="-12 -12 24 24"><g transform="rotate(38)"><path d="M0-11.5L2.5-8V3H-2.5V-8Z" fill="#aab8c7" stroke="#2f3f50" stroke-width="1" stroke-linejoin="round"/><path d="M0-10V3" stroke="#e7eef5" stroke-width=".8"/><rect x="-6.5" y="3" width="13" height="2.4" rx="1" fill="#b8892a" stroke="#4d3510" stroke-width=".9"/><rect x="-1.3" y="5.4" width="2.6" height="5" fill="#6b3b1d" stroke="#3a1f0d" stroke-width=".7"/><circle cy="11" r="1.7" fill="#b8892a" stroke="#4d3510" stroke-width=".7"/></g></symbol>' +
+    '<symbol id="s3" viewBox="-12 -12 24 24"><g transform="rotate(-38)"><path d="M-2.6-10C-5-10-5.5-6-3.4-4C-4 0-3.2 5-2.2 10.5H2.2C3.2 5 4 0 3.4-4C5.5-6 5-10 2.6-10C1-11.5-1-11.5-2.6-10Z" fill="#a9733a" stroke="#3d2410" stroke-width="1.1"/><path d="M-1-9C-1.4-4-1 4-.6 9" stroke="#e0b57e" stroke-width=".9" fill="none"/><circle cx="2" cy="-1" r=".9" fill="#3d2410"/><circle cx="-1.5" cy="4" r=".8" fill="#3d2410"/><path d="M3.2-2c3-1 4.6 0 5 1.6-2.4.4-4-.2-5-1.6ZM-3.2 1.5c-3-1-4.6 0-5 1.6 2.4.4 4-.2 5-1.6Z" fill="#5f9a3a" stroke="#27401a" stroke-width=".7"/></g></symbol>' +
+    /* semne franceze */
+    '<symbol id="f0" viewBox="-12 -12 24 24"><path d="M0-11L8 0 0 11-8 0Z" fill="#c4261f" stroke="#7a1612" stroke-width=".8"/></symbol>' +
+    '<symbol id="f1" viewBox="-12 -12 24 24"><path d="M0 10.5C-12.5 1-9.5-8.5-4.5-8.5-2-8.5-.6-7.3 0-5.8 .6-7.3 2-8.5 4.5-8.5 9.5-8.5 12.5 1 0 10.5Z" fill="#c4261f" stroke="#7a1612" stroke-width=".8"/></symbol>' +
+    '<symbol id="f2" viewBox="-12 -12 24 24"><path d="M0-11C-4-6-11-2-11 3-11 6.6-7.4 8-4.6 6.2-5 8.6-5.8 10-7 11H7C5.8 10 5 8.6 4.6 6.2 7.4 8 11 6.6 11 3 11-2 4-6 0-11Z" fill="#17171d"/></symbol>' +
+    '<symbol id="f3" viewBox="-12 -12 24 24"><g fill="#17171d"><circle cx="0" cy="-5.6" r="4.7"/><circle cx="-5.6" cy="2.6" r="4.7"/><circle cx="5.6" cy="2.6" r="4.7"/><path d="M-1.4 1H1.4L3.2 11H-3.2Z"/><rect x="-2" y="-2" width="4" height="6"/></g></symbol>' +
+    '<pattern id="bk" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="12" height="12" fill="#14382a"/><path d="M0 0H12M0 6H12" stroke="#c8832a" stroke-width=".7" opacity=".7"/><circle cx="6" cy="3" r="1.2" fill="#e8c87a" opacity=".8"/></pattern>' +
+    '</defs></svg>';
+
+  const INK_IT = ['#7a5410', '#8f2a22', '#2f4a63', '#6b4423'];
+  const TUN = ['#d9a52b', '#c23b30', '#4f78a0', '#5f8f3a'];
+  const PIPS = {
+    2: [[50, 44], [50, 116]],
+    3: [[50, 40], [50, 80], [50, 120]],
+    4: [[33, 46], [67, 46], [33, 114], [67, 114]],
+    5: [[33, 46], [67, 46], [50, 80], [33, 114], [67, 114]],
+    6: [[33, 42], [67, 42], [33, 80], [67, 80], [33, 118], [67, 118]],
+    7: [[33, 42], [67, 42], [50, 61], [33, 80], [67, 80], [33, 118], [67, 118]]
+  };
+  function use(id, x, y, w) { return '<use href="#' + id + '" x="' + (x - w / 2) + '" y="' + (y - w / 2) + '" width="' + w + '" height="' + w + '"/>'; }
+
+  function figure(r, s) {
+    const tun = TUN[s], sym = 's' + s, stroke = '#222';
+    if (r === 8) { /* Fante: paj */
+      return '<ellipse cx="50" cy="133" rx="22" ry="3" fill="#0002"/>' +
+        '<rect x="41" y="104" width="7" height="24" fill="#3b3b4a"/><rect x="52" y="104" width="7" height="24" fill="#3b3b4a"/>' +
+        '<rect x="38" y="124" width="11" height="7" rx="2" fill="#5a3b22"/><rect x="51" y="124" width="11" height="7" rx="2" fill="#5a3b22"/>' +
+        '<path d="M36 66h28l5 42H31Z" fill="' + tun + '" stroke="' + stroke + '" stroke-width="1.2" stroke-linejoin="round"/>' +
+        '<rect x="33" y="88" width="34" height="5" fill="#2b2b33"/>' +
+        '<path d="M36 68l-9 22 6 3 8-16ZM64 68l9 20-6 4-7-14Z" fill="' + tun + '" stroke="' + stroke + '" stroke-width="1.1" stroke-linejoin="round"/>' +
+        '<circle cx="50" cy="55" r="10" fill="#efd2ae" stroke="' + stroke + '" stroke-width="1.2"/>' +
+        '<path d="M39 52c0-14 22-14 22 0l-3-3c-5-4-12-4-16 0Z" fill="' + tun + '" stroke="' + stroke + '" stroke-width="1.1"/>' +
+        '<path d="M58 44c8-8 14-6 14 0-6-1-9 1-12 5Z" fill="#f3efe4" stroke="' + stroke + '" stroke-width=".8"/>' +
+        '<circle cx="46" cy="55" r="1.1" fill="#222"/><circle cx="54" cy="55" r="1.1" fill="#222"/><path d="M46 60q4 2.5 8 0" stroke="#222" fill="none" stroke-width="1"/>' +
+        use(sym, 76, 96, 22);
+    }
+    if (r === 9) { /* Cavallo: călăreț */
+      return '<ellipse cx="48" cy="137" rx="30" ry="3" fill="#0002"/>' +
+        '<path d="M20 104c-10 4-12 18-8 26" stroke="#3b2412" stroke-width="4.5" fill="none" stroke-linecap="round"/>' +
+        '<rect x="28" y="112" width="6" height="24" fill="#7b4c2a" stroke="' + stroke + '" stroke-width="1"/><rect x="38" y="112" width="6" height="24" fill="#7b4c2a" stroke="' + stroke + '" stroke-width="1"/>' +
+        '<rect x="56" y="112" width="6" height="24" fill="#7b4c2a" stroke="' + stroke + '" stroke-width="1"/><rect x="66" y="112" width="6" height="24" fill="#7b4c2a" stroke="' + stroke + '" stroke-width="1"/>' +
+        '<ellipse cx="47" cy="104" rx="28" ry="14" fill="#8b5a33" stroke="' + stroke + '" stroke-width="1.2"/>' +
+        '<path d="M62 98l8-26 11-7 8 7-5 6-5 2-6 22Z" fill="#8b5a33" stroke="' + stroke + '" stroke-width="1.2" stroke-linejoin="round"/>' +
+        '<path d="M70 72l-6 4 3 10" stroke="#3b2412" stroke-width="3.5" fill="none" stroke-linecap="round"/>' +
+        '<circle cx="82" cy="70" r="1.2" fill="#fff"/>' +
+        '<path d="M38 74h16l3 26H35Z" fill="' + tun + '" stroke="' + stroke + '" stroke-width="1.2" stroke-linejoin="round"/>' +
+        '<circle cx="46" cy="64" r="8" fill="#efd2ae" stroke="' + stroke + '" stroke-width="1.2"/>' +
+        '<path d="M37 61h18l-3-9H40Z" fill="' + tun + '" stroke="' + stroke + '" stroke-width="1"/>' +
+        '<path d="M55 78l14 8" stroke="' + stroke + '" stroke-width="3" stroke-linecap="round"/>' +
+        use(sym, 22, 80, 20);
+    }
+    /* Re */
+    return '<ellipse cx="50" cy="135" rx="26" ry="3" fill="#0002"/>' +
+      '<path d="M30 68h40l8 64H22Z" fill="' + tun + '" stroke="' + stroke + '" stroke-width="1.2" stroke-linejoin="round"/>' +
+      '<path d="M28 110h44l2 9H26Z" fill="#f5f0e6" stroke="' + stroke + '" stroke-width="1"/><g fill="#222"><circle cx="34" cy="114" r="1.3"/><circle cx="44" cy="115" r="1.3"/><circle cx="54" cy="114" r="1.3"/><circle cx="64" cy="115" r="1.3"/></g>' +
+      '<path d="M40 68l10 14 10-14" fill="#f5f0e6" stroke="' + stroke + '" stroke-width="1"/>' +
+      '<circle cx="50" cy="52" r="11" fill="#efd2ae" stroke="' + stroke + '" stroke-width="1.2"/>' +
+      '<path d="M39 55c0 16 22 16 22 0Z" fill="#dcd6cc" stroke="' + stroke + '" stroke-width="1"/>' +
+      '<circle cx="45.5" cy="50" r="1.2" fill="#222"/><circle cx="54.5" cy="50" r="1.2" fill="#222"/>' +
+      '<path d="M37 43l4-15 9 9 9-9 4 15Z" fill="#e0a82e" stroke="' + stroke + '" stroke-width="1.1" stroke-linejoin="round"/>' +
+      '<circle cx="41" cy="28" r="2" fill="#c23b30"/><circle cx="50" cy="35" r="2" fill="#c23b30"/><circle cx="59" cy="28" r="2" fill="#c23b30"/>' +
+      '<path d="M76 72v46" stroke="#6b4a1c" stroke-width="3" stroke-linecap="round"/>' + use(sym, 76, 66, 20);
+  }
+
+  function labelOf(r, mode) {
+    if (mode === 'fr') return r === 1 ? 'A' : r === 8 ? 'J' : r === 9 ? 'Q' : r === 10 ? 'K' : String(r);
+    return r === 8 ? 'F' : r === 9 ? 'C' : r === 10 ? 'R' : String(r);
+  }
+  function corner(r, s, mode, ink) {
+    const lab = labelOf(r, mode), small = r >= 8 ? '<text x="13" y="45" text-anchor="middle" font-size="9" fill="' + ink + '" font-family="Georgia,serif" opacity=".85">' + r + '</text>' : '';
+    const symId = (mode === 'fr' ? 'f' : 's') + s;
+    return '<text x="13" y="23" text-anchor="middle" font-size="19" font-weight="700" fill="' + ink + '" font-family="Georgia,\'Iowan Old Style\',serif">' + lab + '</text>' + small + use(symId, 13, r >= 8 ? 57 : 38, 14);
+  }
+  function face(id, mode) {
+    const s = (id / 10) | 0, r = (id % 10) + 1;
+    const ink = mode === 'fr' ? (s < 2 ? '#b3201a' : '#17171d') : INK_IT[s];
+    const symId = (mode === 'fr' ? 'f' : 's') + s;
+    let b = '<rect x="1" y="1" width="98" height="158" rx="9" fill="#f6f0df" stroke="#a9996e" stroke-width="1.4"/><rect x="5.5" y="5.5" width="89" height="149" rx="6" fill="none" stroke="' + ink + '" stroke-opacity=".28" stroke-width="1"/>';
+    b += corner(r, s, mode, ink);
+    b += '<g transform="rotate(180 50 80)">' + corner(r, s, mode, ink) + '</g>';
+    if (r === 1) {
+      b += '<circle cx="50" cy="80" r="33" fill="none" stroke="' + ink + '" stroke-opacity=".3" stroke-width="1.2"/>' + use(symId, 50, 80, mode === 'fr' ? 50 : 56);
+    } else if (r <= 7) {
+      for (const p of PIPS[r]) b += use(symId, p[0], p[1], r >= 6 ? 20 : 24);
+    } else if (mode === 'fr') {
+      const L = r === 8 ? 'J' : r === 9 ? 'Q' : 'K';
+      b += '<rect x="22" y="30" width="56" height="100" rx="4" fill="' + ink + '" fill-opacity=".07" stroke="' + ink + '" stroke-opacity=".5" stroke-width="1"/>' +
+        '<text x="50" y="94" text-anchor="middle" font-size="54" font-weight="700" fill="' + ink + '" font-family="Georgia,serif">' + L + '</text>' + use(symId, 50, 46, 22) + use(symId, 50, 118, 22);
+    } else {
+      b += '<rect x="20" y="28" width="60" height="104" rx="5" fill="' + ink + '" fill-opacity=".06" stroke="' + ink + '" stroke-opacity=".35" stroke-width="1"/>' + figure(r, s);
+    }
+    return b;
+  }
+  function backSvg() {
+    return '<rect x="1" y="1" width="98" height="158" rx="9" fill="url(#bk)" stroke="#e8c87a" stroke-width="2"/><rect x="8" y="8" width="84" height="144" rx="6" fill="none" stroke="#e8c87a" stroke-width="1.2" stroke-opacity=".8"/>' +
+      '<circle cx="50" cy="80" r="15" fill="#14382a" stroke="#e8c87a" stroke-width="1.5"/><path d="M50 68l5 12-5 12-5-12Z" fill="#e8c87a"/>';
+  }
+  /* returnează un element <svg> pentru cartea id (sau spatele, id = -1) */
+  function svgFor(id, mode) {
+    const wrap = document.createElement('div');
+    wrap.innerHTML = '<svg viewBox="0 0 100 160" aria-hidden="true" focusable="false">' + (id < 0 ? backSvg() : face(id, mode)) + '</svg>';
+    return wrap.firstChild;
+  }
+  return { SPRITE, svgFor, labelOf };
+})();
+
+/* ===== INTERFAȚĂ ===== */
+(function () {
+'use strict';
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+const NS = 'http://www.w3.org/2000/svg';
+function h(tag, attrs) {
+  const e = document.createElement(tag);
+  if (attrs) for (const k in attrs) {
+    const v = attrs[k];
+    if (v === false || v === null || v === undefined) continue;
+    if (k === 'class') e.className = v;
+    else if (k.slice(0, 2) === 'on' && typeof v === 'function') e.addEventListener(k.slice(2), v);
+    else if (k === 'text') e.textContent = v;
+    else e.setAttribute(k, v === true ? '' : v);
+  }
+  for (let i = 2; i < arguments.length; i++) {
+    const c = arguments[i]; if (c === null || c === undefined || c === false) continue;
+    if (Array.isArray(c)) c.forEach(x => x && e.appendChild(typeof x === 'string' ? document.createTextNode(x) : x));
+    else e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+  }
+  return e;
+}
+
+/* ---------- preferințe + statistici (opționale; aplicația merge și fără) ---------- */
+const PREF_KEY = 'sff.prefs.v1', STAT_KEY = 'sff.stats.v1';
+let prefs = { lang: null, deck: 'it', level: 'h', variant: 'scopa', showHands: false, showMem: false };
+let stats = {};
+function loadStore() {
+  try {
+    const p = JSON.parse(localStorage.getItem(PREF_KEY) || 'null');
+    if (p && typeof p === 'object') {
+      if (LANGS.includes(p.lang)) prefs.lang = p.lang;
+      if (p.deck === 'it' || p.deck === 'fr') prefs.deck = p.deck;
+      if (p.level === 'h' || p.level === 'mc') prefs.level = p.level;
+      if (ATLAS.some(a => a.id === p.variant && a.play)) prefs.variant = p.variant;
+      prefs.showHands = !!p.showHands; prefs.showMem = !!p.showMem;
+    }
+    const s = JSON.parse(localStorage.getItem(STAT_KEY) || 'null');
+    if (s && typeof s === 'object') for (const k in s) if (ATLAS.some(a => a.id === k) && s[k] && Number.isFinite(s[k].w) && Number.isFinite(s[k].l)) stats[k] = { w: s[k].w | 0, l: s[k].l | 0 };
+  } catch (e) { /* stocare indisponibilă */ }
+}
+function savePrefs() { try { localStorage.setItem(PREF_KEY, JSON.stringify(prefs)); } catch (e) { /* ignorat */ } }
+function saveStats() { try { localStorage.setItem(STAT_KEY, JSON.stringify(stats)); } catch (e) { /* ignorat */ } }
+
+/* ---------- limbă ---------- */
+let lang = 'ro', deckMode = 'it', view = 'atlas', filter = 'all';
+function detectLang() {
+  if (prefs.lang) return prefs.lang;
+  const cands = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'ro']);
+  for (const c of cands) { const p = String(c).slice(0, 2).toLowerCase(); if (LANGS.includes(p)) return p; }
+  return 'ro';
+}
+function T(key, vars) {
+  let s = (UI[lang] && UI[lang][key]); if (s === undefined) s = UI.en[key]; if (s === undefined) s = UI.ro[key]; if (s === undefined) s = key;
+  if (vars) for (const k in vars) s = s.split('{' + k + '}').join(String(vars[k]));
+  return s;
+}
+const longLang = () => (lang === 'ro' ? 'ro' : 'en');
+const isLongFallback = () => lang !== 'ro' && lang !== 'en';
+
+/* ---------- nume de cărți ---------- */
+function rankName(r) { if (deckMode === 'fr') return r === 1 ? 'A' : r === 8 ? 'J' : r === 9 ? 'Q' : r === 10 ? 'K' : String(r); return r === 1 ? 'Asso' : r === 8 ? 'Fante' : r === 9 ? 'Cavallo' : r === 10 ? 'Re' : String(r); }
+function cardName(id) {
+  const s = SC.suit(id), r = SC.rank(id);
+  return deckMode === 'fr' ? rankName(r) + SUIT_SYM[s] : rankName(r) + ' ' + SUIT_NAMES[lang][s];
+}
+function cardFull(id) { const r = SC.rank(id); return cardName(id) + (r >= 8 || r === 1 ? ' (' + r + ')' : ''); }
+function sortIds(a) { return a.slice().sort((x, y) => SC.suit(x) - SC.suit(y) || SC.rank(x) - SC.rank(y)); }
+function sortTable(a) { return a.slice().sort((x, y) => SC.rank(x) - SC.rank(y) || SC.suit(x) - SC.suit(y)); }
+function miniCard(id) {
+  const s = SC.suit(id), r = SC.rank(id);
+  const sv = document.createElementNS(NS, 'svg'); sv.setAttribute('viewBox', '-12 -12 24 24'); sv.setAttribute('aria-hidden', 'true');
+  const u = document.createElementNS(NS, 'use'); u.setAttribute('href', '#' + (deckMode === 'fr' ? 'f' : 's') + s); u.setAttribute('x', '-12'); u.setAttribute('y', '-12'); u.setAttribute('width', '24'); u.setAttribute('height', '24'); sv.appendChild(u);
+  const lab = deckMode === 'fr' ? CARDS.labelOf(r, 'fr') : (r >= 8 ? CARDS.labelOf(r, 'it') : String(r));
+  return h('span', { class: 'mini m' + s + (deckMode === 'fr' ? ' fr' : ''), 'aria-hidden': 'true' }, lab, sv);
+}
+function cardEl(id, opts) {
+  opts = opts || {};
+  const tag = opts.button ? 'button' : 'div';
+  const el = h(tag, { class: 'card' + (opts.cls ? ' ' + opts.cls : ''), 'data-id': id });
+  el.appendChild(CARDS.svgFor(id, deckMode));
+  if (id >= 0) { el.setAttribute('aria-label', cardFull(id)); el.setAttribute('title', cardFull(id)); if (!opts.button) el.setAttribute('role', 'img'); }
+  if (opts.button) el.setAttribute('type', 'button');
+  return el;
+}
+function backEl() { const e = h('div', { class: 'card', 'aria-hidden': 'true' }); e.appendChild(CARDS.svgFor(-1, deckMode)); return e; }
+
+/* ---------- joc ---------- */
+let G = null; /* starea jocului curent */
+let aiTimer = null;
+const reduceMotion = () => { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } };
+
+function playerName(p) {
+  if (!G) return '';
+  if (G.kind === 'ruba' || G.rules.players === 2) return p === 0 ? T('play.you') : T('play.ai');
+  return [T('play.you'), T('play.oppR'), T('play.partner'), T('play.oppL')][p];
+}
+function teamName(t) { return G.kind === 'ruba' || G.rules.players === 2 ? (t === 0 ? T('play.you') : T('play.ai')) : (t === 0 ? T('play.teamYou') : T('play.teamOpp')); }
+
+function defaultTarget(id) { return SC.RULESETS[id] ? SC.RULESETS[id].target : 0; }
+function readSetup() {
+  const g = id => $('#' + id);
+  const variant = g('sv-variant').value, r = SC.RULESETS[variant];
+  const o = {};
+  if (r) {
+    o.target = parseInt(g('sv-target').value, 10) || r.target;
+    o.reBello = !!(g('sv-rebello') && g('sv-rebello').checked);
+    o.napola = !!(g('sv-napola') && g('sv-napola').checked);
+    o.lastSweep = !!(g('sv-last') && g('sv-last').checked);
+    if (variant === 'scopa15') o.cap15 = g('sv-cap15').value === 'b' ? 'b' : 'a';
+  }
+  return { variant, opts: o, level: g('sv-level').value === 'mc' ? 'mc' : 'h', seed: g('sv-seed').value.trim(), showHands: g('sv-showh').checked, showMem: g('sv-showm').checked };
+}
+
+function startGame(setup) {
+  if (aiTimer) { clearTimeout(aiTimer); aiTimer = null; }
+  const seed = setup.seed === '' ? null : setup.seed;
+  const dealRng = SC.makeRNG(seed);
+  const aiRng = SC.makeRNG(seed === null ? null : seed + '|ai');
+  prefs.variant = setup.variant; prefs.level = setup.level; prefs.showHands = setup.showHands; prefs.showMem = setup.showMem; savePrefs();
+  G = { kind: setup.variant === 'rubamazzo' ? 'ruba' : 'std', id: setup.variant, setup, dealRng, aiRng, level: setup.level, log: [], status: '', sel: null, phase: 'play', handNo: 0, evIdx: 0, focusHand: null, wins: [0, 0], busy: false };
+  if (G.kind === 'std') {
+    G.rules = SC.rulesFor(setup.variant, setup.opts);
+    G.match = SC.newMatch(setup.variant, setup.opts, dealRng);
+    G.samples = 40;
+    newHand();
+  } else {
+    G.dealer = dealRng.int(2); G.rules = { players: 2 };
+    newRuba();
+  }
+  view = 'play'; renderAll(); window.scrollTo(0, 0);
+  afterChange(true);
+}
+function newHand() {
+  const g = G; g.st = SC.startHand(g.match, g.dealRng); g.evIdx = 0; g.sel = null; g.phase = 'play'; g.handNo++;
+  log(T('log.newHand', { p: playerName(g.st.dealer) }));
+  if (g.st.redeals) log(T('log.redeal'));
+  flushEvents();
+}
+function newRuba() {
+  const g = G; g.st = SC.RUBA.deal(g.dealRng, g.dealer); g.sel = null; g.phase = 'play'; g.handNo++;
+  log(T('log.newHand', { p: playerName(g.st.dealer) }));
+}
+function log(msg) { G.log.push(msg); if (G.log.length > 60) G.log.shift(); }
+function flushEvents() {
+  const g = G, st = g.st; if (!st.events) return;
+  while (g.evIdx < st.events.length) {
+    const ev = st.events[g.evIdx++];
+    if (ev.type === 'dealerBonus') log(T('log.dealerBonus', { p: playerName(ev.p), n: ev.pts }));
+    else if (ev.type === 'handBonus') log(T('log.handBonus', { p: playerName(ev.p), n: ev.pts }));
+  }
+}
+function setStatus(msg) { if (G) G.status = msg; const s = $('#status'); if (s) s.textContent = msg; }
+function humanTurn() { return G && G.phase === 'play' && !G.st.over && G.st.turn === 0 && !G.busy; }
+
+/* după orice schimbare de stare: ia măsuri în funcție de cine e la rând */
+function afterChange(first) {
+  if (!G) return;
+  renderPlay();
+  if (G.phase !== 'play') return;
+  if (G.st.over) { endHand(); return; }
+  if (G.st.turn === 0) { setStatus(T('play.yourTurn')); renderPlay(); focusDefault(); }
+  else aiStep();
+}
+function aiStep() {
+  const g = G; if (!g || g.st.over) return;
+  g.busy = true; setStatus(T('play.aiThinking')); renderPlay();
+  const delay = reduceMotion() ? 120 : (g.level === 'mc' ? 350 : 650);
+  aiTimer = setTimeout(function () {
+    aiTimer = null; if (G !== g || g.phase !== 'play') return;
+    try {
+      let mv;
+      if (g.kind === 'ruba') mv = SC.RUBA.choose(SC.RUBA.observe(g.st, g.st.turn), g.aiRng);
+      else mv = SC.chooseMove(SC.observe(g.st, g.st.turn), g.level, g.aiRng, g.samples);
+      g.busy = false; doMove(mv);
+    } catch (e) { /* watchdog: dacă AI-ul aruncă excepție, joacă o mutare legală oarecare ca jocul să nu rămână blocat */
+      g.busy = false;
+      try { const L = g.kind === 'ruba' ? SC.RUBA.moves(g.st) : SC.legalMoves(g.st); doMove(L[g.aiRng.int(L.length)]); }
+      catch (e2) { setStatus('Eroare internă AI: ' + (e2 && e2.message)); renderPlay(); }
+    }
+  }, delay);
+}
+function doMove(mv) {
+  const g = G, st = g.st, p = st.turn, nm = playerName(p);
+  if (g.kind === 'ruba') {
+    if (mv.kind === 'place') log(T('log.place', { p: nm, c: cardName(mv.card) }));
+    else if (mv.kind === 'table') log(T('log.take', { p: nm, c: cardName(mv.card), t: cardName(mv.target) }));
+    else log(nm + ': ' + cardName(mv.card) + ' — ' + T('ruba.steal') + ' (' + st.piles[1 - p].length + ')');
+    SC.RUBA.apply(st, mv, true);
+  } else {
+    if (!mv.take.length) log(T('log.place', { p: nm, c: cardName(mv.card) }));
+    else log(T('log.take', { p: nm, c: cardName(mv.card), t: sortTable(mv.take).map(cardName).join(' + ') }));
+    const r = SC.applyMove(st, mv, true);
+    if (r.sweep) log(T('log.scopa', { p: nm }));
+    if (st.over && st.leftoverTo !== undefined) log(T('log.leftover', { p: teamName(st.leftoverTo) }));
+    flushEvents();
+  }
+  g.sel = null;
+  setStatus(g.log[g.log.length - 1]);
+  afterChange();
+}
+function endHand() {
+  const g = G; if (g.phase !== 'play') return;
+  if (g.kind === 'ruba') {
+    g.phase = 'matchEnd'; const w = SC.RUBA.winner(g.st);
+    g.result = { winner: w };
+    if (w === 0) recordStat(true); else if (w === 1) recordStat(false);
+    setStatus(w === 0 ? T('end.youWin') : w === 1 ? T('end.youLose') : T('end.draw'));
+  } else {
+    g.lastScore = SC.finishHand(g.match, g.st);
+    if (g.match.winner >= 0) { g.phase = 'matchEnd'; recordStat(g.match.winner === 0); setStatus(g.match.winner === 0 ? T('end.youWin') : T('end.youLose')); }
+    else { g.phase = 'handEnd'; setStatus(T('end.hand')); }
+  }
+  renderPlay();
+  const b = $('#endwrap button'); if (b) b.focus();
+}
+function recordStat(won) {
+  const s = stats[G.id] || (stats[G.id] = { w: 0, l: 0 });
+  if (won) s.w++; else s.l++; saveStats();
+}
+
+/* ---------- selecția jucătorului ---------- */
+function optionsFor(card) {
+  const g = G, st = g.st;
+  if (g.kind === 'ruba') {
+    return SC.RUBA.moves(st, 0).filter(m => m.card === card).map(m => ({
+      ids: m.kind === 'table' ? [m.target] : [], mv: m,
+      label: m.kind === 'table' ? T('ruba.take') + ': ' + cardName(m.target) : m.kind === 'steal' ? T('ruba.steal') + ' (' + st.piles[1].length + ' ' + T('play.cards') + ')' : T('ruba.place'),
+      parts: m.kind === 'table' ? [m.target] : []
+    }));
+  }
+  const takes = SC.legalTakes(st.rules, card, st.table);
+  if (!takes.length) return [{ ids: [], mv: { card, take: [] }, label: T('btn.place'), parts: [], place: true }];
+  return takes.map(t => ({ ids: t, mv: { card, take: t }, label: T('play.optLabel') + ': ' + sortTable(t).map(cardName).join(' + '), parts: sortTable(t), sweep: t.length === st.table.length }));
+}
+function selectCard(id) {
+  if (!humanTurn()) return;
+  const g = G;
+  if (g.sel && g.sel.card === id) return confirmMove();
+  const opts = optionsFor(id);
+  g.sel = { card: id, options: opts, idx: opts.length === 1 ? 0 : -1, tsel: new Set() };
+  if (opts.length === 1) setStatus(opts[0].place ? T('play.noCap') : T('play.opt1', { t: opts[0].label.replace(/^[^:]*: /, '') }));
+  else setStatus(T('play.selected', { c: cardFull(id) }) + ' ' + T('play.optN', { n: opts.length }));
+  renderPlay();
+}
+function selValid() {
+  const s = G && G.sel; if (!s) return false;
+  if (s.idx < 0) return false;
+  if (s.tsel.size) { const want = new Set(s.options[s.idx].ids); if (want.size !== s.tsel.size) return false; for (const x of s.tsel) if (!want.has(x)) return false; }
+  return true;
+}
+function confirmMove() {
+  if (!humanTurn() || !G.sel) return;
+  const s = G.sel;
+  if (s.idx < 0) { setStatus(T('play.pickOpt')); renderPlay(); return; }
+  if (!selValid()) { setStatus(T('play.invalid', { c: cardFull(s.card) })); renderPlay(); return; }
+  doMove(s.options[s.idx].mv);
+}
+function cancelSel() { if (!G || !G.sel) return; G.sel = null; setStatus(T('play.yourTurn')); renderPlay(); focusDefault(); }
+function chooseOpt(i) {
+  const s = G && G.sel; if (!s || i < 0 || i >= s.options.length) return;
+  if (s.idx === i && !s.tsel.size) { return confirmMove(); }
+  s.idx = i; s.tsel = new Set();
+  const o = s.options[i]; setStatus(o.place ? T('play.noCap') : T('play.opt1', { t: o.label.replace(/^[^:]*: /, '') }));
+  renderPlay();
+}
+function toggleTable(id) {
+  if (!humanTurn()) return;
+  const s = G.sel; if (!s) { setStatus(T('play.yourTurn')); return; }
+  if (s.tsel.has(id)) s.tsel.delete(id); else s.tsel.add(id);
+  /* potrivire exactă cu o captură legală? */
+  let exact = -1, any = false;
+  s.options.forEach((o, i) => {
+    const set = new Set(o.ids); let sub = true; for (const x of s.tsel) if (!set.has(x)) sub = false;
+    if (sub) any = true;
+    if (sub && set.size === s.tsel.size && s.tsel.size) exact = i;
+  });
+  s.bad = s.tsel.size > 0 && !any;
+  if (exact >= 0) { s.idx = exact; setStatus(T('play.opt1', { t: s.options[exact].label.replace(/^[^:]*: /, '') })); }
+  else if (s.bad) setStatus(T('play.invalid', { c: cardFull(s.card) }));
+  else if (s.tsel.size) { s.idx = -1; setStatus(T('play.pickOpt')); }
+  else { s.idx = s.options.length === 1 ? 0 : -1; }
+  renderPlay();
+}
+
+/* ---------- randare ---------- */
+function renderAll() {
+  document.documentElement.lang = lang;
+  const app = $('#app'); app.textContent = '';
+  app.appendChild(headerEl());
+  const main = h('main', { id: 'main' }); app.appendChild(main);
+  if (view === 'atlas') main.appendChild(atlasView());
+  else if (view === 'play') main.appendChild(playView());
+  else if (view === 'deck') main.appendChild(deckView());
+  else main.appendChild(aboutView());
+  app.appendChild(h('footer', { class: 'pg' }, T('footer.local')));
+  if (view === 'play' && G) renderPlay();
+}
+function headerEl() {
+  const sel = h('select', { id: 'langsel', 'aria-label': T('lang'), onchange: e => { lang = e.target.value; prefs.lang = lang; savePrefs(); renderAll(); } },
+    LANGS.map(l => { const o = h('option', { value: l }, LANG_NAMES[l]); if (l === lang) o.selected = true; return o; }));
+  const dsel = h('select', { id: 'decksel', 'aria-label': T('deck.label'), onchange: e => { deckMode = e.target.value; prefs.deck = deckMode; savePrefs(); renderAll(); } },
+    [['it', T('deck.it')], ['fr', T('deck.fr')]].map(([v, n]) => { const o = h('option', { value: v }, n); if (v === deckMode) o.selected = true; return o; }));
+  const tabs = h('nav', { class: 'tabs', role: 'tablist', 'aria-label': 'Secțiuni' },
+    [['atlas', 'tab.atlas'], ['play', 'tab.play'], ['deck', 'tab.deck'], ['about', 'tab.about']].map(([v, k]) =>
+      h('button', { class: 'btn', role: 'tab', type: 'button', 'aria-selected': String(view === v), onclick: () => { view = v; renderAll(); window.scrollTo(0, 0); } }, T(k))));
+  return h('div', null,
+    h('header', { class: 'top' },
+      h('div', null, h('p', { class: 'brand' }, 'SCOPONE ', T('brand'), h('small', null, T('sub')))),
+      h('div', { class: 'ctrls' }, h('label', { for: 'langsel' }, T('lang')), sel, h('label', { for: 'decksel' }, T('deck.label')), dsel)),
+    tabs);
+}
+
+/* ----- atlas ----- */
+function tagChips(a) {
+  const c = [];
+  c.push(h('span', { class: 'chip ' + (a.play ? 'ok' : 'at') }, a.play ? T('tag.playable') : T('tag.atlas')));
+  if (a.play && a.approx) c.push(h('span', { class: 'chip warn' }, T('tag.approx')));
+  if (a.play && !a.approx) c.push(h('span', { class: 'chip ok' }, T('tag.faithful')));
+  a.tags.forEach(x => c.push(h('span', { class: 'chip' }, x)));
+  return h('div', { class: 'chips' }, c);
+}
+function ficheEl(a) {
+  const d = a[longLang()];
+  const ul = arr => arr && arr.length ? h('ul', null, arr.map(x => h('li', null, x))) : null;
+  const det = h('details', null, h('summary', null, T('btn.rules')),
+    d.deal ? h('p', null, h('b', null, T('lbl.deal') + ': '), d.deal) : null,
+    d.rules.length ? h('div', null, h('b', null, T('lbl.rules')), ul(d.rules)) : null,
+    d.regional && d.regional.length ? h('div', null, h('b', null, T('lbl.regional')), ul(d.regional)) : null,
+    d.approx && d.approx.length ? h('div', { class: 'warnbox' }, h('b', null, T('lbl.approx')), ul(d.approx)) : null,
+    a.src && a.src.length ? h('p', { class: 'meta' }, h('b', null, T('lbl.sources') + ': '), a.src.join(' · ')) : null,
+    isLongFallback() ? h('p', { class: 'enote' }, T('note.en')) : null);
+  return h('article', { class: 'fiche', id: 'v-' + a.id },
+    h('h3', null, d.name), tagChips(a),
+    h('p', { class: 'meta' }, h('b', null, T('lbl.players') + ': '), a.players),
+    h('p', null, d.origin),
+    h('div', { class: 'acts' }, a.play ? h('button', { class: 'btn pri', type: 'button', onclick: () => { prefs.variant = a.id; savePrefs(); view = 'play'; renderAll(); window.scrollTo(0, 0); } }, T('btn.play')) : null),
+    det);
+}
+function atlasView() {
+  const nPlay = ATLAS.filter(a => a.play).length;
+  const fl = h('div', { class: 'filters', role: 'group', 'aria-label': 'Filtru' },
+    [['all', 'Toate / All (' + ATLAS.length + ')'], ['play', T('tag.playable') + ' (' + nPlay + ')'], ['atlas', T('tag.atlas') + ' (' + (ATLAS.length - nPlay) + ')']].map(([v, n]) =>
+      h('button', { class: 'btn', type: 'button', 'aria-pressed': String(filter === v), onclick: () => { filter = v; renderAll(); } }, n)));
+  const list = ATLAS.filter(a => filter === 'all' || (filter === 'play') === a.play);
+  return h('div', null,
+    h('section', { class: 'hero' }, h('h1', null, 'Scopone'), h('p', null, T('sub'))),
+    fl, h('div', { class: 'grid' }, list.map(ficheEl)));
+}
+
+/* ----- pachet ----- */
+function deckView() {
+  const rows = [];
+  for (let r = 1; r <= 10; r++) rows.push(h('tr', null, h('td', null, String(r)), h('td', null, r === 1 ? 'Asso' : r === 8 ? 'Fante' : r === 9 ? 'Cavallo' : r === 10 ? 'Re' : String(r)), h('td', null, r === 1 ? 'A' : r === 8 ? 'J' : r === 9 ? 'Q' : r === 10 ? 'K' : String(r)), h('td', null, String(r)), h('td', null, String(SC.PRIM[r]))));
+  const tbl = h('table', { class: 'tbl' }, h('caption', { class: 'sr' }, T('deck.prime')), h('thead', null, h('tr', null, h('th', null, '#'), h('th', null, 'IT'), h('th', null, '♦♥♠♣'), h('th', null, T('deck.cap')), h('th', null, T('deck.prime')))), h('tbody', null, rows));
+  const g = h('div', { class: 'gallery' }); for (let i = 0; i < 40; i++) g.appendChild(cardEl(i));
+  const txt = {
+    ro: ['Pachetul italian are 40 de cărți: patru semne (Denari ♦, Coppe ♥, Spade ♠, Bastoni ♣) × zece ranguri (As, 2–7, Fante, Cavallo, Re). Cărțile 8, 9, 10 se numesc și figuri.', 'Semnele din această aplicație sunt desene proprii (SVG), nu reproduc niciun pachet regional (napoletan, piacentin, siciliano etc.); asta le face mai ușor de recunoscut decât de „autentificat”. Dacă nu cunoașteți pachetul, alegeți „Franceze” din antet: ♦ Denari, ♥ Coppe, ♠ Spade, ♣ Bastoni; Fante=J, Cavallo=Q, Re=K.', 'Valoarea la captură este rangul (As=1 … Re=10). Primiera folosește altă scară (coloana din dreapta): cea mai bună carte din fiecare semn, adunate; fără un semn nu se poate puncta primiera.'],
+    en: ['The Italian pack has 40 cards: four suits (Denari/coins ♦, Coppe/cups ♥, Spade/swords ♠, Bastoni/batons ♣) × ten ranks (Ace, 2–7, Fante, Cavallo, Re). The 8, 9, 10 are the court cards.', 'The signs in this app are original drawings (SVG) and do not reproduce any regional pattern (Neapolitan, Piacentine, Sicilian…); they are meant to be recognisable rather than "authentic". If you do not know the pack, choose "French" in the header: ♦ coins, ♥ cups, ♠ swords, ♣ batons; Fante=J, Cavallo=Q, Re=K.', 'The capture value is the rank (Ace=1 … King=10). Primiera uses another scale (right-hand column): the best card of each suit, added up; a side missing a suit cannot score primiera.']
+  }[longLang()];
+  return h('div', null, h('section', { class: 'hero' }, h('h1', null, T('deck.title'))),
+    h('div', { class: 'panel' }, txt.map(x => h('p', null, x)), isLongFallback() ? h('p', { class: 'enote' }, T('note.en')) : null, h('div', { class: 'tblwrap', tabindex: '0', role: 'region', 'aria-label': T('deck.prime') }, tbl)),
+    h('div', { class: 'panel' }, h('h2', null, T('deck.gallery')), g));
+}
+
+/* ----- despre ----- */
+const ABOUT = {
+  ro: [
+    ['Ce este', 'Un atlas al familiei Scopa/Scopone cu pachetul italian de 40 de cărți. Opt variante se joacă contra unui adversar AI local; restul sunt descrise în atlas. Totul este într-un singur fișier HTML, offline.'],
+    ['Onestitate', 'Fiecare variantă are un statut: „fidel regulilor citate” sau „⚠ aproximare” cu ce lipsește. Regulile au fost verificate din Pagat.com (și Wikipedia italiană / ghiduri italiene unde Pagat nu le descrie); nu s-au putut citi regulamentele Federației Italiene Scopone. Unde sursele diferă, fișa spune ce variantă s-a implementat.'],
+    ['AI-ul', 'AI-ul este didactic, nu un LLM. Nivelul „Euristic” evaluează fiecare mutare cu o valoare a cărților capturate și estimează riscul unei scopa a adversarului din cărțile încă nevăzute (numără cărțile ieșite). Nivelul „Monte-Carlo” simulează zeci de distribuții posibile ale cărților nevăzute (determinizare) cu o politică euristică și alege mutarea cu rezultatul mediu mai bun. AI-ul nu vede mâinile tale: primește doar masa, propria mână, pliurile și numărul de cărți ale celorlalți (excepție: opțiunea de învățare „Arată mâinile AI” doar le afișează ție).'],
+    ['Confidențialitate', 'Fără rețea, cont sau telemetrie. Se folosesc (opțional) localStorage pentru limbă/pachet/ultima variantă și statistici locale; aplicația merge și fără. Amestecul folosește crypto.getRandomValues; un seed introdus de tine face împărțirile reproductibile.'],
+    ['Autor', 'Alexio — Alexandru-Ionuț Chiuță · alexio@trom.tf']
+  ],
+  en: [
+    ['What it is', 'An atlas of the Scopa/Scopone family with the 40-card Italian pack. Eight variants are playable against a local AI opponent; the rest are described in the atlas. Everything is one offline HTML file.'],
+    ['Honesty', 'Each variant is marked "faithful to the cited rules" or "⚠ approximation" with what is missing. Rules were checked against Pagat.com (and Italian Wikipedia / Italian guides where Pagat does not describe them); the rulebook of the Federazione Italiana Scopone could not be read. Where sources differ, the entry states which version was implemented.'],
+    ['The AI', 'The AI is didactic, not an LLM. The "Heuristic" level scores each move by the value of the captured cards and estimates the opponent’s sweep risk from cards not yet seen (it counts played cards). The "Monte-Carlo" level simulates dozens of possible distributions of the unseen cards (determinisation) with a heuristic policy and picks the move with the better average result. The AI does not see your hand: it gets only the table, its own hand, the piles and the others’ card counts (exception: the learning option "Show AI hands" only displays them to you).'],
+    ['Privacy', 'No network, account or telemetry. localStorage is used (optionally) for language/deck/last variant and local statistics; the app works without it. Shuffling uses crypto.getRandomValues; a seed you enter makes the deals reproducible.'],
+    ['Author', 'Alexio — Alexandru-Ionuț Chiuță · alexio@trom.tf']
+  ]
+};
+function aboutView() {
+  const A = ABOUT[longLang()];
+  const nRows = Object.keys(stats).length;
+  const st = nRows ? h('ul', null, Object.keys(stats).map(k => { const a = ATLAS.find(x => x.id === k); return h('li', null, (a ? a[longLang()].name : k) + ': ' + T('stats.wl', { w: stats[k].w, l: stats[k].l })); })) : h('p', null, T('stats.none'));
+  return h('div', null, h('section', { class: 'hero' }, h('h1', null, T('about.title'))),
+    h('div', { class: 'panel' }, A.map(([t, p]) => h('div', null, h('h3', null, t), h('p', null, p))), isLongFallback() ? h('p', { class: 'enote' }, T('note.en')) : null),
+    h('div', { class: 'panel stats' }, h('h3', null, T('stats.title')), st),
+    h('div', { class: 'panel' }, h('p', { class: 'help' }, T('help.keys'))));
+}
+
+/* ----- setup + joc ----- */
+function playView() {
+  const wrap = h('div', null);
+  wrap.appendChild(setupPanel());
+  wrap.appendChild(h('div', { id: 'playzone' }));
+  if (G) wrap.firstChild.hidden = true;
+  return wrap;
+}
+function setupPanel() {
+  const playable = ATLAS.filter(a => a.play);
+  const sel = h('select', { id: 'sv-variant', onchange: () => { prefs.variant = $('#sv-variant').value; refreshSetupOpts(); } },
+    playable.map(a => { const o = h('option', { value: a.id }, a[longLang()].name + (a.approx ? ' ⚠' : '')); if (a.id === prefs.variant) o.selected = true; return o; }));
+  const lvl = h('select', { id: 'sv-level' },
+    [['h', T('setup.lvl.h')], ['mc', T('setup.lvl.mc')]].map(([v, n]) => { const o = h('option', { value: v }, n); if (v === prefs.level) o.selected = true; return o; }));
+  const box = (id, key, checked) => h('label', { class: 'f chk' }, h('input', { type: 'checkbox', id, checked: checked ? true : false }), h('span', null, T(key)));
+  const panel = h('section', { class: 'panel', id: 'setup', 'aria-labelledby': 'setup-h' },
+    h('h2', { id: 'setup-h' }, T('setup.title')),
+    h('div', { class: 'form' },
+      h('div', { class: 'f' }, h('label', { for: 'sv-variant' }, T('setup.variant')), sel, h('small', { id: 'sv-info' }, '')),
+      h('div', { class: 'f' }, h('label', { for: 'sv-level' }, T('setup.level')), lvl, h('small', null, T('setup.lvl.h.d')), h('small', null, T('setup.lvl.mc.d'))),
+      h('div', { class: 'f', id: 'sv-targetbox' }, h('label', { for: 'sv-target' }, T('setup.target')), h('select', { id: 'sv-target' })),
+      h('div', { class: 'f', id: 'sv-cap15box' }, h('label', { for: 'sv-cap15' }, T('setup.cap15')), h('select', { id: 'sv-cap15' }, h('option', { value: 'a' }, T('cap15.a')), h('option', { value: 'b' }, T('cap15.b')))),
+      h('div', { class: 'f', id: 'sv-optbox' }, h('b', null, T('setup.options')), box('sv-rebello', 'opt.reBello', false), box('sv-napola', 'opt.napola', false), box('sv-last', 'opt.lastSweep', false)),
+      h('div', { class: 'f' }, h('label', { for: 'sv-seed' }, T('setup.seed')), h('input', { type: 'text', id: 'sv-seed', autocomplete: 'off', spellcheck: 'false', maxlength: '40' }), h('small', null, T('setup.seedHint'))),
+      h('div', { class: 'f' }, box('sv-showh', 'setup.showHands', prefs.showHands), box('sv-showm', 'setup.showMem', prefs.showMem))),
+    h('p', { class: 'help' }, T('help.keys')),
+    h('div', { class: 'row' }, h('button', { class: 'btn pri', type: 'button', id: 'sv-start', onclick: () => startGame(readSetup()) }, T('btn.start'))));
+  setTimeout(refreshSetupOpts, 0);
+  return panel;
+}
+function refreshSetupOpts() {
+  const v = $('#sv-variant'); if (!v) return;
+  const id = v.value, r = SC.RULESETS[id], a = ATLAS.find(x => x.id === id);
+  const tb = $('#sv-targetbox'), ob = $('#sv-optbox'), cb = $('#sv-cap15box'), ti = $('#sv-target');
+  ti.textContent = '';
+  if (r) { r.targets.forEach(x => { const o = h('option', { value: String(x) }, String(x)); if (x === r.target) o.selected = true; ti.appendChild(o); }); }
+  tb.hidden = !r; ob.hidden = !r || !!r.cirulla; cb.hidden = id !== 'scopa15';
+  const info = $('#sv-info');
+  if (info) info.textContent = a ? (a.approx ? '⚠ ' + T('tag.approx') : T('tag.faithful')) + ' · ' + a.players : '';
+}
+
+function playView2() { /* nefolosit */ }
+
+function renderPlay() {
+  const zone = $('#playzone'); if (!zone || !G) return;
+  const setup = $('#setup'); if (setup) setup.hidden = true;
+  const had = document.activeElement && document.activeElement.getAttribute ? document.activeElement.getAttribute('data-fk') : null;
+  if (!$('#boardwrap', zone)) {
+    zone.textContent = '';
+    zone.appendChild(h('div', { id: 'boardwrap' }));
+    zone.appendChild(h('div', { id: 'actwrap' }));
+    zone.appendChild(h('div', { id: 'status', class: 'status', role: 'status', 'aria-live': 'polite' }));
+    zone.appendChild(h('div', { id: 'endwrap' }));
+    zone.appendChild(h('div', { id: 'logwrap', class: 'log', role: 'log', 'aria-live': 'off', tabindex: '0', 'aria-label': 'Log' }));
+    zone.appendChild(h('div', { id: 'memwrap' }));
+    zone.appendChild(h('p', { class: 'help' }, T('help.keys')));
+  }
+  $('#status').textContent = G.status || '';
+  const bw = $('#boardwrap'); bw.textContent = ''; bw.appendChild(boardEl());
+  const aw = $('#actwrap'); aw.textContent = ''; const ae = actionEl(); if (ae) aw.appendChild(ae);
+  const ew = $('#endwrap'); ew.textContent = ''; if (G.phase !== 'play') ew.appendChild(endEl());
+  const lw = $('#logwrap'); lw.textContent = ''; G.log.slice(-8).forEach(l => lw.appendChild(h('div', null, l))); lw.scrollTop = lw.scrollHeight;
+  const mw = $('#memwrap'); mw.textContent = ''; const me = memEl(); if (me) mw.appendChild(me);
+  if (had) { const e = $('[data-fk="' + had + '"]'); if (e) { try { e.focus({ preventScroll: true }); } catch (x) { e.focus(); } } }
+}
+function backToSetup() {
+  if (aiTimer) { clearTimeout(aiTimer); aiTimer = null; }
+  G = null; const s = $('#setup'); if (s) s.hidden = false; const z = $('#playzone'); if (z) z.textContent = '';
+  const b = $('#sv-start'); if (b) b.focus();
+}
+function focusDefault() {
+  const a = document.activeElement;
+  if (a && a !== document.body && a.closest && a.closest('#playzone') && a.hasAttribute('data-fk')) return;
+  const first = $('#boardwrap .hand .card'); if (first && G && G.st.turn === 0 && !G.st.over) { try { first.focus({ preventScroll: true }); } catch (e) { first.focus(); } }
+}
+
+function seatEl(p, pos) {
+  const g = G, st = g.st, n = g.kind === 'ruba' ? 2 : st.n;
+  const cnt = st.hands[p].length;
+  const open = g.setup.showHands;
+  const fan = h('div', { class: 'fan' + (open ? ' open' : ''), 'aria-hidden': open ? 'false' : 'true' });
+  if (open) sortIds(st.hands[p]).forEach(id => fan.appendChild(cardEl(id, { cls: '' })));
+  else for (let i = 0; i < cnt; i++) fan.appendChild(backEl());
+  const t = SC.team(p);
+  const pile = g.kind === 'ruba' ? st.piles[p].length : st.piles[t].length;
+  return h('div', { class: 'seat ' + pos + (st.turn === p && !st.over ? ' turn' : ''), 'aria-label': playerName(p) },
+    h('div', { class: 'nm' }, playerName(p) + ' · ' + cnt + ' ' + T('play.cards')), fan,
+    n === 2 ? h('div', null, T('play.pile') + ': ' + pile) : null);
+}
+function boardEl() {
+  const g = G, st = g.st, two = g.kind === 'ruba' || g.rules.players === 2;
+  const sel = g.sel;
+  /* scor */
+  const sc = g.kind === 'ruba' ? [st.piles[0].length, st.piles[1].length] : g.match.scores;
+  const bar = h('div', { class: 'scorebar' },
+    h('div', { class: 'sc' }, h('button', { class: 'btn', type: 'button', onclick: backToSetup }, T('btn.setup')),
+      h('span', null, teamName(0) + ' ', h('b', null, String(sc[0]))), h('span', null, teamName(1) + ' ', h('b', null, String(sc[1]))),
+      g.kind === 'std' ? h('span', null, T('play.target') + ' ', h('b', null, String(g.rules.winTarget))) : null),
+    h('div', { class: 'sc' },
+      g.kind === 'std' ? h('span', null, T('play.pile') + ' ', h('b', null, st.piles[0].length + '/' + st.piles[1].length), ' · ' + T('play.scope') + ' ', h('b', null, (st.scope[0] + (st.bonus[0] || 0)) + '/' + (st.scope[1] + (st.bonus[1] || 0)))) : null,
+      h('span', null, T('play.stock') + ' ', h('b', null, String(st.stock.length))), h('span', null, T('play.dealer') + ' ', h('b', null, playerName(st.dealer)))));
+  /* masa */
+  const canSet = new Set(); const actSet = new Set();
+  if (sel) { sel.options.forEach(o => o.ids.forEach(x => canSet.add(x))); if (sel.idx >= 0 && !sel.tsel.size) sel.options[sel.idx].ids.forEach(x => actSet.add(x)); }
+  const tbl = h('div', { class: 'tblarea', role: 'group', 'aria-label': T('play.table') });
+  if (!st.table.length) tbl.appendChild(h('span', { class: 'empty' }, T('play.emptyTable')));
+  sortTable(st.table).forEach((id, i) => {
+    const cls = (sel && canSet.has(id) ? 'can ' : '') + (actSet.has(id) ? 'act ' : '') + (sel && sel.tsel.has(id) ? 'tsel ' : '') + (sel && sel.bad && sel.tsel.has(id) ? 'bad' : '');
+    const c = cardEl(id, { button: true, cls: cls.trim() });
+    c.setAttribute('data-fk', 't' + id);
+    c.setAttribute('aria-pressed', String(!!(sel && sel.tsel.has(id))));
+    c.tabIndex = sel && i === 0 ? 0 : -1;
+    c.addEventListener('click', () => toggleTable(id));
+    tbl.appendChild(c);
+  });
+  /* locuri */
+  const seats = h('div', { class: 'seats' + (two ? ' two' : '') });
+  if (two) { seats.appendChild(seatEl(1, 'top')); }
+  else { seats.appendChild(seatEl(2, 'top')); seats.appendChild(seatEl(3, 'left')); seats.appendChild(seatEl(1, 'right')); }
+  seats.appendChild(tbl);
+  /* mâna ta */
+  const hand = h('div', { class: 'hand', role: 'group', 'aria-label': T('play.hand') });
+  const my = sortIds(st.hands[0]); const can = humanTurn();
+  const fh = g.focusHand !== null && my.includes(g.focusHand) ? g.focusHand : my[0];
+  my.forEach(id => {
+    const c = cardEl(id, { button: true, cls: sel && sel.card === id ? 'sel' : '' });
+    c.setAttribute('data-fk', 'h' + id);
+    c.setAttribute('aria-pressed', String(!!(sel && sel.card === id)));
+    if (!can) c.setAttribute('aria-disabled', 'true');
+    c.tabIndex = id === fh ? 0 : -1;
+    c.addEventListener('focus', () => { g.focusHand = id; });
+    c.addEventListener('click', () => { if (!can) { setStatus(G.busy || st.turn !== 0 ? T('play.aiThinking') : T('end.hand')); return; } selectCard(id); });
+    hand.appendChild(c);
+  });
+  return h('section', { class: 'board', 'aria-label': 'Joc' }, bar, seats, h('p', { class: 'sr' }, T('play.hand')), hand);
+}
+function optLabelNode(o, i) {
+  const parts = o.parts && o.parts.length ? o.parts.map((id, k) => [k ? ' + ' : '', miniCard(id)]).flat() : [];
+  return h('button', { class: 'btn opt', type: 'button', role: 'radio', 'data-fk': 'o' + i, 'aria-checked': String(G.sel.idx === i), 'aria-label': (i + 1) + '. ' + o.label + (o.sweep ? ' · SCOPA' : ''), onclick: () => chooseOpt(i) },
+    h('span', { class: 'n' }, (i + 1) + '.'), o.place || !parts.length ? h('span', null, o.label) : h('span', null, T('play.optLabel') + ': ', parts), o.sweep ? h('b', null, ' · SCOPA') : null);
+}
+function actionEl() {
+  const g = G; if (g.phase !== 'play') return null;
+  const s = g.sel;
+  if (!s) return null;
+  const body = [];
+  if (s.options.length > 1 || (s.options.length === 1 && !s.options[0].place)) {
+    body.push(h('div', { role: 'radiogroup', 'aria-label': T('play.optsTitle'), class: 'opts' }, s.options.map(optLabelNode)));
+  }
+  if (s.options.length === 1 && s.options[0].place) body.push(h('div', null, T('play.noCap')));
+  else if (s.options.length === 1 && g.kind === 'std') body.push(h('div', { class: 'help' }, T('play.mustCap')));
+  body.push(h('div', { class: 'row' },
+    h('button', { class: 'btn pri', type: 'button', 'data-fk': 'ok', onclick: confirmMove }, s.options.length === 1 && s.options[0].place ? T('btn.place') : T('btn.confirm')),
+    h('button', { class: 'btn', type: 'button', 'data-fk': 'cancel', onclick: cancelSel }, T('btn.cancel'))));
+  return h('div', { class: 'actbar' }, h('div', null, T('play.selected', { c: cardFull(s.card) })), body);
+}
+function endEl() {
+  const g = G;
+  if (g.kind === 'ruba') {
+    const a = g.st.piles[0].length, b = g.st.piles[1].length;
+    return h('div', { class: 'endpanel' }, h('div', { class: 'big' }, g.result.winner === 0 ? T('end.youWin') : g.result.winner === 1 ? T('end.youLose') : T('end.draw')),
+      h('p', null, T('play.you') + ': ' + a + ' ' + T('play.cards') + ' · ' + T('play.ai') + ': ' + b + ' ' + T('play.cards')),
+      h('div', { class: 'row' }, h('button', { class: 'btn pri', type: 'button', 'data-fk': 'nm', onclick: () => { g.dealer = 1 - g.dealer; newRuba(); afterChange(); } }, T('btn.newmatch')), h('button', { class: 'btn', type: 'button', onclick: backToSetup }, T('btn.setup'))));
+  }
+  const sc = g.lastScore, tm = sc.teams, rules = g.rules;
+  const rows = [];
+  const add = (k, f) => { const a = f(tm[0]), b = f(tm[1]); if (a || b || ['scope', 'carte', 'denari', 'sette', 'prim'].includes(k)) rows.push(h('tr', null, h('td', null, T('sc.' + k)), h('td', null, String(a)), h('td', null, String(b)))); };
+  add('scope', t => t.scopeOnly); if (rules.cirulla) add('handBonus', t => t.handBonus);
+  add('carte', t => t.carte); add('denari', t => t.denari); add('sette', t => t.sette); add('prim', t => t.prim);
+  if (rules.opts.reBello) add('reBello', t => t.reBello); if (rules.opts.napola) add('napola', t => t.napola);
+  if (rules.cirulla) { add('piccola', t => t.piccola); add('grande', t => t.grande); }
+  rows.push(h('tr', { class: 'tot' }, h('td', null, T('sc.total')), h('td', null, String(tm[0].total)), h('td', null, String(tm[1].total))));
+  rows.push(h('tr', { class: 'tot' }, h('td', null, T('sc.match')), h('td', null, String(g.match.scores[0])), h('td', null, String(g.match.scores[1]))));
+  const prim = t => t.primVal === null ? T('sc.noPrim') : String(t.primVal);
+  const det = h('p', { class: 'help' }, T('sc.colYou') + ': ' + T('sc.detail', { c: tm[0].cards, d: tm[0].den, p: prim(tm[0]) }) + ' · ' + T('sc.colOpp') + ': ' + T('sc.detail', { c: tm[1].cards, d: tm[1].den, p: prim(tm[1]) }));
+  const over = g.phase === 'matchEnd';
+  return h('div', { class: 'endpanel' },
+    h('div', { class: 'big' }, over ? (g.match.winner === 0 ? T('end.youWin') : T('end.youLose')) : T('end.hand')),
+    sc.instant !== null ? h('p', null, T('end.instant')) : null,
+    h('table', null, h('thead', null, h('tr', null, h('th', null, ''), h('th', null, teamName(0)), h('th', null, teamName(1)))), h('tbody', null, rows)), det,
+    h('div', { class: 'row' },
+      over ? h('button', { class: 'btn pri', type: 'button', 'data-fk': 'nm', onclick: () => startGame(g.setup) }, T('btn.newmatch'))
+        : h('button', { class: 'btn pri', type: 'button', 'data-fk': 'nh', onclick: () => { newHand(); afterChange(); } }, T('btn.next')),
+      h('button', { class: 'btn', type: 'button', onclick: backToSetup }, T('btn.setup'))));
+}
+function memEl() {
+  const g = G; if (!g || !g.setup.showMem || g.kind !== 'std') return null;
+  const un = new Set(SC.unseenOf(SC.observe(g.st, 0)));
+  const wrap = h('div', { class: 'panel' }, h('b', null, T('mem.title')), h('div', { class: 'legend' }, T('mem.legend')));
+  const grid = h('div', { class: 'mem', role: 'list' });
+  for (let s = 0; s < 4; s++) for (let r = 1; r <= 10; r++) { const id = s * 10 + r - 1; grid.appendChild(h('span', { role: 'listitem', class: (un.has(id) ? '' : 'out ') + 'f' + s, 'aria-label': cardFull(id) + (un.has(id) ? '' : ' —') }, rankName(r).slice(0, 2) + SUIT_SYM[s])); }
+  wrap.appendChild(grid); return wrap;
+}
+
+/* ---------- tastatură ---------- */
+document.addEventListener('keydown', function (e) {
+  if (view !== 'play' || !G || G.phase !== 'play') return;
+  const t = e.target, tag = t && t.tagName;
+  if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  const grp = t.closest ? (t.closest('.hand') || t.closest('.tblarea')) : null;
+  if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && grp) {
+    const items = $$('button.card', grp); const i = items.indexOf(t);
+    if (i >= 0) { e.preventDefault(); const j = (i + (e.key === 'ArrowRight' ? 1 : -1) + items.length) % items.length; items.forEach(x => x.tabIndex = -1); items[j].tabIndex = 0; items[j].focus(); }
+  } else if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && G.sel && G.sel.options.length > 1) {
+    e.preventDefault(); const s = G.sel, n = s.options.length;
+    s.tsel = new Set(); s.idx = s.idx < 0 ? (e.key === 'ArrowDown' ? 0 : n - 1) : (s.idx + (e.key === 'ArrowDown' ? 1 : -1) + n) % n;
+    const o = s.options[s.idx]; setStatus(T('play.opt1', { t: o.label.replace(/^[^:]*: /, '') })); renderPlay();
+  } else if (/^[1-9]$/.test(e.key) && G.sel && humanTurn()) {
+    const i = parseInt(e.key, 10) - 1; if (i < G.sel.options.length) { e.preventDefault(); chooseOpt(i); }
+  } else if (e.key === 'Escape' && G.sel) { e.preventDefault(); cancelSel(); }
+  else if (e.key === 'Enter' && G.sel && t === document.body) { e.preventDefault(); confirmMove(); }
+});
+
+/* ---------- inițializare ---------- */
+function init() {
+  loadStore(); lang = detectLang(); deckMode = prefs.deck;
+  document.body.insertAdjacentHTML('afterbegin', CARDS.SPRITE);
+  renderAll();
+  window.__sff = { SC, rerender: () => renderPlay(), state: () => G, get lang() { return lang; }, setLang: l => { lang = l; renderAll(); }, startGame, readSetup, view: () => view };
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+
+</script>
+<!-- tf-donate: sprijin voluntar (Patreon + Buy Me a Coffee) — self-contained, fără resurse externe, fără JS -->
+<div id="tf-donate" aria-label="Sprijină autorul">
+<style>
+#tf-donate{position:fixed;right:14px;bottom:14px;z-index:2147483600;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1}
+#tf-donate *{box-sizing:border-box}
+#tf-donate .tf-cb{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+#tf-donate .tf-panel{display:flex;gap:8px;align-items:center;background:rgba(20,20,24,.84);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:7px 9px 7px 12px;border-radius:999px;box-shadow:0 4px 18px rgba(0,0,0,.30)}
+#tf-donate .tf-lbl{color:#fff;font-size:12px;font-weight:600;opacity:.85;white-space:nowrap}
+#tf-donate a.tf-b{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;text-decoration:none;font-size:12.5px;font-weight:700;line-height:1;transition:transform .14s ease;border:0}
+#tf-donate a.tf-b:hover{transform:translateY(-2px)}
+#tf-donate a.tf-pat{background:#fff;color:#000}
+#tf-donate a.tf-bmc{background:#ffdd00;color:#1a1a1a}
+#tf-donate a.tf-b svg{width:15px;height:15px;display:block}
+#tf-donate .tf-x,#tf-donate .tf-open{display:inline-flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;border:0;color:#fff}
+#tf-donate .tf-x{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.16);font-size:12px}
+#tf-donate .tf-open{display:none;width:46px;height:46px;border-radius:50%;background:#e0245e;font-size:20px;box-shadow:0 4px 16px rgba(0,0,0,.32)}
+#tf-donate .tf-cb:checked ~ .tf-panel{display:none}
+#tf-donate .tf-cb:checked ~ .tf-open{display:inline-flex}
+@media (max-width:560px){#tf-donate .tf-lbl{display:none}}
+@media print{#tf-donate{display:none}}
+</style>
+<input type="checkbox" id="tf-donate-cb" class="tf-cb" aria-hidden="true">
+<div class="tf-panel">
+<span class="tf-lbl">Sprijină:</span>
+<a class="tf-b tf-pat" href="https://www.patreon.com/c/alexio_tf" target="_blank" rel="noopener" aria-label="Sprijină pe Patreon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="15.4" cy="9.4" r="6.6" fill="currentColor"/><rect x="2.4" y="2.4" width="3.7" height="19.2" fill="currentColor"/></svg>Patreon</a>
+<a class="tf-b tf-bmc" href="https://buymeacoffee.com/echo.of.the.strings" target="_blank" rel="noopener" aria-label="Buy Me a Coffee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h11v6.5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V8z"/><path d="M16 9.5h2.2a2.3 2.3 0 0 1 0 4.6H16"/><path d="M7.5 4.5V3M11.5 4.5V3"/></svg>Coffee</a>
+<label for="tf-donate-cb" class="tf-x" title="Ascunde" aria-label="Ascunde">✕</label>
+</div>
+<label for="tf-donate-cb" class="tf-open" title="Sprijină" aria-label="Sprijină">♥</label>
+</div>
+</body>
+</html>
