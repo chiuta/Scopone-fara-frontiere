@@ -14,7 +14,7 @@
     Buy Me a Coffee: https://buymeacoffee.com/echo.of.the.strings
   ============================================================================
 -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-QjKn0N/KQFtrYEikG0VbHnaLZqokt7NpActVY9QjxCU='; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-t7bGUfAekZ0eX1DveeBRHU8ocQ9fTMXbqtJo4L/bCtM='; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Atlas al familiei Scopa/Scopone cu pachetul italian de 40 de cărți: Scopa, Scopone (9+4 și 10 cărți), Scopa a 15, Cirulla, Rubamazzo și altele, jucabile contra AI, offline.">
 <meta name="theme-color" content="#0d0a08">
@@ -44,9 +44,11 @@ select{padding-right:8px}
 .btn:hover{border-color:var(--gold)}
 .btn.pri{background:linear-gradient(#c8832a,#9a6218);color:#140c02;border-color:#e8c87a}
 .btn[disabled]{opacity:.45;cursor:not-allowed}
-nav.tabs{display:flex;gap:6px;padding:12px 0;overflow-x:auto;border-bottom:1px solid var(--line)}
+nav.tabs{padding:12px 0;overflow-x:auto;border-bottom:1px solid var(--line)}
+nav.tabs .tablist{display:flex;gap:6px}
 nav.tabs .btn[aria-selected=true]{background:linear-gradient(#c8832a,#9a6218);color:#140c02;border-color:#e8c87a}
 h1,h2,h3{font-family:var(--fd);font-weight:600;line-height:1.15}
+.panel > div > h2,.panel.stats > h2{font-size:1.17em}
 .hero{text-align:center;padding:26px 0 8px}
 .hero h1{font-size:clamp(2rem,7vw,3.6rem);margin:.1em 0;letter-spacing:.02em;background:linear-gradient(180deg,#fbf0d0,#e8c87a 55%,#c8832a);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero p{color:var(--muted);max-width:720px;margin:6px auto;font-family:var(--fu);font-size:.98rem}
@@ -56,7 +58,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:600;line-height:1.15}
 .filters{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:14px;margin:10px 0 30px}
 .fiche{background:linear-gradient(#1f180e,#151008);border:1px solid var(--line);border-radius:var(--r);padding:16px}
-.fiche h3{margin:.1em 0 .2em;font-size:1.3rem;color:var(--gold2)}
+.fiche h2{margin:.1em 0 .2em;font-size:1.3rem;color:var(--gold2)}
 .fiche p,.fiche li{font-size:.97rem}
 .fiche .meta{font-family:var(--fu);font-size:.85rem;color:var(--muted)}
 .fiche ul{padding-left:1.1em;margin:.3em 0}
@@ -1318,6 +1320,39 @@ function T(key, vars) {
 const longLang = () => (lang === 'ro' ? 'ro' : 'en');
 const isLongFallback = () => lang !== 'ro' && lang !== 'en';
 
+/* etichete de atlas (tag-uri, număr de jucători) traduse; sursa rămâne în română */
+const LIDX = { en: 0, fr: 1, it: 2, es: 3, pt: 4, de: 5 };
+const TAGT = {
+  '10 cărți': ['10 cards', '10 cartes', '10 carte', '10 cartas', '10 cartas', '10 Karten'],
+  'Corsica': ['Corsica', 'Corse', 'Corsica', 'Córcega', 'Córsega', 'Korsika'],
+  'Franța': ['France', 'France', 'Francia', 'Francia', 'França', 'Frankreich'],
+  'Germania': ['Germany', 'Allemagne', 'Germania', 'Alemania', 'Alemanha', 'Deutschland'],
+  'Italia': ['Italy', 'Italie', 'Italia', 'Italia', 'Itália', 'Italien'],
+  'Liguria': ['Liguria', 'Ligurie', 'Liguria', 'Liguria', 'Ligúria', 'Ligurien'],
+  'Tunisia': ['Tunisia', 'Tunisie', 'Tunisia', 'Túnez', 'Tunísia', 'Tunesien'],
+  'asul ia tot': ['ace takes all', 'l’as prend tout', 'l’asso prende tutto', 'el as se lo lleva todo', 'o ás leva tudo', 'Ass nimmt alles'],
+  'clasic': ['classic', 'classique', 'classico', 'clásico', 'clássico', 'klassisch'],
+  'combinații': ['combinations', 'combinaisons', 'combinazioni', 'combinaciones', 'combinações', 'Kombinationen'],
+  'copii': ['kids', 'enfants', 'bambini', 'niños', 'crianças', 'Kinder'],
+  'furt': ['stealing', 'vol', 'furto', 'robo', 'roubo', 'Stehlen'],
+  'informație perfectă în amintire': ['perfect information from memory', 'information parfaite en mémoire', 'informazione perfetta a memoria', 'información perfecta de memoria', 'informação perfeita de memória', 'perfekte Information aus dem Gedächtnis'],
+  'perechi': ['partnerships', 'par équipes', 'a coppie', 'por parejas', 'em duplas', 'Paare'],
+  'pescuit': ['fishing', 'pêche', 'pesca', 'pesca', 'pesca', 'Fischen'],
+  'secvențe': ['sequences', 'séquences', 'sequenze', 'secuencias', 'sequências', 'Sequenzen'],
+  'suma 15': ['sum to 15', 'somme 15', 'somma 15', 'suma 15', 'soma 15', 'Summe 15'],
+  'variantă': ['variant', 'variante', 'variante', 'variante', 'variante', 'Variante']
+};
+const PLT = {
+  '2 sau 4': ['2 or 4', '2 ou 4', '2 o 4', '2 o 4', '2 ou 4', '2 oder 4'],
+  '4 (două perechi)': ['4 (two partnerships)', '4 (deux équipes)', '4 (due coppie)', '4 (dos parejas)', '4 (duas duplas)', '4 (zwei Paare)'],
+  '2 (3 sau 4 în atlas)': ['2 (3 or 4 in the atlas)', '2 (3 ou 4 dans l’atlas)', '2 (3 o 4 nell’atlante)', '2 (3 o 4 en el atlas)', '2 (3 ou 4 no atlas)', '2 (3 oder 4 im Atlas)'],
+  '2 (3 sau 4 în perechi: doar în atlas)': ['2 (3 or 4 in teams: atlas only)', '2 (3 ou 4 par équipes : atlas seulement)', '2 (3 o 4 a coppie: solo atlante)', '2 (3 o 4 por parejas: solo atlas)', '2 (3 ou 4 em duplas: só no atlas)', '2 (3 oder 4 in Paaren: nur im Atlas)']
+};
+function tagL(t) { const m = TAGT[t]; return (lang === 'ro' || !m) ? t : m[LIDX[lang]]; }
+function playersL(p) { const m = PLT[p]; return (lang === 'ro' || !m) ? p : m[LIDX[lang]]; }
+const ARIA = { sections: ['Secțiuni', 'Sections', 'Sections', 'Sezioni', 'Secciones', 'Secções', 'Bereiche'], filter: ['Filtru', 'Filter', 'Filtre', 'Filtro', 'Filtro', 'Filtro', 'Filter'], game: ['Joc', 'Game', 'Jeu', 'Gioco', 'Juego', 'Jogo', 'Spiel'], all: ['Toate', 'All', 'Tous', 'Tutti', 'Todos', 'Todos', 'Alle'] };
+const AL = k => ARIA[k][LANGS.indexOf(lang)];
+
 /* ---------- nume de cărți ---------- */
 function rankName(r) { if (deckMode === 'fr') return r === 1 ? 'A' : r === 8 ? 'J' : r === 9 ? 'Q' : r === 10 ? 'K' : String(r); return r === 1 ? 'Asso' : r === 8 ? 'Fante' : r === 9 ? 'Cavallo' : r === 10 ? 'Re' : String(r); }
 function cardName(id) {
@@ -1561,9 +1596,10 @@ function headerEl() {
     LANGS.map(l => { const o = h('option', { value: l }, LANG_NAMES[l]); if (l === lang) o.selected = true; return o; }));
   const dsel = h('select', { id: 'decksel', 'aria-label': T('deck.label'), onchange: e => { deckMode = e.target.value; prefs.deck = deckMode; savePrefs(); renderAll(); } },
     [['it', T('deck.it')], ['fr', T('deck.fr')]].map(([v, n]) => { const o = h('option', { value: v }, n); if (v === deckMode) o.selected = true; return o; }));
-  const tabs = h('nav', { class: 'tabs', role: 'tablist', 'aria-label': 'Secțiuni' },
+  const tabs = h('nav', { class: 'tabs', 'aria-label': AL('sections') },
+    h('div', { class: 'tablist', role: 'tablist' },
     [['atlas', 'tab.atlas'], ['play', 'tab.play'], ['deck', 'tab.deck'], ['about', 'tab.about']].map(([v, k]) =>
-      h('button', { class: 'btn', role: 'tab', type: 'button', 'aria-selected': String(view === v), onclick: () => { view = v; renderAll(); window.scrollTo(0, 0); } }, T(k))));
+      h('button', { class: 'btn', role: 'tab', type: 'button', 'aria-selected': String(view === v), onclick: () => { view = v; renderAll(); window.scrollTo(0, 0); } }, T(k)))));
   return h('div', null,
     h('header', { class: 'top' },
       h('div', null, h('p', { class: 'brand' }, 'SCOPONE ', T('brand'), h('small', null, T('sub')))),
@@ -1577,7 +1613,7 @@ function tagChips(a) {
   c.push(h('span', { class: 'chip ' + (a.play ? 'ok' : 'at') }, a.play ? T('tag.playable') : T('tag.atlas')));
   if (a.play && a.approx) c.push(h('span', { class: 'chip warn' }, T('tag.approx')));
   if (a.play && !a.approx) c.push(h('span', { class: 'chip ok' }, T('tag.faithful')));
-  a.tags.forEach(x => c.push(h('span', { class: 'chip' }, x)));
+  a.tags.forEach(x => c.push(h('span', { class: 'chip' }, tagL(x))));
   return h('div', { class: 'chips' }, c);
 }
 function ficheEl(a) {
@@ -1591,16 +1627,16 @@ function ficheEl(a) {
     a.src && a.src.length ? h('p', { class: 'meta' }, h('b', null, T('lbl.sources') + ': '), a.src.join(' · ')) : null,
     isLongFallback() ? h('p', { class: 'enote' }, T('note.en')) : null);
   return h('article', { class: 'fiche', id: 'v-' + a.id },
-    h('h3', null, d.name), tagChips(a),
-    h('p', { class: 'meta' }, h('b', null, T('lbl.players') + ': '), a.players),
+    h('h2', null, d.name), tagChips(a),
+    h('p', { class: 'meta' }, h('b', null, T('lbl.players') + ': '), playersL(a.players)),
     h('p', null, d.origin),
     h('div', { class: 'acts' }, a.play ? h('button', { class: 'btn pri', type: 'button', onclick: () => { prefs.variant = a.id; savePrefs(); view = 'play'; renderAll(); window.scrollTo(0, 0); } }, T('btn.play')) : null),
     det);
 }
 function atlasView() {
   const nPlay = ATLAS.filter(a => a.play).length;
-  const fl = h('div', { class: 'filters', role: 'group', 'aria-label': 'Filtru' },
-    [['all', 'Toate / All (' + ATLAS.length + ')'], ['play', T('tag.playable') + ' (' + nPlay + ')'], ['atlas', T('tag.atlas') + ' (' + (ATLAS.length - nPlay) + ')']].map(([v, n]) =>
+  const fl = h('div', { class: 'filters', role: 'group', 'aria-label': AL('filter') },
+    [['all', AL('all') + ' (' + ATLAS.length + ')'], ['play', T('tag.playable') + ' (' + nPlay + ')'], ['atlas', T('tag.atlas') + ' (' + (ATLAS.length - nPlay) + ')']].map(([v, n]) =>
       h('button', { class: 'btn', type: 'button', 'aria-pressed': String(filter === v), onclick: () => { filter = v; renderAll(); } }, n)));
   const list = ATLAS.filter(a => filter === 'all' || (filter === 'play') === a.play);
   return h('div', null,
@@ -1645,17 +1681,18 @@ function aboutView() {
   const nRows = Object.keys(stats).length;
   const st = nRows ? h('ul', null, Object.keys(stats).map(k => { const a = ATLAS.find(x => x.id === k); return h('li', null, (a ? a[longLang()].name : k) + ': ' + T('stats.wl', { w: stats[k].w, l: stats[k].l })); })) : h('p', null, T('stats.none'));
   return h('div', null, h('section', { class: 'hero' }, h('h1', null, T('about.title'))),
-    h('div', { class: 'panel' }, A.map(([t, p]) => h('div', null, h('h3', null, t), h('p', null, p))), isLongFallback() ? h('p', { class: 'enote' }, T('note.en')) : null),
-    h('div', { class: 'panel stats' }, h('h3', null, T('stats.title')), st),
+    h('div', { class: 'panel' }, A.map(([t, p]) => h('div', null, h('h2', null, t), h('p', null, p))), isLongFallback() ? h('p', { class: 'enote' }, T('note.en')) : null),
+    h('div', { class: 'panel stats' }, h('h2', null, T('stats.title')), st),
     h('div', { class: 'panel' }, h('p', { class: 'help' }, T('help.keys'))));
 }
 
 /* ----- setup + joc ----- */
 function playView() {
   const wrap = h('div', null);
+  wrap.appendChild(h('h1', { class: 'sr' }, T('tab.play')));
   wrap.appendChild(setupPanel());
   wrap.appendChild(h('div', { id: 'playzone' }));
-  if (G) wrap.firstChild.hidden = true;
+  if (G) wrap.children[1].hidden = true;
   return wrap;
 }
 function setupPanel() {
@@ -1784,7 +1821,7 @@ function boardEl() {
     c.addEventListener('click', () => { if (!can) { setStatus(G.busy || st.turn !== 0 ? T('play.aiThinking') : T('end.hand')); return; } selectCard(id); });
     hand.appendChild(c);
   });
-  return h('section', { class: 'board', 'aria-label': 'Joc' }, bar, seats, h('p', { class: 'sr' }, T('play.hand')), hand);
+  return h('section', { class: 'board', 'aria-label': AL('game') }, bar, seats, h('p', { class: 'sr' }, T('play.hand')), hand);
 }
 function optLabelNode(o, i) {
   const parts = o.parts && o.parts.length ? o.parts.map((id, k) => [k ? ' + ' : '', miniCard(id)]).flat() : [];
@@ -1876,7 +1913,7 @@ if (document.readyState === 'loading') document.addEventListener('DOMContentLoad
 
 </script>
 <!-- tf-donate: sprijin voluntar (Patreon + Buy Me a Coffee) — self-contained, fără resurse externe, fără JS -->
-<div id="tf-donate" aria-label="Sprijină autorul">
+<aside id="tf-donate" aria-label="Sprijină autorul">
 <style>
 #tf-donate{position:fixed;right:14px;bottom:14px;z-index:2147483600;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1}
 #tf-donate *{box-sizing:border-box}
@@ -1893,7 +1930,7 @@ if (document.readyState === 'loading') document.addEventListener('DOMContentLoad
 #tf-donate .tf-open{display:none;width:46px;height:46px;border-radius:50%;background:#e0245e;font-size:20px;box-shadow:0 4px 16px rgba(0,0,0,.32)}
 #tf-donate .tf-cb:checked ~ .tf-panel{display:none}
 #tf-donate .tf-cb:checked ~ .tf-open{display:inline-flex}
-@media (max-width:560px){#tf-donate .tf-lbl{display:none}}
+@media (max-width:560px){#tf-donate .tf-lbl{display:none}#tf-donate .tf-panel{display:none}#tf-donate .tf-open{display:inline-flex;width:40px;height:40px;opacity:.88}#tf-donate .tf-cb:checked ~ .tf-panel{display:flex}#tf-donate .tf-cb:checked ~ .tf-open{display:none}#tf-donate .tf-cb:focus-visible ~ .tf-open,#tf-donate .tf-cb:focus-visible ~ .tf-panel{outline:2px solid #fff;outline-offset:2px}body{padding-bottom:60px}}
 @media print{#tf-donate{display:none}}
 </style>
 <input type="checkbox" id="tf-donate-cb" class="tf-cb">
@@ -1904,6 +1941,6 @@ if (document.readyState === 'loading') document.addEventListener('DOMContentLoad
 <label for="tf-donate-cb" class="tf-x" title="Ascunde" aria-label="Ascunde">✕</label>
 </div>
 <label for="tf-donate-cb" class="tf-open" title="Sprijină" aria-label="Sprijină">♥</label>
-</div>
+</aside>
 </body>
 </html>

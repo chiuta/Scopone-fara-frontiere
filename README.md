@@ -1,5 +1,7 @@
 # Scopone fără frontiere
 
+**Ultima actualizare:** 11 octombrie 2026
+
 Atlas al familiei Scopa/Scopone cu pachetul italian de 40 de cărți: 8 variante jucabile contra AI, într-un singur fișier HTML offline.
 
 **Live:** https://chiuta.github.io/Scopone-fara-frontiere/
@@ -83,3 +85,10 @@ Alexio — Alexandru-Ionuț Chiuță · alexio@trom.tf
 ## English summary
 
 Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pack (original SVG suits, French-suit mode): 8 variants playable against a local AI (Scopa, Scopone 9+4 ⚠name, Scopone 10-card ⚠name — sources disagree which one is "scientifico", Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 atlas-only. UI in 7 languages, long texts RO+EN. Exhaustive legal-capture generator verified against brute force; 500 AI-vs-AI matches per variant without violations. No network, no telemetry. License undeclared.
+
+## Istoric / Changelog
+
+### 11 octombrie 2026
+- Etichetele din atlas (filtrul „Toate”, numărul de jucători, tag-urile de fișă, etichetele ARIA) sunt acum traduse în toate cele 7 limbi, fără amestec RO/EN.
+- Pe ecrane ≤560 px pastila de donații este implicit un buton ♥ mic (se extinde la atingere/Space) și pagina are margine jos.
+- Structură: `nav` fără rol `tablist` pe însuși reperul (tablist-ul e în interior), `aside` pentru donații, titluri h1→h2 în ordine, h1 și în vederea „Joacă” (axe: 0 încălcări în toate cele 4 vederi); hash-ul CSP al scriptului a fost recalculat.
