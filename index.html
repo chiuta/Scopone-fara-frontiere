@@ -14,7 +14,7 @@
     Buy Me a Coffee: https://buymeacoffee.com/echo.of.the.strings
   ============================================================================
 -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Y8DLM6expz0zNXZ2813M+58J0Vqht3HHGBdqK+ailjA='; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-tsAsBt/Mn1tluHWbSbl/tF/QqBKga8Xa/lG1vpPPILM='; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Atlas al familiei Scopa/Scopone cu pachetul italian de 40 de cărți: Scopa, Scopone (9+4 și 10 cărți), Scopa a 15, Cirulla, Rubamazzo și altele, jucabile contra AI, offline.">
 <meta name="theme-color" content="#0d0a08">
@@ -1582,8 +1582,28 @@ function toggleTable(id) {
 }
 
 /* ---------- randare ---------- */
+const DON = {
+  ro: ['Sprijină autorul', 'Sprijină:', 'Sprijină pe Patreon', 'Ascunde', 'Sprijină'],
+  en: ['Support the author', 'Support:', 'Support on Patreon', 'Hide', 'Support'],
+  fr: ['Soutenir l’auteur', 'Soutenir :', 'Soutenir sur Patreon', 'Masquer', 'Soutenir'],
+  it: ['Sostieni l’autore', 'Sostieni:', 'Sostieni su Patreon', 'Nascondi', 'Sostieni'],
+  es: ['Apoya al autor', 'Apoya:', 'Apoya en Patreon', 'Ocultar', 'Apoya'],
+  pt: ['Apoie o autor', 'Apoie:', 'Apoie no Patreon', 'Ocultar', 'Apoie'],
+  de: ['Den Autor unterstützen', 'Unterstützen:', 'Auf Patreon unterstützen', 'Ausblenden', 'Unterstützen']
+};
+function localizeDonate() {
+  const d = DON[lang] || DON.en, root = document.getElementById('tf-donate'); if (!root) return;
+  root.setAttribute('aria-label', d[0]);
+  const set = (sel, fn) => { const n = root.querySelector(sel); if (n) fn(n); };
+  set('.tf-lbl', n => { n.textContent = d[1]; });
+  set('.tf-pat', n => n.setAttribute('aria-label', d[2]));
+  set('.tf-x', n => { n.setAttribute('aria-label', d[3]); n.title = d[3]; });
+  set('.tf-open', n => { n.setAttribute('aria-label', d[4]); n.title = d[4]; });
+}
+document.addEventListener('DOMContentLoaded', localizeDonate);
 function renderAll() {
   document.documentElement.lang = lang;
+  localizeDonate();
   const app = $('#app'); app.textContent = '';
   app.appendChild(headerEl());
   const main = h('main', { id: 'main' }); app.appendChild(main);
@@ -1728,7 +1748,7 @@ function refreshSetupOpts() {
   if (r) { r.targets.forEach(x => { const o = h('option', { value: String(x) }, String(x)); if (x === r.target) o.selected = true; ti.appendChild(o); }); }
   tb.hidden = !r; ob.hidden = !r || !!r.cirulla; cb.hidden = id !== 'scopa15';
   const info = $('#sv-info');
-  if (info) info.textContent = a ? (a.approx ? '⚠ ' + T('tag.approx') : T('tag.faithful')) + ' · ' + a.players : '';
+  if (info) info.textContent = a ? (a.approx ? T('tag.approx') : T('tag.faithful')) + ' · ' + playersL(a.players) : '';
 }
 
 function playView2() { /* nefolosit */ }

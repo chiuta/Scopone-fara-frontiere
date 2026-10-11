@@ -90,6 +90,8 @@ Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pac
 ## Istoric / Changelog
 
 ### 11 octombrie 2026
+- Linia de sub selectorul de variantă din „Joacă” afișa numărul de jucători în română în celelalte limbi („2 (3 sau 4 în perechi: doar în atlas)”) și un dublu „⚠ ⚠”; acum este tradusă în toate cele 7 limbi, iar un singur ⚠ apare la aproximări.
+- Pastila de donații („Sprijină:”, etichete ARIA, titluri) urmează acum limba interfeței (7 limbi), nu mai rămâne în română.
 - Buton de **sugestie** (💡, tasta H) pentru mutarea jucătorului, în toate variantele jucabile (inclusiv Rubamazzo) și în 7 limbi.
 - Etichetele din atlas (filtrul „Toate”, numărul de jucători, tag-urile de fișă, etichetele ARIA) sunt acum traduse în toate cele 7 limbi, fără amestec RO/EN.
 - Pe ecrane ≤560 px pastila de donații este implicit un buton ♥ mic (se extinde la atingere/Space) și pagina are margine jos.
