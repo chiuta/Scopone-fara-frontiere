@@ -14,7 +14,7 @@
     Buy Me a Coffee: https://buymeacoffee.com/echo.of.the.strings
   ============================================================================
 -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-t7bGUfAekZ0eX1DveeBRHU8ocQ9fTMXbqtJo4L/bCtM='; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Y8DLM6expz0zNXZ2813M+58J0Vqht3HHGBdqK+ailjA='; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Atlas al familiei Scopa/Scopone cu pachetul italian de 40 de cărți: Scopa, Scopone (9+4 și 10 cărți), Scopa a 15, Cirulla, Rubamazzo și altele, jucabile contra AI, offline.">
 <meta name="theme-color" content="#0d0a08">
@@ -984,6 +984,9 @@ const UI = {
   }
 };
 /* completare: lipsurile din non-RO/EN cad pe EN (key-parity verificată de script) */
+/* sugestie (hint) pentru jucător: euristică simplă, 7 limbi */
+const HINT_UI = {"ro": {"btn.hint": "💡 Sugestie", "hint.take": "Sugestie: joacă {c} și ia {t}.", "hint.place": "Sugestie: pune {c} pe masă.", "hint.play": "Sugestie: joacă {c}.", "hint.note": "Sugestia vine din euristica simplă a AI-ului (nu din Monte-Carlo) și nu e garantat cea mai bună mutare. Nu se contorizează în statistici.", "hint.short": "Sugestie"}, "en": {"btn.hint": "💡 Hint", "hint.take": "Hint: play {c} and take {t}.", "hint.place": "Hint: put {c} on the table.", "hint.play": "Hint: play {c}.", "hint.note": "The hint comes from the AI's simple heuristic (not Monte-Carlo) and is not guaranteed to be the best move. It does not affect the statistics.", "hint.short": "hint"}, "fr": {"btn.hint": "💡 Conseil", "hint.take": "Conseil : jouez {c} et prenez {t}.", "hint.place": "Conseil : posez {c} sur la table.", "hint.play": "Conseil : jouez {c}.", "hint.note": "Le conseil vient de l'heuristique simple de l'IA (pas de Monte-Carlo) et n'est pas forcément le meilleur coup. Il n'influence pas les statistiques.", "hint.short": "conseil"}, "it": {"btn.hint": "💡 Suggerimento", "hint.take": "Suggerimento: gioca {c} e prendi {t}.", "hint.place": "Suggerimento: metti {c} sul tavolo.", "hint.play": "Suggerimento: gioca {c}.", "hint.note": "Il suggerimento viene dall'euristica semplice dell'IA (non Monte-Carlo) e non è necessariamente la mossa migliore. Non influisce sulle statistiche.", "hint.short": "suggerimento"}, "es": {"btn.hint": "💡 Pista", "hint.take": "Pista: juega {c} y toma {t}.", "hint.place": "Pista: pon {c} en la mesa.", "hint.play": "Pista: juega {c}.", "hint.note": "La pista viene de la heurística simple de la IA (no Monte-Carlo) y no garantiza la mejor jugada. No afecta a las estadísticas.", "hint.short": "pista"}, "pt": {"btn.hint": "💡 Dica", "hint.take": "Dica: jogue {c} e leve {t}.", "hint.place": "Dica: ponha {c} na mesa.", "hint.play": "Dica: jogue {c}.", "hint.note": "A dica vem da heurística simples da IA (não Monte-Carlo) e não garante a melhor jogada. Não afeta as estatísticas.", "hint.short": "dica"}, "de": {"btn.hint": "💡 Tipp", "hint.take": "Tipp: Spiele {c} und nimm {t}.", "hint.place": "Tipp: Lege {c} auf den Tisch.", "hint.play": "Tipp: Spiele {c}.", "hint.note": "Der Tipp stammt aus der einfachen Heuristik der KI (nicht Monte-Carlo) und ist nicht garantiert der beste Zug. Er beeinflusst die Statistik nicht.", "hint.short": "Tipp"}};
+for (const l of LANGS) { Object.assign(UI[l], HINT_UI[l]); UI[l]['help.keys'] += ' · H: ' + HINT_UI[l]['hint.short']; }
 const SUIT_NAMES = {
   ro: ['Denari', 'Cupe', 'Spade', 'Bastoane'], en: ['Coins', 'Cups', 'Swords', 'Batons'], fr: ['Deniers', 'Coupes', 'Épées', 'Bâtons'],
   it: ['Denari', 'Coppe', 'Spade', 'Bastoni'], es: ['Oros', 'Copas', 'Espadas', 'Bastos'], pt: ['Ouros', 'Copas', 'Espadas', 'Paus'], de: ['Münzen', 'Kelche', 'Schwerter', 'Stäbe']
@@ -1831,7 +1834,8 @@ function optLabelNode(o, i) {
 function actionEl() {
   const g = G; if (g.phase !== 'play') return null;
   const s = g.sel;
-  if (!s) return null;
+  const hintBtn = humanTurn() ? h('button', { class: 'btn', type: 'button', 'data-fk': 'hint', title: T('hint.note'), onclick: showHint }, T('btn.hint')) : null;
+  if (!s) return hintBtn ? h('div', { class: 'actbar' }, h('div', { class: 'row' }, hintBtn)) : null;
   const body = [];
   if (s.options.length > 1 || (s.options.length === 1 && !s.options[0].place)) {
     body.push(h('div', { role: 'radiogroup', 'aria-label': T('play.optsTitle'), class: 'opts' }, s.options.map(optLabelNode)));
@@ -1840,8 +1844,31 @@ function actionEl() {
   else if (s.options.length === 1 && g.kind === 'std') body.push(h('div', { class: 'help' }, T('play.mustCap')));
   body.push(h('div', { class: 'row' },
     h('button', { class: 'btn pri', type: 'button', 'data-fk': 'ok', onclick: confirmMove }, s.options.length === 1 && s.options[0].place ? T('btn.place') : T('btn.confirm')),
-    h('button', { class: 'btn', type: 'button', 'data-fk': 'cancel', onclick: cancelSel }, T('btn.cancel'))));
+    h('button', { class: 'btn', type: 'button', 'data-fk': 'cancel', onclick: cancelSel }, T('btn.cancel')), hintBtn));
   return h('div', { class: 'actbar' }, h('div', null, T('play.selected', { c: cardFull(s.card) })), body);
+}
+/* sugestie: aceeași euristică simplă pe care o folosește AI-ul, aplicată DOAR pe ce vede jucătorul; RNG separat, ca să nu schimbe amestecul sau mutările AI */
+function showHint() {
+  if (!humanTurn()) return;
+  const g = G; let mv;
+  try {
+    const rng = SC.makeRNG('hint|' + g.handNo + '|' + g.log.length);
+    mv = g.kind === 'ruba' ? SC.RUBA.choose(SC.RUBA.observe(g.st, 0), rng) : SC.chooseMove(SC.observe(g.st, 0), 'h', rng, 0);
+  } catch (e) { return; }
+  if (!mv) return;
+  if (!(g.sel && g.sel.card === mv.card)) selectCard(mv.card); /* selectCard pe aceeași carte ar confirma mutarea: evitat */
+  const s = g.sel; if (!s) return;
+  let msg;
+  if (g.kind === 'ruba') {
+    const i = s.options.findIndex(o => o.mv.kind === mv.kind && o.mv.target === mv.target); if (i >= 0) s.idx = i;
+    msg = T('hint.play', { c: cardFull(mv.card) }) + (mv.kind === 'table' ? ' ' + T('ruba.take') + ': ' + cardName(mv.target) : mv.kind === 'steal' ? ' ' + T('ruba.steal') : '');
+  } else {
+    const key = a => a.slice().sort().join(',');
+    const i = s.options.findIndex(o => key(o.ids) === key(mv.take || [])); if (i >= 0) { s.idx = i; s.tsel = new Set(); }
+    msg = mv.take && mv.take.length ? T('hint.take', { c: cardFull(mv.card), t: sortTable(mv.take).map(cardName).join(' + ') }) : T('hint.place', { c: cardFull(mv.card) });
+  }
+  setStatus(msg + ' ' + T('btn.confirm') + '?');
+  renderPlay();
 }
 function endEl() {
   const g = G;
@@ -1897,6 +1924,7 @@ document.addEventListener('keydown', function (e) {
     const o = s.options[s.idx]; setStatus(T('play.opt1', { t: o.label.replace(/^[^:]*: /, '') })); renderPlay();
   } else if (/^[1-9]$/.test(e.key) && G.sel && humanTurn()) {
     const i = parseInt(e.key, 10) - 1; if (i < G.sel.options.length) { e.preventDefault(); chooseOpt(i); }
+  } else if ((e.key === 'h' || e.key === 'H') && humanTurn()) { e.preventDefault(); showHint();
   } else if (e.key === 'Escape' && G.sel) { e.preventDefault(); cancelSel(); }
   else if (e.key === 'Enter' && G.sel && t === document.body) { e.preventDefault(); confirmMove(); }
 });
