@@ -1,6 +1,6 @@
 # Scopone fără frontiere
 
-**Ultima actualizare:** 11 octombrie 2026
+**Versiune:** 1.0.0 · **Ultima actualizare:** 12 octombrie 2026
 
 Atlas al familiei Scopa/Scopone cu pachetul italian de 40 de cărți: 8 variante jucabile contra AI, într-un singur fișier HTML offline.
 
@@ -88,6 +88,9 @@ Alexio — Alexandru-Ionuț Chiuță · alexio@trom.tf
 Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pack (original SVG suits, French-suit mode): 8 variants playable against a local AI (Scopa, Scopone 9+4 ⚠name, Scopone 10-card ⚠name — sources disagree which one is "scientifico", Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 atlas-only. UI in 7 languages, long texts RO+EN. Exhaustive legal-capture generator verified against brute force; 500 AI-vs-AI matches per variant without violations. No network, no telemetry. License undeclared.
 
 ## Istoric / Changelog
+
+### 12 octombrie 2026 (v1.0.0)
+- 1.0.0 — 2026-10-12: versiunea și data ultimei actualizări sunt afișate în aplicație
 
 ### 11 octombrie 2026
 - Linia de sub selectorul de variantă din „Joacă” afișa numărul de jucători în română în celelalte limbi („2 (3 sau 4 în perechi: doar în atlas)”) și un dublu „⚠ ⚠”; acum este tradusă în toate cele 7 limbi, iar un singur ⚠ apare la aproximări.

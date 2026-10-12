@@ -2,6 +2,8 @@
 <html lang="ro">
 <head>
 <meta charset="UTF-8">
+<meta name="application-version" content="1.0.0">
+<meta name="last-updated" content="2026-10-12">
 <!--
   ============================================================================
   Scopone-fara-frontiere
@@ -14,7 +16,7 @@
     Buy Me a Coffee: https://buymeacoffee.com/echo.of.the.strings
   ============================================================================
 -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-tsAsBt/Mn1tluHWbSbl/tF/QqBKga8Xa/lG1vpPPILM='; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-XrhTcShiD6wy0bNK3woq3HWMgsUpF0NAayMdmEgUUDc='; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Atlas al familiei Scopa/Scopone cu pachetul italian de 40 de cărți: Scopa, Scopone (9+4 și 10 cărți), Scopa a 15, Cirulla, Rubamazzo și altele, jucabile contra AI, offline.">
 <meta name="theme-color" content="#0d0a08">
@@ -741,6 +743,7 @@ return {
 
 
 /* ===== I18N: interfața în 7 limbi (RO/EN/FR/IT/ES/PT/DE). Textele lungi (atlas, reguli) doar RO+EN. ===== */
+const APP_VERSION = '1.0.0', APP_UPDATED = '2026-10-12';
 const LANGS = ['ro', 'en', 'fr', 'it', 'es', 'pt', 'de'];
 const LANG_NAMES = { ro: 'Română', en: 'English', fr: 'Français', it: 'Italiano', es: 'Español', pt: 'Português', de: 'Deutsch' };
 const UI = {
@@ -776,7 +779,8 @@ const UI = {
     'ruba.steal': 'Fură grămada', 'ruba.take': 'Ia de pe masă', 'ruba.place': 'Pune pe masă', 'ruba.pile': 'grămadă',
     'stats.title': 'Statistici locale', 'stats.none': 'Încă nicio partidă.', 'stats.wl': 'câștigate {w} · pierdute {l}',
     'about.title': 'Despre', 'deck.title': 'Pachetul italian de 40 de cărți', 'deck.prime': 'Valorile primierei', 'deck.cap': 'Valoarea la captură', 'deck.gallery': 'Galerie',
-    'footer.local': 'Rulează local · fără rețea · fără cont · fără telemetrie.'
+    'footer.local': 'Rulează local · fără rețea · fără cont · fără telemetrie.',
+    'ver.label': 'Versiune'
   },
   en: {
     'brand': 'without borders', 'sub': 'Atlas of the Scopa family · playable against AI · StrING Center',
@@ -810,7 +814,8 @@ const UI = {
     'ruba.steal': 'Steal the pile', 'ruba.take': 'Take from the table', 'ruba.place': 'Put on the table', 'ruba.pile': 'pile',
     'stats.title': 'Local statistics', 'stats.none': 'No games yet.', 'stats.wl': 'won {w} · lost {l}',
     'about.title': 'About', 'deck.title': 'The 40-card Italian pack', 'deck.prime': 'Primiera values', 'deck.cap': 'Capture value', 'deck.gallery': 'Gallery',
-    'footer.local': 'Runs locally · no network · no account · no telemetry.'
+    'footer.local': 'Runs locally · no network · no account · no telemetry.',
+    'ver.label': 'Version'
   },
   fr: {
     'brand': 'sans frontières', 'sub': 'Atlas de la famille Scopa · jouable contre l’IA · Centre StrING',
@@ -844,7 +849,8 @@ const UI = {
     'ruba.steal': 'Voler le tas', 'ruba.take': 'Prendre sur la table', 'ruba.place': 'Poser sur la table', 'ruba.pile': 'tas',
     'stats.title': 'Statistiques locales', 'stats.none': 'Aucune partie.', 'stats.wl': 'gagnées {w} · perdues {l}',
     'about.title': 'À propos', 'deck.title': 'Le jeu italien de 40 cartes', 'deck.prime': 'Valeurs de la primiera', 'deck.cap': 'Valeur de prise', 'deck.gallery': 'Galerie',
-    'footer.local': 'Fonctionne en local · sans réseau · sans compte · sans télémétrie.'
+    'footer.local': 'Fonctionne en local · sans réseau · sans compte · sans télémétrie.',
+    'ver.label': 'Version'
   },
   it: {
     'brand': 'senza frontiere', 'sub': 'Atlante della famiglia Scopa · giocabile contro l’IA · Centro StrING',
@@ -878,7 +884,8 @@ const UI = {
     'ruba.steal': 'Ruba il mazzetto', 'ruba.take': 'Prendi dal tavolo', 'ruba.place': 'Metti sul tavolo', 'ruba.pile': 'mazzetto',
     'stats.title': 'Statistiche locali', 'stats.none': 'Nessuna partita.', 'stats.wl': 'vinte {w} · perse {l}',
     'about.title': 'Info', 'deck.title': 'Il mazzo italiano da 40 carte', 'deck.prime': 'Valori della primiera', 'deck.cap': 'Valore di presa', 'deck.gallery': 'Galleria',
-    'footer.local': 'In locale · senza rete · senza account · senza telemetria.'
+    'footer.local': 'In locale · senza rete · senza account · senza telemetria.',
+    'ver.label': 'Versione'
   },
   es: {
     'brand': 'sin fronteras', 'sub': 'Atlas de la familia Scopa · jugable contra la IA · Centro StrING',
@@ -912,7 +919,8 @@ const UI = {
     'ruba.steal': 'Robar el montón', 'ruba.take': 'Llevar de la mesa', 'ruba.place': 'Poner en la mesa', 'ruba.pile': 'montón',
     'stats.title': 'Estadísticas locales', 'stats.none': 'Aún sin partidas.', 'stats.wl': 'ganadas {w} · perdidas {l}',
     'about.title': 'Acerca de', 'deck.title': 'La baraja italiana de 40 cartas', 'deck.prime': 'Valores de la primiera', 'deck.cap': 'Valor de captura', 'deck.gallery': 'Galería',
-    'footer.local': 'Local · sin red · sin cuenta · sin telemetría.'
+    'footer.local': 'Local · sin red · sin cuenta · sin telemetría.',
+    'ver.label': 'Versión'
   },
   pt: {
     'brand': 'sem fronteiras', 'sub': 'Atlas da família Scopa · jogável contra a IA · Centro StrING',
@@ -946,7 +954,8 @@ const UI = {
     'ruba.steal': 'Roubar o monte', 'ruba.take': 'Levar da mesa', 'ruba.place': 'Pôr na mesa', 'ruba.pile': 'monte',
     'stats.title': 'Estatísticas locais', 'stats.none': 'Ainda sem partidas.', 'stats.wl': 'ganhas {w} · perdidas {l}',
     'about.title': 'Sobre', 'deck.title': 'O baralho italiano de 40 cartas', 'deck.prime': 'Valores da primiera', 'deck.cap': 'Valor de captura', 'deck.gallery': 'Galeria',
-    'footer.local': 'Local · sem rede · sem conta · sem telemetria.'
+    'footer.local': 'Local · sem rede · sem conta · sem telemetria.',
+    'ver.label': 'Versão'
   },
   de: {
     'brand': 'ohne Grenzen', 'sub': 'Atlas der Scopa-Familie · spielbar gegen die KI · StrING-Zentrum',
@@ -980,7 +989,8 @@ const UI = {
     'ruba.steal': 'Stapel stehlen', 'ruba.take': 'Vom Tisch nehmen', 'ruba.place': 'Auf den Tisch legen', 'ruba.pile': 'Stapel',
     'stats.title': 'Lokale Statistik', 'stats.none': 'Noch keine Spiele.', 'stats.wl': 'gewonnen {w} · verloren {l}',
     'about.title': 'Info', 'deck.title': 'Das italienische 40-Karten-Blatt', 'deck.prime': 'Primiera-Werte', 'deck.cap': 'Nehmwert', 'deck.gallery': 'Galerie',
-    'footer.local': 'Lokal · ohne Netz · ohne Konto · ohne Telemetrie.'
+    'footer.local': 'Lokal · ohne Netz · ohne Konto · ohne Telemetrie.',
+    'ver.label': 'Version'
   }
 };
 /* completare: lipsurile din non-RO/EN cad pe EN (key-parity verificată de script) */
@@ -1706,7 +1716,7 @@ function aboutView() {
   return h('div', null, h('section', { class: 'hero' }, h('h1', null, T('about.title'))),
     h('div', { class: 'panel' }, A.map(([t, p]) => h('div', null, h('h2', null, t), h('p', null, p))), isLongFallback() ? h('p', { class: 'enote' }, T('note.en')) : null),
     h('div', { class: 'panel stats' }, h('h2', null, T('stats.title')), st),
-    h('div', { class: 'panel' }, h('p', { class: 'help' }, T('help.keys'))));
+    h('div', { class: 'panel' }, h('p', { class: 'help' }, T('help.keys')), h('p', { id: 'app-version', class: 'legend' }, T('ver.label') + ': v ' + APP_VERSION + ' · ' + APP_UPDATED)));
 }
 
 /* ----- setup + joc ----- */
