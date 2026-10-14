@@ -1,6 +1,6 @@
 # Scopone fără frontiere
 
-**Versiune:** 1.0.0 · **Ultima actualizare:** 12 octombrie 2026
+**Versiune:** 1.1.0 · **Ultima actualizare:** 14 octombrie 2026
 
 Atlas al familiei Scopa/Scopone cu pachetul italian de 40 de cărți: 8 variante jucabile contra AI, într-un singur fișier HTML offline.
 
@@ -87,7 +87,18 @@ Alexio — Alexandru-Ionuț Chiuță · alexio@trom.tf
 
 Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pack (original SVG suits, French-suit mode): 8 variants playable against a local AI (Scopa, Scopone 9+4 ⚠name, Scopone 10-card ⚠name — sources disagree which one is "scientifico", Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 atlas-only. UI in 7 languages, long texts RO+EN. Exhaustive legal-capture generator verified against brute force; 500 AI-vs-AI matches per variant without violations. No network, no telemetry. License undeclared.
 
+## Funcții noi (v1.1.0)
+
+- **Joc în doi pe rețea** (buton „Joacă în doi, pe rețea”): meci de Scopone între doi oameni, gazda are locul 0, oaspetele locul 1. Împărțirea e identică la ambii (sămânță comună), mâna adversarului rămâne ascunsă, mutările în afara rândului sunt respinse, sugestia AI este oprită. Conexiunea se face direct între cele două browsere (WebRTC), fără server al nostru: schimbi două texte (ofertă/răspuns), ca text sau cod QR, prin orice canal ales de tine. Implicit nu se contactează niciun server STUN; un STUN poate fi introdus manual în fereastra de conectare, doar dacă îl vrei (aceasta e singura ieșire posibilă către rețea și se face numai la alegerea ta). Dacă legătura se întrerupe, aplicația o arată și poate relua jocul din jurnalul mutărilor.
+- **Citire cu voce a fișelor** (buton „Ascultă fișa” în atlas): titlu, origine și reguli, prin sinteza vocală a browserului (FFF.tts), cu selector de voce în „Despre”; dacă nu există voce, apare un mesaj, nu o eroare. Textele lungi sunt în engleză, deci se citesc cu voce engleză (notat în aplicație).
+- **Kit comun** (core, label, bundle, p2p, qr, tts): eticheta de versiune, copie de siguranță .fff.json cu statisticile locale.
+- Textele noi sunt în toate cele 8 limbi (ro, en, fr, it, es, pt, hu, de); traducerile fr/it/es/pt/hu/de sunt automate și neverificate nativ.
+- Teste: `tests/fff-r8.test.mjs` (Playwright, rețea blocată, două contexte conectate prin dialogul real, axe 0 violări la 1280 și 360 px).
+
 ## Istoric / Changelog
+
+### 14 octombrie 2026 (v1.1.0)
+- Nou: joc în doi pe rețea (WebRTC, fără server), citire cu voce a fișelor, kit comun (etichetă, copie .fff.json), 8 limbi pentru funcțiile noi, teste.
 
 ### 12 octombrie 2026 (v1.0.0)
 - 1.0.0 — 2026-10-12: versiunea și data ultimei actualizări sunt afișate în aplicație
