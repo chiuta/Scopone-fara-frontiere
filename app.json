@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "slug": "scopone-fara-frontiere",
+  "slug": "scopone",
   "name": "Scopone fără frontiere",
   "version": "1.1.0",
   "updated": "2026-10-14",
@@ -12,8 +12,8 @@
     "Web Crypto"
   ],
   "storageKeys": [],
-  "sizeBytes": 411171,
-  "sha256": "9127098616431af1b13197744d0928e2f362beaa3845db79c2630feb9601dc8c",
+  "sizeBytes": 411152,
+  "sha256": "98c0c7d407bd0e02d5d1356d5e7b694142d3d1b5cd2b1913dd7e3bd470449e7e",
   "csp": {
     "present": true,
     "directives": {
