@@ -58,7 +58,7 @@ Nu este un LLM. „Euristic”: valoare pe mutare + estimarea riscului de scopa 
 
 ## Confidențialitate și rețea
 
-Fără rețea, cont sau telemetrie; CSP strict (`default-src 'none'`, script permis doar prin hash SHA-256, fără `connect-src`). `localStorage` (în try/catch) doar pentru limbă, pachet, ultima variantă, statistici locale. Linkurile Patreon/Coffee din footer se deschid doar la clic (`rel=noopener`).
+Fără rețea, cont sau telemetrie; CSP strict (`default-src 'none'`, script permis doar prin hash SHA-256, fără `connect-src`). `localStorage` (în try/catch) doar pentru limbă, pachet, ultima variantă, statistici locale. Linkurile Buy Me a Coffee din footer se deschid doar la clic (`rel=noopener`).
 
 ## Limite și avertismente
 
