@@ -87,9 +87,9 @@ MIT — voir le fichier LICENSE
 
 Alexio — Alexandru-Ionuț Chiuță · alexio@trom.tf
 
-## English summary
+## Résumé
 
-Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pack (original SVG suits, French-suit mode): 8 variants playable against a local AI (Scopa, Scopone 9+4 ⚠name, Scopone 10-card ⚠name — sources disagree which one is "scientifico", Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 atlas-only. UI in 8 languages, long texts RO+EN. Exhaustive legal-capture generator verified against brute force; 500 AI-vs-AI matches per variant without violations. No network, no telemetry. MIT licence.
+Atlas hors ligne, en un seul fichier, de la famille Scopa/Scopone avec un jeu italien de 40 cartes (couleurs SVG originales, mode couleurs françaises) : 8 variantes jouables contre une IA locale (Scopa, Scopone 9+4 ⚠nom, Scopone à 10 cartes ⚠nom — les sources ne s'accordent pas sur celle qui est « scientifico », Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 réservées à l'atlas. Interface en 8 langues, longs textes en RO+EN. Générateur exhaustif des prises légales vérifié par force brute ; 500 parties IA contre IA par variante sans violation. Pas de réseau, pas de télémétrie. Licence MIT.
 
 ## Nouveautés (v1.1.0)
 
