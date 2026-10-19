@@ -10,7 +10,7 @@ Atlas da família Scopa/Scopone com o baralho italiano de 40 cartas: 8 variantes
 
 **Online:** https://chiuta.github.io/Scopone-fara-frontiere/
 
-![Captura de ecrã](screenshot.png)
+![Captura de ecrã](screenshot.pt.png)
 
 ## O que é
 

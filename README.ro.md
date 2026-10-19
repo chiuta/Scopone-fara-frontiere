@@ -10,7 +10,7 @@ Atlas al familiei Scopa/Scopone cu pachetul italian de 40 de cărți: 8 variante
 
 **Live:** https://chiuta.github.io/Scopone-fara-frontiere/
 
-![Captura de ecran](screenshot.png)
+![Captura de ecran](screenshot.ro.png)
 
 ## Ce este
 

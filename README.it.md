@@ -10,7 +10,7 @@ Atlante della famiglia Scopa/Scopone con il mazzo italiano da 40 carte: 8 varian
 
 **Online:** https://chiuta.github.io/Scopone-fara-frontiere/
 
-![Schermata](screenshot.png)
+![Schermata](screenshot.it.png)
 
 ## Cos'è
 

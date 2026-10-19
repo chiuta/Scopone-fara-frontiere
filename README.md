@@ -10,7 +10,7 @@ An atlas of the Scopa/Scopone family with the 40-card Italian deck: 8 variants p
 
 **Live:** https://chiuta.github.io/Scopone-fara-frontiere/
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot.en.png)
 
 ## What it is
 

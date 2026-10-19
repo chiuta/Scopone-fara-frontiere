@@ -10,7 +10,7 @@ Atlas der Scopa/Scopone-Familie mit dem italienischen 40-Karten-Blatt: 8 gegen d
 
 **Online:** https://chiuta.github.io/Scopone-fara-frontiere/
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot.de.png)
 
 ## Was es ist
 

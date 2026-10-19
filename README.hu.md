@@ -10,7 +10,7 @@ A Scopa/Scopone család atlasza az olasz 40 lapos paklival: 8 MI ellen játszhat
 
 **Élő változat:** https://chiuta.github.io/Scopone-fara-frontiere/
 
-![Képernyőkép](screenshot.png)
+![Képernyőkép](screenshot.hu.png)
 
 ## Mi ez
 

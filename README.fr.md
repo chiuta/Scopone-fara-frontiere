@@ -10,7 +10,7 @@ Atlas de la famille Scopa/Scopone avec le jeu italien de 40 cartes : 8 variantes
 
 **En ligne :** https://chiuta.github.io/Scopone-fara-frontiere/
 
-![Capture d'écran](screenshot.png)
+![Capture d'écran](screenshot.fr.png)
 
 ## De quoi s'agit-il
 
