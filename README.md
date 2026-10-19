@@ -1,85 +1,87 @@
 # Scopone fără frontiere
 
-**Versiune:** 1.1.0 · **Ultima actualizare:** 14 octombrie 2026
+**English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-Atlas al familiei Scopa/Scopone cu pachetul italian de 40 de cărți: 8 variante jucabile contra AI, într-un singur fișier HTML offline.
+**Version:** 1.1.0 · **Last updated:** 2026-10-14
+
+An atlas of the Scopa/Scopone family with the 40-card Italian deck: 8 variants playable against an AI, in a single offline HTML file.
 
 **Live:** https://chiuta.github.io/Scopone-fara-frontiere/
 
-![Captura de ecran](screenshot.png)
+![Screenshot](screenshot.png)
 
-## Ce este
+## What it is
 
-Un atlas (15 fișe: origine, reguli, diferențe regionale, aproximări, surse) și un joc efectiv contra unui adversar AI local (euristic / Monte-Carlo, nu LLM). Semnele (Denari, Coppe, Spade, Bastoni) sunt desenate în SVG propriu, fără a copia pachete regionale; există și modul cu semne franceze ♦♥♠♣ pentru cine nu cunoaște pachetul.
+An atlas (15 sheets: origin, rules, regional differences, approximations, sources) and an actual game against a local AI opponent (heuristic / Monte-Carlo, not an LLM). The suits (Denari, Coppe, Spade, Bastoni) are drawn in our own SVG, without copying regional decks; there is also a mode with French suits ♦♥♠♣ for those who do not know the deck.
 
-## Funcții (verificate în cod și teste)
+## Features (verified in code and tests)
 
-- Motor separat de interfață (funcții pure: stare → mutări legale → stare nouă), testat în Node.
-- Generator exhaustiv de capturi legale (DFS cu tăiere), verificat cu enumerare brută 2^n.
-- Selecția capturii: după alegerea unei cărți se pre-listează capturile posibile, cărțile de pe masă sunt evidențiate; la mai multe combinații alegi tu; poți și bifa cărți pe masă (validare: selecția trebuie să fie o captură legală).
-- Tastatură completă: ← → cărți, Enter/Spațiu selectează, ↑ ↓ sau 1–9 aleg captura, Enter confirmă, Esc anulează.
-- **Sugestie (💡 / tasta H)** la rândul tău: evidențiază cartea și captura pe care le-ar alege euristica simplă a AI-ului, aplicată doar pe ce vezi tu (nu pe cărțile ascunse). Folosește un generator aleator separat, deci nu schimbă amestecul sau mutările AI-ului; nu intră în statistici și nu garantează mutarea optimă. Textele sunt în toate cele 7 limbi.
-- Scorare: scope, carte, denari, settebello, primiera (7=21, 6=18, As=16, 5=15, 4=14, 3=13, 2=12, figuri=10; fără un semn nu se punctează), opțional Re bello și Napola/Napoleone; Cirulla: bonusuri de mână/dealer, piccola, grande, cappotto.
-- Interfață în 7 limbi (RO/EN/FR/IT/ES/PT/DE) cu autodetecție; textele lungi din atlas: RO + EN (în FR/IT/ES/PT/DE se afișează engleza, cu nota „text în engleză”). Paritatea cheilor e verificată cu script.
-- Amestec cu `crypto.getRandomValues` (rejection sampling) sau seed reproductibil (mulberry32).
-- Accesibilitate: aria-live, focus vizibil, ținte ≥44 px (cu excepția pastilei fixe de donații din subsol, copiată din serie), contrast ≥4,5:1 (măsurat), `prefers-reduced-motion`, 390 px fără scroll orizontal, `<noscript>`.
+- Engine separate from the interface (pure functions: state → legal moves → new state), tested in Node.
+- Exhaustive generator of legal captures (DFS with pruning), verified against brute-force 2^n enumeration.
+- Capture selection: after choosing a card, the possible captures are pre-listed and the cards on the table are highlighted; if there are several combinations you choose; you can also tick cards on the table (validation: the selection must be a legal capture).
+- Full keyboard: ← → cards, Enter/Space selects, ↑ ↓ or 1–9 choose the capture, Enter confirms, Esc cancels.
+- **Hint (💡 / H key)** on your turn: highlights the card and the capture that the AI's simple heuristic would choose, applied only to what you can see (not to hidden cards). It uses a separate random generator, so it does not change the shuffle or the AI's moves; it does not enter the statistics and does not guarantee the optimal move. The texts are in all 7 languages.
+- Scoring: scope, cards, denari, settebello, primiera (7=21, 6=18, Ace=16, 5=15, 4=14, 3=13, 2=12, face cards=10; a suit that is missing scores nothing), optional Re bello and Napola/Napoleone; Cirulla: hand/dealer bonuses, piccola, grande, cappotto.
+- Interface in 7 languages (RO/EN/FR/IT/ES/PT/DE) with auto-detection; long texts in the atlas: RO + EN (in FR/IT/ES/PT/DE English is shown, with the note "text in English"). Key parity is verified with a script.
+- Shuffle with `crypto.getRandomValues` (rejection sampling) or a reproducible seed (mulberry32).
+- Accessibility: aria-live, visible focus, targets ≥44 px (except the fixed donation pill in the footer, copied from the series), contrast ≥4.5:1 (measured), `prefers-reduced-motion`, 390 px without horizontal scroll, `<noscript>`.
 
-## Variante
+## Variants
 
-| Nume | Jucabil? | ⚠ Aproximări |
+| Name | Playable? | ⚠ Approximations |
 |---|---|---|
-| Scopa (2 jucători) | da | — (fidel Pagat; „chiamarsi fuori” lipsește) |
-| Scopone 9 cărți + 4 pe masă (4 jucători în perechi) | da | ⚠ doar DENUMIREA e disputată între surse (vezi mai jos); regulile sunt cele din surse |
-| Scopone 10 cărți, masa goală (4 jucători) — „scientifico” la Pagat/Aranzulla, „a 10 carte” la Wikipedia | da | ⚠ doar DENUMIREA e disputată; scopa la ultima carte: opțiune (implicit nu se numără) |
-| Scopa a 15 (versiunile a și b din Pagat; b = carte egală, set de aceeași valoare sau set care face 15) | da | versiunea 3 și „minimum de cărți” doar în atlas |
-| Asso piglia tutto | da | ⚠ cu mai mulți ași pe masă, asul ia unul la alegere (Pagat nu spune) |
-| Scopa d'assi (4 jucători, 10 cărți) | da | ⚠ sursele diferă în detalii |
-| Cirulla | da | ⚠ bonusuri declarate automat; piccola/grande după un singur rezumat |
-| Rubamazzo | da | ⚠ reguli regionale variabile, AI simplu |
-| Scopa Bazzica, scalette/Napola, Sbarazzina/Piva, Scopa corsă, Chkobba, Hurrikan, Cicera/Cirullone | doar în atlas | — |
+| Scopa (2 players) | yes | — (faithful to Pagat; "chiamarsi fuori" is missing) |
+| Scopone 9 cards + 4 on the table (4 players in pairs) | yes | ⚠ only the NAME is disputed between sources (see below); the rules are those from the sources |
+| Scopone 10 cards, empty table (4 players) — "scientifico" at Pagat/Aranzulla, "a 10 carte" at Wikipedia | yes | ⚠ only the NAME is disputed; scopa on the last card: option (by default it is not counted) |
+| Scopa a 15 (versions a and b from Pagat; b = equal card, set of the same value or set that makes 15) | yes | version 3 and "minimum of cards" only in the atlas |
+| Asso piglia tutto | yes | ⚠ with several aces on the table, the ace takes one of your choice (Pagat does not say) |
+| Scopa d'assi (4 players, 10 cards) | yes | ⚠ sources differ in details |
+| Cirulla | yes | ⚠ bonuses declared automatically; piccola/grande based on a single summary |
+| Rubamazzo | yes | ⚠ variable regional rules, simple AI |
+| Scopa Bazzica, scalette/Napola, Sbarazzina/Piva, Scopa corsa, Chkobba, Hurrikan, Cicera/Cirullone | atlas only | — |
 
-Despre denumiri: „9 cărți fiecare și masa goală” e imposibil (4×9=36). Există două jocuri: 9 cărți + 4 pe masă și 10 cărți cu masa goală. Pagat și un ghid italian (Aranzulla) numesc „Scopone scientifico” varianta cu 10 cărți; Wikipedia italiană și engleză numesc „scientifico” varianta 9+4 și „Scopone a 10 carte” pe cea cu 10. De aceea aplicația le etichetează după numărul de cărți și le marchează ⚠. Punctele pe mână nu însumează un total constant de 11; „11” este ținta jocului (opțional 21).
+About the names: "9 cards each and an empty table" is impossible (4×9=36). There are two games: 9 cards + 4 on the table and 10 cards with an empty table. Pagat and an Italian guide (Aranzulla) call the 10-card variant "Scopone scientifico"; Italian and English Wikipedia call the 9+4 variant "scientifico" and the 10-card one "Scopone a 10 carte". That is why the application labels them by the number of cards and marks them ⚠. The points per hand do not add up to a constant total of 11; "11" is the target of the game (optionally 21).
 
-## Manual de utilizare
+## User guide
 
-1. Din fila „Atlas” citiți fișa unei variante și apăsați „▶ Joacă”, sau mergeți în „Joacă”.
-2. Alegeți varianta, nivelul AI, ținta, opțiunile de regulă; „Seed” gol = amestec aleator. „▶ Începe meciul”.
-3. În rândul dumneavoastră alegeți o carte din mână; capturile posibile apar jos și se evidențiază pe masă. Alegeți una (clic, ↑↓ sau cifra) și apăsați „Confirmă” / Enter. Dacă nu există captură, cartea se pune pe masă. Captura este obligatorie când e posibilă.
-4. La sfârșitul mâinii apare tabelul de puncte; „Mâna următoare” sau „Meci nou”.
-5. Opțional: „Arată mâinile AI” (doar învățare) și „Arată cărțile ieșite” (ajutor de memorie).
+1. From the "Atlas" tab read the sheet of a variant and press "▶ Play", or go to "Play".
+2. Choose the variant, the AI level, the target, the rule options; an empty "Seed" = random shuffle. "▶ Start match".
+3. On your turn choose a card from your hand; the possible captures appear below and are highlighted on the table. Choose one (click, ↑↓ or the digit) and press "Confirm" / Enter. If there is no capture, the card is placed on the table. Capture is mandatory when possible.
+4. At the end of the hand the points table appears; "Next hand" or "New match".
+5. Optional: "Show AI hands" (learning only) and "Show cards played" (memory aid).
 
-## AI (descriere onestă)
+## AI (an honest description)
 
-Nu este un LLM. „Euristic”: valoare pe mutare + estimarea riscului de scopa din cărțile nevăzute. „Monte-Carlo”: determinizare (distribuții posibile ale cărților nevăzute) + simulări cu politică euristică. AI-ul primește doar o observație (masa, mâna proprie, pliurile, numărul de cărți ale celorlalți): testul verifică că observațiile și deciziile sunt identice când cărțile ascunse sunt permutate. Măsurat (audit independent, 40 de eșantioane cu buget determinist de muncă, meciuri cu locurile alternate, MC contra euristic): Scopa 136/200 (68% ±6,5), Scopone 9+4 103/160 (64% ±7,4), Scopone 10 cărți 90/160 (56% ±7,7 — avantaj nedemonstrat statistic), Cirulla 100/150 (67% ±7,5), Scopa d'assi 128/200 (64% ±6,7), Scopa a 15 132/200 (66% ±6,6), Asso piglia tutto 130/200 (65% ±6,6; ultimele trei cu un buget puțin mai mare); euristicul bate un adversar aleatoriu 185/200 la Scopa. Nu este un jucător de nivel de turneu. (Atenție: cu 10 eșantioane per mutare, MC pierdea la Scopone — 38% și 31%; de aceea sunt acum până la 40, limitate de un buget de muncă: în Chromium ~99% din mutări sub ~115 ms, rar un vârf de ~200 ms.)
+It is not an LLM. "Heuristic": value per move + estimation of the scopa risk from the unseen cards. "Monte-Carlo": determinization (possible distributions of the unseen cards) + simulations with a heuristic policy. The AI receives only an observation (the table, its own hand, the folds, the number of cards of the others): the test verifies that the observations and decisions are identical when the hidden cards are permuted. Measured (independent audit, 40 samples with a deterministic work budget, matches with alternating seats, MC against heuristic): Scopa 136/200 (68% ±6.5), Scopone 9+4 103/160 (64% ±7.4), Scopone 10 cards 90/160 (56% ±7.7 — advantage not statistically demonstrated), Cirulla 100/150 (67% ±7.5), Scopa d'assi 128/200 (64% ±6.7), Scopa a 15 132/200 (66% ±6.6), Asso piglia tutto 130/200 (65% ±6.6; the last three with a slightly larger budget); the heuristic beats a random opponent 185/200 at Scopa. It is not a tournament-level player. (Note: with 10 samples per move, MC lost at Scopone — 38% and 31%; that is why there are now up to 40, limited by a work budget: in Chromium ~99% of moves under ~115 ms, rarely a peak of ~200 ms.)
 
-## Teste (în afara pachetului)
+## Tests (outside the package)
 
-53 de teste de motor (inclusiv 500 de meciuri AI vs AI pe fiecare din cele 7 variante cu mutări validate la fiecare pas, invariantul de 40 de cărți, scor comparat cu o implementare independentă, 60 000 de comparații generator vs enumerare brută), 17 teste UI Playwright (meci complet prin UI pentru fiecare variantă, CSP, rețea, mobil, tastatură, contrast, localStorage blocat) și paritatea i18n.
+53 engine tests (including 500 AI vs AI matches on each of the 7 variants with moves validated at every step, the 40-card invariant, scores compared with an independent implementation, 60,000 comparisons of generator vs brute-force enumeration), 17 Playwright UI tests (a complete match through the UI for each variant, CSP, network, mobile, keyboard, contrast, blocked localStorage) and i18n parity.
 
-## Confidențialitate și rețea
+## Privacy and network
 
-Fără rețea, cont sau telemetrie; CSP strict (`default-src 'none'`, script permis doar prin hash SHA-256, fără `connect-src`). `localStorage` (în try/catch) doar pentru limbă, pachet, ultima variantă, statistici locale. Linkurile Buy Me a Coffee din footer se deschid doar la clic (`rel=noopener`).
+No network, account or telemetry; strict CSP (`default-src 'none'`, scripts allowed only by SHA-256 hash, no `connect-src`). `localStorage` (in try/catch) only for language, deck, last variant, local statistics. The Buy Me a Coffee links in the footer open only on click (`rel=noopener`).
 
-## Limite și avertismente
+## Limits and warnings
 
-- Regulile au fost citite din Pagat.com, Wikipedia italiană și ghiduri italiene; regulamentul Federației Italiene Scopone nu a putut fi consultat.
-- Unde sursele diferă (denumiri Scopone/scientifico — verificate în Pagat, Aranzulla, Sisal, Wikipedia IT/EN; ținta 11 vs 21; scopa la ultima carte) fișa spune ce s-a implementat; opțiunile sunt expuse.
-- Cirulla și Rubamazzo au ⚠ aproximări; AI-ul nu e de turneu.
-- Cărțile sunt desene originale, nu reproduc pachete regionale.
+- The rules were read from Pagat.com, Italian Wikipedia and Italian guides; the regulations of the Italian Scopone Federation could not be consulted.
+- Where the sources differ (Scopone/scientifico names — verified at Pagat, Aranzulla, Sisal, Wikipedia IT/EN; target 11 vs 21; scopa on the last card) the sheet says what was implemented; the options are exposed.
+- Cirulla and Rubamazzo have ⚠ approximations; the AI is not tournament-level.
+- The cards are original drawings, not reproductions of regional decks.
 
-## Surse
+## Sources
 
 pagat.com/fishing/scopa.html · scopone.html · cirulla.html · it.wikipedia.org (Scopone scientifico, Rubamazzetto) · en.wikipedia.org (Scopone) · aranzulla.it (Scopone scientifico) · sisal.it (Scopone) · qualcherisposta.it (Rubamazzo).
 
-## Rulare locală
+## Local use
 
-Descărcați `index.html` și deschideți-l în browser; funcționează fără internet.
+Download `index.html` and open it in a browser; it works without internet.
 
-## Licență
+## License
 
-MIT — vezi fișierul LICENSE
+MIT — see the LICENSE file
 
-## Autor
+## Author
 
 Alexio — Alexandru-Ionuț Chiuță · alexio@trom.tf
 
@@ -87,26 +89,26 @@ Alexio — Alexandru-Ionuț Chiuță · alexio@trom.tf
 
 Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pack (original SVG suits, French-suit mode): 8 variants playable against a local AI (Scopa, Scopone 9+4 ⚠name, Scopone 10-card ⚠name — sources disagree which one is "scientifico", Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 atlas-only. UI in 7 languages, long texts RO+EN. Exhaustive legal-capture generator verified against brute force; 500 AI-vs-AI matches per variant without violations. No network, no telemetry. MIT licence.
 
-## Funcții noi (v1.1.0)
+## New features (v1.1.0)
 
-- **Joc în doi pe rețea** (buton „Joacă în doi, pe rețea”): meci de Scopone între doi oameni, gazda are locul 0, oaspetele locul 1. Împărțirea e identică la ambii (sămânță comună), mâna adversarului rămâne ascunsă, mutările în afara rândului sunt respinse, sugestia AI este oprită. Conexiunea se face direct între cele două browsere (WebRTC), fără server al nostru: schimbi două texte (ofertă/răspuns), ca text sau cod QR, prin orice canal ales de tine. Implicit nu se contactează niciun server STUN; un STUN poate fi introdus manual în fereastra de conectare, doar dacă îl vrei (aceasta e singura ieșire posibilă către rețea și se face numai la alegerea ta). Dacă legătura se întrerupe, aplicația o arată și poate relua jocul din jurnalul mutărilor.
-- **Citire cu voce a fișelor** (buton „Ascultă fișa” în atlas): titlu, origine și reguli, prin sinteza vocală a browserului (FFF.tts), cu selector de voce în „Despre”; dacă nu există voce, apare un mesaj, nu o eroare. Textele lungi sunt în engleză, deci se citesc cu voce engleză (notat în aplicație).
-- **Kit comun** (core, label, bundle, p2p, qr, tts): eticheta de versiune, copie de siguranță .fff.json cu statisticile locale.
-- Textele noi sunt în toate cele 8 limbi (ro, en, fr, it, es, pt, hu, de); traducerile fr/it/es/pt/hu/de sunt automate și neverificate nativ.
-- Teste: `tests/fff-r8.test.mjs` (Playwright, rețea blocată, două contexte conectate prin dialogul real, axe 0 violări la 1280 și 360 px).
+- **Two-player network game** ("Play two-player, over the network" button): a Scopone match between two humans, the host has seat 0, the guest seat 1. The deal is identical for both (shared seed), the opponent's hand stays hidden, out-of-turn moves are rejected, the AI hint is turned off. The connection is made directly between the two browsers (WebRTC), without a server of ours: you exchange two texts (offer/answer), as text or QR code, through any channel you choose. By default no STUN server is contacted; a STUN can be entered manually in the connection window, only if you want it (this is the only possible exit to the network and it happens only at your choice). If the link is interrupted, the application shows it and can resume the game from the move log.
+- **Voice reading of the sheets** ("Listen to the sheet" button in the atlas): title, origin and rules, through the browser's speech synthesis (FFF.tts), with a voice selector in "About"; if there is no voice, a message appears, not an error. The long texts are in English, so they are read with an English voice (noted in the application).
+- **Common kit** (core, label, bundle, p2p, qr, tts): the version label, .fff.json backup with the local statistics.
+- The new texts are in all 8 languages (ro, en, fr, it, es, pt, hu, de); the fr/it/es/pt/hu/de translations are automatic and not natively verified.
+- Tests: `tests/fff-r8.test.mjs` (Playwright, network blocked, two contexts connected through the real dialog, axe 0 violations at 1280 and 360 px).
 
-## Istoric / Changelog
+## History / Changelog
 
-### 14 octombrie 2026 (v1.1.0)
-- Nou: joc în doi pe rețea (WebRTC, fără server), citire cu voce a fișelor, kit comun (etichetă, copie .fff.json), 8 limbi pentru funcțiile noi, teste.
+### 14 October 2026 (v1.1.0)
+- New: two-player network game (WebRTC, no server), voice reading of the sheets, common kit (label, .fff.json backup), 8 languages for the new features, tests.
 
-### 12 octombrie 2026 (v1.0.0)
-- 1.0.0 — 2026-10-12: versiunea și data ultimei actualizări sunt afișate în aplicație
+### 12 October 2026 (v1.0.0)
+- 1.0.0 — 2026-10-12: the version and the date of the last update are shown in the application
 
-### 11 octombrie 2026
-- Linia de sub selectorul de variantă din „Joacă” afișa numărul de jucători în română în celelalte limbi („2 (3 sau 4 în perechi: doar în atlas)”) și un dublu „⚠ ⚠”; acum este tradusă în toate cele 7 limbi, iar un singur ⚠ apare la aproximări.
-- Pastila de donații („Sprijină:”, etichete ARIA, titluri) urmează acum limba interfeței (7 limbi), nu mai rămâne în română.
-- Buton de **sugestie** (💡, tasta H) pentru mutarea jucătorului, în toate variantele jucabile (inclusiv Rubamazzo) și în 7 limbi.
-- Etichetele din atlas (filtrul „Toate”, numărul de jucători, tag-urile de fișă, etichetele ARIA) sunt acum traduse în toate cele 7 limbi, fără amestec RO/EN.
-- Pe ecrane ≤560 px pastila de donații este implicit un buton ♥ mic (se extinde la atingere/Space) și pagina are margine jos.
-- Structură: `nav` fără rol `tablist` pe însuși reperul (tablist-ul e în interior), `aside` pentru donații, titluri h1→h2 în ordine, h1 și în vederea „Joacă” (axe: 0 încălcări în toate cele 4 vederi); hash-ul CSP al scriptului a fost recalculat.
+### 11 October 2026
+- The line under the variant selector in "Play" showed the number of players in Romanian in the other languages ("2 (3 or 4 in pairs: atlas only)") and a double "⚠ ⚠"; it is now translated into all 7 languages, and a single ⚠ appears for approximations.
+- The donation pill ("Support:", ARIA labels, titles) now follows the interface language (7 languages), no longer staying in Romanian.
+- **Hint** button (💡, H key) for the player's move, in all playable variants (including Rubamazzo) and in 7 languages.
+- The labels in the atlas (the "All" filter, the number of players, the sheet tags, the ARIA labels) are now translated into all 7 languages, with no RO/EN mixing.
+- On screens ≤560 px the donation pill is by default a small ♥ button (it expands on touch/Space) and the page has a bottom margin.
+- Structure: `nav` without the `tablist` role on the landmark itself (the tablist is inside), `aside` for donations, headings h1→h2 in order, h1 also in the "Play" view (axe: 0 violations in all 4 views); the CSP hash of the script was recomputed.
