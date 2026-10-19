@@ -11,9 +11,11 @@
     "localStorage",
     "Web Crypto"
   ],
-  "storageKeys": [],
-  "sizeBytes": 409215,
-  "sha256": "d3d8a62ad5604eb4bc31d4007c1c37ad685cb43d232469c4b191a37b20c9637e",
+  "storageKeys": [
+    "sff.prefs.v1"
+  ],
+  "sizeBytes": 409865,
+  "sha256": "cd7afea6b9fd5542ecab9bf186e50858f8108436839d900a837a966a8a4671dd",
   "csp": {
     "present": true,
     "directives": {
@@ -55,7 +57,7 @@
     ]
   },
   "kit": {
-    "version": "1.0.0",
+    "version": "1.1.1",
     "modules": [
       "core",
       "label",
