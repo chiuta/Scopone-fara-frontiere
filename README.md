@@ -2,7 +2,9 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 1.1.0 · **Last updated:** 2026-10-14
+**Version:** 1.2.0 · **Last updated:** 2026-10-19
+
+Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
 An atlas of the Scopa/Scopone family with the 40-card Italian deck: 8 variants playable against an AI, in a single offline HTML file.
 
@@ -20,9 +22,9 @@ An atlas (15 sheets: origin, rules, regional differences, approximations, source
 - Exhaustive generator of legal captures (DFS with pruning), verified against brute-force 2^n enumeration.
 - Capture selection: after choosing a card, the possible captures are pre-listed and the cards on the table are highlighted; if there are several combinations you choose; you can also tick cards on the table (validation: the selection must be a legal capture).
 - Full keyboard: ← → cards, Enter/Space selects, ↑ ↓ or 1–9 choose the capture, Enter confirms, Esc cancels.
-- **Hint (💡 / H key)** on your turn: highlights the card and the capture that the AI's simple heuristic would choose, applied only to what you can see (not to hidden cards). It uses a separate random generator, so it does not change the shuffle or the AI's moves; it does not enter the statistics and does not guarantee the optimal move. The texts are in all 7 languages.
+- **Hint (💡 / H key)** on your turn: highlights the card and the capture that the AI's simple heuristic would choose, applied only to what you can see (not to hidden cards). It uses a separate random generator, so it does not change the shuffle or the AI's moves; it does not enter the statistics and does not guarantee the optimal move. The texts are in all 8 languages.
 - Scoring: scope, cards, denari, settebello, primiera (7=21, 6=18, Ace=16, 5=15, 4=14, 3=13, 2=12, face cards=10; a suit that is missing scores nothing), optional Re bello and Napola/Napoleone; Cirulla: hand/dealer bonuses, piccola, grande, cappotto.
-- Interface in 7 languages (RO/EN/FR/IT/ES/PT/DE) with auto-detection; long texts in the atlas: RO + EN (in FR/IT/ES/PT/DE English is shown, with the note "text in English"). Key parity is verified with a script.
+- Interface in 8 languages (RO/EN/FR/IT/ES/PT/DE/HU) with auto-detection; long texts in the atlas: RO + EN (in FR/IT/ES/PT/DE/HU English is shown, with the note "text in English"). Key parity is verified with a script.
 - Shuffle with `crypto.getRandomValues` (rejection sampling) or a reproducible seed (mulberry32).
 - Accessibility: aria-live, visible focus, targets ≥44 px (except the fixed donation pill in the footer, copied from the series), contrast ≥4.5:1 (measured), `prefers-reduced-motion`, 390 px without horizontal scroll, `<noscript>`.
 
@@ -87,7 +89,7 @@ Alexio — Alexandru-Ionuț Chiuță · alexio@trom.tf
 
 ## English summary
 
-Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pack (original SVG suits, French-suit mode): 8 variants playable against a local AI (Scopa, Scopone 9+4 ⚠name, Scopone 10-card ⚠name — sources disagree which one is "scientifico", Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 atlas-only. UI in 7 languages, long texts RO+EN. Exhaustive legal-capture generator verified against brute force; 500 AI-vs-AI matches per variant without violations. No network, no telemetry. MIT licence.
+Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pack (original SVG suits, French-suit mode): 8 variants playable against a local AI (Scopa, Scopone 9+4 ⚠name, Scopone 10-card ⚠name — sources disagree which one is "scientifico", Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 atlas-only. UI in 8 languages, long texts RO+EN. Exhaustive legal-capture generator verified against brute force; 500 AI-vs-AI matches per variant without violations. No network, no telemetry. MIT licence.
 
 ## New features (v1.1.0)
 

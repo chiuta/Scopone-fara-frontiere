@@ -2,7 +2,9 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · **Magyar**
 
-**Verzió:** 1.1.0 · **Utolsó frissítés:** 2026-10-14
+**Verzió:** 1.2.0 · **Utolsó frissítés:** 2026-10-19
+
+A felület nyelvei: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
 A Scopa/Scopone család atlasza az olasz 40 lapos paklival: 8 MI ellen játszható változat egyetlen offline HTML-fájlban.
 
@@ -20,9 +22,9 @@ Egy atlasz (15 lap: eredet, szabályok, regionális különbségek, közelítés
 - Szabályos ütések kimerítő generátora (DFS nyesessel), nyers 2^n felsorolással ellenőrizve.
 - Az ütés kiválasztása: egy lap kiválasztása után a lehetséges ütések előre fel vannak sorolva, az asztalon lévő lapok kiemelve; több kombináció esetén Ön választ; az asztalon lévő lapokat be is jelölheti (érvényesítés: a kijelölésnek szabályos ütésnek kell lennie).
 - Teljes billentyűzetkezelés: ← → lapok, Enter/Szóköz kijelöl, ↑ ↓ vagy 1–9 az ütést választja, Enter megerősít, Esc megszakít.
-- **Tipp (💡 / H billentyű)** az Ön körében: kiemeli azt a lapot és ütést, amelyet az MI egyszerű heurisztikája választana, kizárólag arra alkalmazva, amit Ön lát (a rejtett lapokra nem). Külön véletlengenerátort használ, így nem változtatja meg a keverést vagy az MI lépéseit; nem kerül be a statisztikába, és nem garantálja az optimális lépést. A szövegek mind a 7 nyelven elérhetők.
+- **Tipp (💡 / H billentyű)** az Ön körében: kiemeli azt a lapot és ütést, amelyet az MI egyszerű heurisztikája választana, kizárólag arra alkalmazva, amit Ön lát (a rejtett lapokra nem). Külön véletlengenerátort használ, így nem változtatja meg a keverést vagy az MI lépéseit; nem kerül be a statisztikába, és nem garantálja az optimális lépést. A szövegek mind a 8 nyelven elérhetők.
 - Pontozás: scope, lapok, denari, settebello, primiera (7=21, 6=18, Ász=16, 5=15, 4=14, 3=13, 2=12, figurák=10; egy szín hiányában nincs pont), opcionálisan Re bello és Napola/Napoleone; Cirulla: kéz-/osztóbónuszok, piccola, grande, cappotto.
-- Felület 7 nyelven (RO/EN/FR/IT/ES/PT/DE) automatikus felismeréssel; az atlasz hosszú szövegei: RO + EN (FR/IT/ES/PT/DE nyelven az angol jelenik meg, a „szöveg angolul” megjegyzéssel). A kulcsok paritását szkript ellenőrzi.
+- Felület 8 nyelven (RO/EN/FR/IT/ES/PT/DE/HU) automatikus felismeréssel; az atlasz hosszú szövegei: RO + EN (FR/IT/ES/PT/DE/HU nyelven az angol jelenik meg, a „szöveg angolul” megjegyzéssel). A kulcsok paritását szkript ellenőrzi.
 - Keverés `crypto.getRandomValues`-szal (elutasításos mintavételezés) vagy reprodukálható maggal (mulberry32).
 - Akadálymentesség: aria-live, látható fókusz, ≥44 px célterületek (a láblécben lévő fix adománycsík kivételével, amely a sorozatból van átmásolva), kontraszt ≥4,5:1 (mérve), `prefers-reduced-motion`, 390 px vízszintes görgetés nélkül, `<noscript>`.
 
@@ -87,7 +89,7 @@ Alexio — Alexandru-Ionuț Chiuță · alexio@trom.tf
 
 ## English summary
 
-Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pack (original SVG suits, French-suit mode): 8 variants playable against a local AI (Scopa, Scopone 9+4 ⚠name, Scopone 10-card ⚠name — sources disagree which one is "scientifico", Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 atlas-only. UI in 7 languages, long texts RO+EN. Exhaustive legal-capture generator verified against brute force; 500 AI-vs-AI matches per variant without violations. No network, no telemetry. MIT licence.
+Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pack (original SVG suits, French-suit mode): 8 variants playable against a local AI (Scopa, Scopone 9+4 ⚠name, Scopone 10-card ⚠name — sources disagree which one is "scientifico", Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 atlas-only. UI in 8 languages, long texts RO+EN. Exhaustive legal-capture generator verified against brute force; 500 AI-vs-AI matches per variant without violations. No network, no telemetry. MIT licence.
 
 ## Újdonságok (v1.1.0)
 

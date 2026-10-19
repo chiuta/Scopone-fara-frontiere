@@ -2,7 +2,9 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · **Español** · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versión:** 1.1.0 · **Última actualización:** 2026-10-14
+**Versión:** 1.2.0 · **Última actualización:** 2026-10-19
+
+Idiomas de la interfaz: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
 Atlas de la familia Scopa/Scopone con la baraja italiana de 40 cartas: 8 variantes jugables contra la IA, en un solo archivo HTML sin conexión.
 
@@ -20,9 +22,9 @@ Un atlas (15 fichas: origen, reglas, diferencias regionales, aproximaciones, fue
 - Generador exhaustivo de capturas legales (DFS con poda), verificado con enumeración por fuerza bruta 2^n.
 - Selección de la captura: tras elegir una carta se preenumeran las capturas posibles y se resaltan las cartas de la mesa; si hay varias combinaciones eliges tú; también puedes marcar cartas de la mesa (validación: la selección debe ser una captura legal).
 - Teclado completo: ← → cartas, Intro/Espacio selecciona, ↑ ↓ o 1–9 eligen la captura, Intro confirma, Esc cancela.
-- **Sugerencia (💡 / tecla H)** en tu turno: resalta la carta y la captura que elegiría la heurística simple de la IA, aplicada solo a lo que tú ves (no a las cartas ocultas). Usa un generador aleatorio independiente, por lo que no cambia el barajado ni las jugadas de la IA; no entra en las estadísticas y no garantiza la jugada óptima. Los textos están en los 7 idiomas.
+- **Sugerencia (💡 / tecla H)** en tu turno: resalta la carta y la captura que elegiría la heurística simple de la IA, aplicada solo a lo que tú ves (no a las cartas ocultas). Usa un generador aleatorio independiente, por lo que no cambia el barajado ni las jugadas de la IA; no entra en las estadísticas y no garantiza la jugada óptima. Los textos están en los 8 idiomas.
 - Puntuación: escobas, cartas, denari, settebello, primiera (7=21, 6=18, As=16, 5=15, 4=14, 3=13, 2=12, figuras=10; sin un palo no se puntúa), opcionales Re bello y Napola/Napoleone; Cirulla: bonificaciones de mano/repartidor, piccola, grande, cappotto.
-- Interfaz en 7 idiomas (RO/EN/FR/IT/ES/PT/DE) con autodetección; textos largos del atlas: RO + EN (en FR/IT/ES/PT/DE se muestra el inglés, con la nota «texto en inglés»). La paridad de claves se verifica con un script.
+- Interfaz en 8 idiomas (RO/EN/FR/IT/ES/PT/DE/HU) con autodetección; textos largos del atlas: RO + EN (en FR/IT/ES/PT/DE/HU se muestra el inglés, con la nota «texto en inglés»). La paridad de claves se verifica con un script.
 - Barajado con `crypto.getRandomValues` (muestreo por rechazo) o semilla reproducible (mulberry32).
 - Accesibilidad: aria-live, foco visible, objetivos ≥44 px (salvo la píldora fija de donaciones del pie, copiada de la serie), contraste ≥4,5:1 (medido), `prefers-reduced-motion`, 390 px sin desplazamiento horizontal, `<noscript>`.
 
@@ -87,7 +89,7 @@ Alexio — Alexandru-Ionuț Chiuță · alexio@trom.tf
 
 ## English summary
 
-Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pack (original SVG suits, French-suit mode): 8 variants playable against a local AI (Scopa, Scopone 9+4 ⚠name, Scopone 10-card ⚠name — sources disagree which one is "scientifico", Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 atlas-only. UI in 7 languages, long texts RO+EN. Exhaustive legal-capture generator verified against brute force; 500 AI-vs-AI matches per variant without violations. No network, no telemetry. MIT licence.
+Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pack (original SVG suits, French-suit mode): 8 variants playable against a local AI (Scopa, Scopone 9+4 ⚠name, Scopone 10-card ⚠name — sources disagree which one is "scientifico", Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 atlas-only. UI in 8 languages, long texts RO+EN. Exhaustive legal-capture generator verified against brute force; 500 AI-vs-AI matches per variant without violations. No network, no telemetry. MIT licence.
 
 ## Novedades (v1.1.0)
 

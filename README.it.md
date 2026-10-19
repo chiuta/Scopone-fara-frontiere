@@ -2,7 +2,9 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · **Italiano** · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versione:** 1.1.0 · **Ultimo aggiornamento:** 2026-10-14
+**Versione:** 1.2.0 · **Ultimo aggiornamento:** 2026-10-19
+
+Lingue dell'interfaccia: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
 Atlante della famiglia Scopa/Scopone con il mazzo italiano da 40 carte: 8 varianti giocabili contro l'IA, in un unico file HTML offline.
 
@@ -20,9 +22,9 @@ Un atlante (15 schede: origine, regole, differenze regionali, approssimazioni, f
 - Generatore esaustivo di prese legali (DFS con potatura), verificato con enumerazione a forza bruta 2^n.
 - Selezione della presa: dopo aver scelto una carta si pre-elencano le prese possibili, le carte sul tavolo sono evidenziate; se ci sono più combinazioni scegli tu; puoi anche spuntare carte sul tavolo (validazione: la selezione deve essere una presa legale).
 - Tastiera completa: ← → carte, Invio/Spazio seleziona, ↑ ↓ o 1–9 scelgono la presa, Invio conferma, Esc annulla.
-- **Suggerimento (💡 / tasto H)** al tuo turno: evidenzia la carta e la presa che sceglierebbe l'euristica semplice dell'IA, applicata solo a ciò che vedi tu (non alle carte nascoste). Usa un generatore casuale separato, quindi non cambia il mescolamento né le mosse dell'IA; non entra nelle statistiche e non garantisce la mossa ottimale. I testi sono in tutte e 7 le lingue.
+- **Suggerimento (💡 / tasto H)** al tuo turno: evidenzia la carta e la presa che sceglierebbe l'euristica semplice dell'IA, applicata solo a ciò che vedi tu (non alle carte nascoste). Usa un generatore casuale separato, quindi non cambia il mescolamento né le mosse dell'IA; non entra nelle statistiche e non garantisce la mossa ottimale. I testi sono in tutte e 8 le lingue.
 - Punteggio: scope, carte, denari, settebello, primiera (7=21, 6=18, Asso=16, 5=15, 4=14, 3=13, 2=12, figure=10; senza un seme non si conteggia), opzionali Re bello e Napola/Napoleone; Cirulla: bonus di mano/mazziere, piccola, grande, cappotto.
-- Interfaccia in 7 lingue (RO/EN/FR/IT/ES/PT/DE) con rilevamento automatico; testi lunghi dell'atlante: RO + EN (in FR/IT/ES/PT/DE si mostra l'inglese, con la nota «testo in inglese»). La parità delle chiavi è verificata con uno script.
+- Interfaccia in 8 lingue (RO/EN/FR/IT/ES/PT/DE/HU) con rilevamento automatico; testi lunghi dell'atlante: RO + EN (in FR/IT/ES/PT/DE/HU si mostra l'inglese, con la nota «testo in inglese»). La parità delle chiavi è verificata con uno script.
 - Mescolamento con `crypto.getRandomValues` (rejection sampling) o seme riproducibile (mulberry32).
 - Accessibilità: aria-live, focus visibile, bersagli ≥44 px (tranne la pillola fissa delle donazioni nel piè di pagina, copiata dalla serie), contrasto ≥4,5:1 (misurato), `prefers-reduced-motion`, 390 px senza scorrimento orizzontale, `<noscript>`.
 
@@ -87,7 +89,7 @@ Alexio — Alexandru-Ionuț Chiuță · alexio@trom.tf
 
 ## English summary
 
-Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pack (original SVG suits, French-suit mode): 8 variants playable against a local AI (Scopa, Scopone 9+4 ⚠name, Scopone 10-card ⚠name — sources disagree which one is "scientifico", Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 atlas-only. UI in 7 languages, long texts RO+EN. Exhaustive legal-capture generator verified against brute force; 500 AI-vs-AI matches per variant without violations. No network, no telemetry. MIT licence.
+Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pack (original SVG suits, French-suit mode): 8 variants playable against a local AI (Scopa, Scopone 9+4 ⚠name, Scopone 10-card ⚠name — sources disagree which one is "scientifico", Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 atlas-only. UI in 8 languages, long texts RO+EN. Exhaustive legal-capture generator verified against brute force; 500 AI-vs-AI matches per variant without violations. No network, no telemetry. MIT licence.
 
 ## Novità (v1.1.0)
 

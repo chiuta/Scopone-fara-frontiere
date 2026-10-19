@@ -2,7 +2,9 @@
 
 [English](README.md) · [Română](README.ro.md) · **Français** · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version :** 1.1.0 · **Dernière mise à jour :** 2026-10-14
+**Version :** 1.2.0 · **Dernière mise à jour :** 2026-10-19
+
+Langues de l'interface : **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
 Atlas de la famille Scopa/Scopone avec le jeu italien de 40 cartes : 8 variantes jouables contre une IA, dans un seul fichier HTML hors ligne.
 
@@ -20,9 +22,9 @@ Un atlas (15 fiches : origine, règles, différences régionales, approximations
 - Générateur exhaustif de prises légales (DFS avec élagage), vérifié par énumération brute 2^n.
 - Choix de la prise : après avoir choisi une carte, les prises possibles sont pré-listées et les cartes de la table sont mises en évidence ; s'il y a plusieurs combinaisons, vous choisissez ; vous pouvez aussi cocher des cartes sur la table (validation : la sélection doit être une prise légale).
 - Clavier complet : ← → cartes, Entrée/Espace sélectionne, ↑ ↓ ou 1–9 choisissent la prise, Entrée confirme, Échap annule.
-- **Suggestion (💡 / touche H)** à votre tour : met en évidence la carte et la prise que choisirait l'heuristique simple de l'IA, appliquée uniquement à ce que vous voyez (pas aux cartes cachées). Elle utilise un générateur aléatoire distinct, donc ne change ni le mélange ni les coups de l'IA ; elle n'entre pas dans les statistiques et ne garantit pas le coup optimal. Les textes sont dans les 7 langues.
+- **Suggestion (💡 / touche H)** à votre tour : met en évidence la carte et la prise que choisirait l'heuristique simple de l'IA, appliquée uniquement à ce que vous voyez (pas aux cartes cachées). Elle utilise un générateur aléatoire distinct, donc ne change ni le mélange ni les coups de l'IA ; elle n'entre pas dans les statistiques et ne garantit pas le coup optimal. Les textes sont dans les 8 langues.
 - Décompte : scope, cartes, denari, settebello, primiera (7=21, 6=18, As=16, 5=15, 4=14, 3=13, 2=12, figures=10 ; sans une enseigne, pas de point), en option Re bello et Napola/Napoleone ; Cirulla : bonus de main/donneur, piccola, grande, cappotto.
-- Interface en 7 langues (RO/EN/FR/IT/ES/PT/DE) avec détection automatique ; textes longs de l'atlas : RO + EN (en FR/IT/ES/PT/DE l'anglais s'affiche, avec la mention « texte en anglais »). La parité des clés est vérifiée par script.
+- Interface en 8 langues (RO/EN/FR/IT/ES/PT/DE/HU) avec détection automatique ; textes longs de l'atlas : RO + EN (en FR/IT/ES/PT/DE/HU l'anglais s'affiche, avec la mention « texte en anglais »). La parité des clés est vérifiée par script.
 - Mélange avec `crypto.getRandomValues` (échantillonnage par rejet) ou graine reproductible (mulberry32).
 - Accessibilité : aria-live, focus visible, cibles ≥44 px (sauf la pastille de dons fixe du pied de page, copiée de la série), contraste ≥4,5:1 (mesuré), `prefers-reduced-motion`, 390 px sans défilement horizontal, `<noscript>`.
 
@@ -87,7 +89,7 @@ Alexio — Alexandru-Ionuț Chiuță · alexio@trom.tf
 
 ## English summary
 
-Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pack (original SVG suits, French-suit mode): 8 variants playable against a local AI (Scopa, Scopone 9+4 ⚠name, Scopone 10-card ⚠name — sources disagree which one is "scientifico", Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 atlas-only. UI in 7 languages, long texts RO+EN. Exhaustive legal-capture generator verified against brute force; 500 AI-vs-AI matches per variant without violations. No network, no telemetry. MIT licence.
+Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pack (original SVG suits, French-suit mode): 8 variants playable against a local AI (Scopa, Scopone 9+4 ⚠name, Scopone 10-card ⚠name — sources disagree which one is "scientifico", Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 atlas-only. UI in 8 languages, long texts RO+EN. Exhaustive legal-capture generator verified against brute force; 500 AI-vs-AI matches per variant without violations. No network, no telemetry. MIT licence.
 
 ## Nouveautés (v1.1.0)
 

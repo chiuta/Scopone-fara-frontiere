@@ -2,7 +2,9 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 1.1.0 · **Ultima actualizare:** 2026-10-14
+**Versiune:** 1.2.0 · **Ultima actualizare:** 2026-10-19
+
+Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
 Atlas al familiei Scopa/Scopone cu pachetul italian de 40 de cărți: 8 variante jucabile contra AI, într-un singur fișier HTML offline.
 
@@ -20,9 +22,9 @@ Un atlas (15 fișe: origine, reguli, diferențe regionale, aproximări, surse) �
 - Generator exhaustiv de capturi legale (DFS cu tăiere), verificat cu enumerare brută 2^n.
 - Selecția capturii: după alegerea unei cărți se pre-listează capturile posibile, cărțile de pe masă sunt evidențiate; la mai multe combinații alegi tu; poți și bifa cărți pe masă (validare: selecția trebuie să fie o captură legală).
 - Tastatură completă: ← → cărți, Enter/Spațiu selectează, ↑ ↓ sau 1–9 aleg captura, Enter confirmă, Esc anulează.
-- **Sugestie (💡 / tasta H)** la rândul tău: evidențiază cartea și captura pe care le-ar alege euristica simplă a AI-ului, aplicată doar pe ce vezi tu (nu pe cărțile ascunse). Folosește un generator aleator separat, deci nu schimbă amestecul sau mutările AI-ului; nu intră în statistici și nu garantează mutarea optimă. Textele sunt în toate cele 7 limbi.
+- **Sugestie (💡 / tasta H)** la rândul tău: evidențiază cartea și captura pe care le-ar alege euristica simplă a AI-ului, aplicată doar pe ce vezi tu (nu pe cărțile ascunse). Folosește un generator aleator separat, deci nu schimbă amestecul sau mutările AI-ului; nu intră în statistici și nu garantează mutarea optimă. Textele sunt în toate cele 8 limbi.
 - Scorare: scope, carte, denari, settebello, primiera (7=21, 6=18, As=16, 5=15, 4=14, 3=13, 2=12, figuri=10; fără un semn nu se punctează), opțional Re bello și Napola/Napoleone; Cirulla: bonusuri de mână/dealer, piccola, grande, cappotto.
-- Interfață în 7 limbi (RO/EN/FR/IT/ES/PT/DE) cu autodetecție; textele lungi din atlas: RO + EN (în FR/IT/ES/PT/DE se afișează engleza, cu nota „text în engleză”). Paritatea cheilor e verificată cu script.
+- Interfață în 8 limbi (RO/EN/FR/IT/ES/PT/DE/HU) cu autodetecție; textele lungi din atlas: RO + EN (în FR/IT/ES/PT/DE/HU se afișează engleza, cu nota „text în engleză”). Paritatea cheilor e verificată cu script.
 - Amestec cu `crypto.getRandomValues` (rejection sampling) sau seed reproductibil (mulberry32).
 - Accesibilitate: aria-live, focus vizibil, ținte ≥44 px (cu excepția pastilei fixe de donații din subsol, copiată din serie), contrast ≥4,5:1 (măsurat), `prefers-reduced-motion`, 390 px fără scroll orizontal, `<noscript>`.
 
@@ -87,7 +89,7 @@ Alexio — Alexandru-Ionuț Chiuță · alexio@trom.tf
 
 ## English summary
 
-Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pack (original SVG suits, French-suit mode): 8 variants playable against a local AI (Scopa, Scopone 9+4 ⚠name, Scopone 10-card ⚠name — sources disagree which one is "scientifico", Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 atlas-only. UI in 7 languages, long texts RO+EN. Exhaustive legal-capture generator verified against brute force; 500 AI-vs-AI matches per variant without violations. No network, no telemetry. MIT licence.
+Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pack (original SVG suits, French-suit mode): 8 variants playable against a local AI (Scopa, Scopone 9+4 ⚠name, Scopone 10-card ⚠name — sources disagree which one is "scientifico", Scopa a 15, Asso piglia tutto ⚠, Scopa d'assi ⚠, Cirulla ⚠, Rubamazzo ⚠), 7 atlas-only. UI in 8 languages, long texts RO+EN. Exhaustive legal-capture generator verified against brute force; 500 AI-vs-AI matches per variant without violations. No network, no telemetry. MIT licence.
 
 ## Funcții noi (v1.1.0)
 
