@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · **Deutsch** · [Magyar](README.hu.md)
 
-**Version:** 1.2.4 · **Zuletzt aktualisiert:** 2026-10-23
+**Version:** 1.2.5 · **Zuletzt aktualisiert:** 2026-10-23
 
 Oberflächensprachen: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -100,6 +100,10 @@ Offline-Atlas in einer einzigen Datei zur Scopa-/Scopone-Familie mit einem itali
 - Tests: `tests/fff-r8.test.mjs` (Playwright, Netzwerk blockiert, zwei Kontexte über den echten Dialog verbunden, axe 0 Verstöße bei 1280 und 360 px).
 
 ## Verlauf / Changelog
+
+### 1.2.5 — 2026-10-23
+
+- Die Schlüssel des lokalen Speichers verwenden jetzt das Präfix `scopone.` (`FFF.store.migrate` beim Start, vor jedem Lesezugriff): vorhandene Daten bleiben automatisch erhalten, alte `.fff.json`-Sicherungen lassen sich weiterhin importieren.
 
 ### 1.2.3 — 2026-10-22
 

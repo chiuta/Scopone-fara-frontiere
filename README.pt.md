@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Português** · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versão:** 1.2.4 · **Última atualização:** 2026-10-23
+**Versão:** 1.2.5 · **Última atualização:** 2026-10-23
 
 Idiomas da interface: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -100,6 +100,10 @@ Atlas offline, num único ficheiro, da família Scopa/Scopone com baralho italia
 - Testes: `tests/fff-r8.test.mjs` (Playwright, rede bloqueada, dois contextos ligados pela caixa de diálogo real, axe 0 violações a 1280 e 360 px).
 
 ## Histórico / Changelog
+
+### 1.2.5 — 2026-10-23
+
+- As chaves do armazenamento local passam a usar o prefixo `scopone.` (`FFF.store.migrate` no arranque, antes de qualquer leitura): os dados existentes são mantidos automaticamente e as cópias `.fff.json` antigas continuam a poder ser importadas.
 
 ### 1.2.3 — 2026-10-22
 

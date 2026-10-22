@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · **Français** · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version :** 1.2.4 · **Dernière mise à jour :** 2026-10-23
+**Version :** 1.2.5 · **Dernière mise à jour :** 2026-10-23
 
 Langues de l'interface : **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -100,6 +100,10 @@ Atlas hors ligne, en un seul fichier, de la famille Scopa/Scopone avec un jeu it
 - Tests : `tests/fff-r8.test.mjs` (Playwright, réseau bloqué, deux contextes connectés par la vraie boîte de dialogue, axe 0 violation à 1280 et 360 px).
 
 ## Historique / Changelog
+
+### 1.2.5 — 2026-10-23
+
+- Les clés du stockage local utilisent désormais le préfixe `scopone.` (`FFF.store.migrate` au démarrage, avant toute lecture) : les données existantes sont conservées automatiquement et les anciennes sauvegardes `.fff.json` restent importables.
 
 ### 1.2.3 — 2026-10-22
 

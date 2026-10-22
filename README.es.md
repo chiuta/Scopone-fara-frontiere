@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · **Español** · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versión:** 1.2.4 · **Última actualización:** 2026-10-23
+**Versión:** 1.2.5 · **Última actualización:** 2026-10-23
 
 Idiomas de la interfaz: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -100,6 +100,10 @@ Atlas sin conexión, de un único archivo, de la familia Scopa/Scopone con una b
 - Pruebas: `tests/fff-r8.test.mjs` (Playwright, red bloqueada, dos contextos conectados mediante el cuadro de diálogo real, axe 0 infracciones a 1280 y 360 px).
 
 ## Historial / Changelog
+
+### 1.2.5 — 2026-10-23
+
+- Las claves del almacenamiento local usan ahora el prefijo `scopone.` (`FFF.store.migrate` al arrancar, antes de cualquier lectura): los datos existentes se conservan automáticamente y las copias `.fff.json` antiguas se siguen pudiendo importar.
 
 ### 1.2.3 — 2026-10-22
 

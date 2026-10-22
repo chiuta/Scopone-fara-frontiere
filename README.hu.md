@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · **Magyar**
 
-**Verzió:** 1.2.4 · **Utolsó frissítés:** 2026-10-23
+**Verzió:** 1.2.5 · **Utolsó frissítés:** 2026-10-23
 
 A felület nyelvei: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -99,6 +99,10 @@ Egyfájlos, offline atlasz a Scopa/Scopone családról 40 lapos olasz paklival (
 - Tesztek: `tests/fff-r8.test.mjs` (Playwright, hálózat blokkolva, két, a valódi párbeszédablakon át összekapcsolt környezet, axe 0 szabálysértés 1280 és 360 px-en).
 
 ## Előzmények / Changelog
+
+### 1.2.5 — 2026-10-23
+
+- A helyi tárhely kulcsai mostantól a `scopone.` előtagot használják (`FFF.store.migrate` induláskor, bármilyen olvasás előtt): a meglévő adatok automatikusan megmaradnak, a régi `.fff.json` mentések továbbra is importálhatók.
 
 ### 1.2.3 — 2026-10-22
 

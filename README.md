@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 1.2.4 · **Last updated:** 2026-10-23
+**Version:** 1.2.5 · **Last updated:** 2026-10-23
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -100,6 +100,10 @@ Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pac
 - Tests: `tests/fff-r8.test.mjs` (Playwright, network blocked, two contexts connected through the real dialog, axe 0 violations at 1280 and 360 px).
 
 ## History / Changelog
+
+### 1.2.5 — 2026-10-23
+
+- Local storage keys now use the `scopone.` prefix (`FFF.store.migrate` at startup, before any read): existing data is kept automatically, and old `.fff.json` backups can still be imported.
 
 ### 1.2.3 — 2026-10-22
 
