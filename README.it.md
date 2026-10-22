@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · **Italiano** · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versione:** 1.2.2 · **Ultimo aggiornamento:** 2026-10-22
+**Versione:** 1.2.3 · **Ultimo aggiornamento:** 2026-10-22
 
 Lingue dell'interfaccia: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -100,6 +100,10 @@ Atlante offline in un unico file della famiglia Scopa/Scopone con un mazzo itali
 - Test: `tests/fff-r8.test.mjs` (Playwright, rete bloccata, due contesti collegati tramite la vera finestra di dialogo, axe 0 violazioni a 1280 e 360 px).
 
 ## Storico / Changelog
+
+### 1.2.3 — 2026-10-22
+
+fff-kit 1.1.4: target touch e dimensione minima del testo; target touch e testo corretti.
 
 ### 1.2.2 — 2026-10-22
 - fff-kit 1.1.2: PBKDF2 con 600.000 iterazioni, protezione anti-clickjacking

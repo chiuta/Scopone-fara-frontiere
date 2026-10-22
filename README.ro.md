@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 1.2.2 · **Ultima actualizare:** 2026-10-22
+**Versiune:** 1.2.3 · **Ultima actualizare:** 2026-10-22
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -100,6 +100,10 @@ Atlas offline într-un singur fișier al familiei Scopa/Scopone cu pachet italia
 - Teste: `tests/fff-r8.test.mjs` (Playwright, rețea blocată, două contexte conectate prin dialogul real, axe 0 violări la 1280 și 360 px).
 
 ## Istoric / Changelog
+
+### 1.2.3 — 2026-10-22
+
+fff-kit 1.1.4: ținte tactile și text minim; ținte tactile/text corectate.
 
 ### 1.2.2 — 2026-10-22
 - fff-kit 1.1.2: PBKDF2 600 000 iterații, protecție anti-clickjacking
