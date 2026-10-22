@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · **Español** · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versión:** 1.2.1 · **Última actualización:** 2026-10-19
+**Versión:** 1.2.2 · **Última actualización:** 2026-10-22
 
 Idiomas de la interfaz: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -100,6 +100,9 @@ Atlas sin conexión, de un único archivo, de la familia Scopa/Scopone con una b
 - Pruebas: `tests/fff-r8.test.mjs` (Playwright, red bloqueada, dos contextos conectados mediante el cuadro de diálogo real, axe 0 infracciones a 1280 y 360 px).
 
 ## Historial / Changelog
+
+### 1.2.2 — 2026-10-22
+- fff-kit 1.1.2: PBKDF2 con 600.000 iteraciones, protección anti-clickjacking
 
 ### 14 de octubre de 2026 (v1.1.0)
 - Nuevo: partida de dos en red (WebRTC, sin servidor), lectura en voz alta de las fichas, kit común (etiqueta, copia .fff.json), 8 idiomas para las funciones nuevas, pruebas.

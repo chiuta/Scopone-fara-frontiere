@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Português** · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versão:** 1.2.1 · **Última atualização:** 2026-10-19
+**Versão:** 1.2.2 · **Última atualização:** 2026-10-22
 
 Idiomas da interface: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -100,6 +100,9 @@ Atlas offline, num único ficheiro, da família Scopa/Scopone com baralho italia
 - Testes: `tests/fff-r8.test.mjs` (Playwright, rede bloqueada, dois contextos ligados pela caixa de diálogo real, axe 0 violações a 1280 e 360 px).
 
 ## Histórico / Changelog
+
+### 1.2.2 — 2026-10-22
+- fff-kit 1.1.2: PBKDF2 com 600.000 iterações, proteção anti-clickjacking
 
 ### 14 de outubro de 2026 (v1.1.0)
 - Novo: jogo a dois em rede (WebRTC, sem servidor), leitura em voz alta das fichas, kit comum (etiqueta, cópia .fff.json), 8 idiomas para as funcionalidades novas, testes.

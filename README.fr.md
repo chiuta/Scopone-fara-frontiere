@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · **Français** · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version :** 1.2.1 · **Dernière mise à jour :** 2026-10-19
+**Version :** 1.2.2 · **Dernière mise à jour :** 2026-10-22
 
 Langues de l'interface : **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -100,6 +100,9 @@ Atlas hors ligne, en un seul fichier, de la famille Scopa/Scopone avec un jeu it
 - Tests : `tests/fff-r8.test.mjs` (Playwright, réseau bloqué, deux contextes connectés par la vraie boîte de dialogue, axe 0 violation à 1280 et 360 px).
 
 ## Historique / Changelog
+
+### 1.2.2 — 2026-10-22
+- fff-kit 1.1.2 : PBKDF2 à 600 000 itérations, protection anti-clickjacking
 
 ### 14 octobre 2026 (v1.1.0)
 - Nouveau : partie à deux en réseau (WebRTC, sans serveur), lecture à voix haute des fiches, kit commun (étiquette, sauvegarde .fff.json), 8 langues pour les nouvelles fonctions, tests.

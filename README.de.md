@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · **Deutsch** · [Magyar](README.hu.md)
 
-**Version:** 1.2.1 · **Zuletzt aktualisiert:** 2026-10-19
+**Version:** 1.2.2 · **Zuletzt aktualisiert:** 2026-10-22
 
 Oberflächensprachen: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -100,6 +100,9 @@ Offline-Atlas in einer einzigen Datei zur Scopa-/Scopone-Familie mit einem itali
 - Tests: `tests/fff-r8.test.mjs` (Playwright, Netzwerk blockiert, zwei Kontexte über den echten Dialog verbunden, axe 0 Verstöße bei 1280 und 360 px).
 
 ## Verlauf / Changelog
+
+### 1.2.2 — 2026-10-22
+- fff-kit 1.1.2: PBKDF2 mit 600.000 Iterationen, Schutz vor Clickjacking
 
 ### 14. Oktober 2026 (v1.1.0)
 - Neu: Zwei-Spieler-Netzwerkspiel (WebRTC, ohne Server), Vorlesen der Datenblätter, gemeinsames Kit (Label, .fff.json-Sicherung), 8 Sprachen für die neuen Funktionen, Tests.

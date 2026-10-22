@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 1.2.1 · **Last updated:** 2026-10-19
+**Version:** 1.2.2 · **Last updated:** 2026-10-22
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -100,6 +100,9 @@ Single-file offline atlas of the Scopa/Scopone family with a 40-card Italian pac
 - Tests: `tests/fff-r8.test.mjs` (Playwright, network blocked, two contexts connected through the real dialog, axe 0 violations at 1280 and 360 px).
 
 ## History / Changelog
+
+### 1.2.2 — 2026-10-22
+- fff-kit 1.1.2: PBKDF2 600,000 iterations, anti-clickjacking protection
 
 ### 14 October 2026 (v1.1.0)
 - New: two-player network game (WebRTC, no server), voice reading of the sheets, common kit (label, .fff.json backup), 8 languages for the new features, tests.
