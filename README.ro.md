@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 1.2.6 · **Ultima actualizare:** 2026-10-26
+**Versiune:** 2.0.0 · **Ultima actualizare:** 2026-10-26
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -18,6 +18,8 @@ Un atlas (15 fișe: origine, reguli, diferențe regionale, aproximări, surse) �
 
 ## Funcții (verificate în cod și teste)
 
+- **v2.0.0 — Antrenor de strategie** (casetă în setup, contra AI): după fiecare mutare a ta, motorul simulează toate mutările legale pe aceleași distribuiri posibile ale cărților nevăzute și îți spune dacă ai jucat cea mai bună, o imprecizie, o greșeală sau o greșeală gravă, cu motive în limbaj simplu (scopa ratată, settebello ratat sau lăsat pe masă, risc de scopa pentru adversar, mai puține cărți/denari luați, carte prețioasă irosită). La final de mână apare revizuirea. Verdictele sunt estimări statistice, nu adevăruri absolute.
+- Neinclus în v2.0.0: masa în perechi prin p2p pentru 4 jucători (p2p-ul existent rămâne pentru variantele în doi).
 - Motor separat de interfață (funcții pure: stare → mutări legale → stare nouă), testat în Node.
 - Generator exhaustiv de capturi legale (DFS cu tăiere), verificat cu enumerare brută 2^n.
 - Selecția capturii: după alegerea unei cărți se pre-listează capturile posibile, cărțile de pe masă sunt evidențiate; la mai multe combinații alegi tu; poți și bifa cărți pe masă (validare: selecția trebuie să fie o captură legală).
