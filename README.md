@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 2.0.0 · **Last updated:** 2026-10-26
+**Version:** 2.0.1 · **Last updated:** 2026-10-27
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -11,6 +11,8 @@ An atlas of the Scopa/Scopone family with the 40-card Italian deck: 8 variants p
 **Live:** https://chiuta.github.io/Scopone-fara-frontiere/
 
 ![Screenshot](screenshot.en.png)
+
+**Note 2.0.1:** documentation only (Status and Offline sections, CHANGELOG.md); the application code is unchanged. The review recommended the hint feature (already present: 💡 / H key) and nothing else for this app.
 
 ## What it is
 
@@ -78,6 +80,14 @@ pagat.com/fishing/scopa.html · scopone.html · cirulla.html · it.wikipedia.org
 ## Local use
 
 Download `index.html` and open it in a browser; it works without internet.
+
+## Status
+
+Stable, version 2.0.1 (2026-10-27). 8 variants are playable against the local AI (heuristic / Monte-Carlo), with the hint (💡 / H), the strategy coach, local statistics and a two-player network game. A unified local multiplayer mode across the card games is planned, not implemented. Changes: `CHANGELOG.md`.
+
+## Offline
+
+A single file, `index.html`: no CDN, no external fonts or scripts, no tracking, no accounts. A strict CSP (`default-src 'none'`) blocks network connections; a service worker caches the app for offline start. The optional two-player game connects the players directly (WebRTC, manual signalling).
 
 ## License
 
