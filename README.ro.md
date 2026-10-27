@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 2.0.0 · **Ultima actualizare:** 2026-10-26
+**Versiune:** 2.0.1 · **Ultima actualizare:** 2026-10-27
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -11,6 +11,8 @@ Atlas al familiei Scopa/Scopone cu pachetul italian de 40 de cărți: 8 variante
 **Live:** https://chiuta.github.io/Scopone-fara-frontiere/
 
 ![Captura de ecran](screenshot.ro.png)
+
+**Notă 2.0.1:** doar documentație (secțiunile Stare și Offline, CHANGELOG.md); codul aplicației nu s-a schimbat. Recenzia a apreciat sugestiile (existente: 💡 / tasta H) și nu a cerut altceva pentru această aplicație.
 
 ## Ce este
 
@@ -80,6 +82,14 @@ pagat.com/fishing/scopa.html · scopone.html · cirulla.html · it.wikipedia.org
 ## Rulare locală
 
 Descărcați `index.html` și deschideți-l în browser; funcționează fără internet.
+
+## Stare
+
+Stabil, versiunea 2.0.1 (2026-10-27). 8 variante jucabile contra AI-ului local (euristic / Monte-Carlo), cu sugestia (💡 / H), antrenorul de strategie, statistici locale și joc în rețea în doi. Un mod multiplayer local unificat între jocurile de cărți este planificat, nu implementat. Modificări: `CHANGELOG.md`.
+
+## Offline
+
+Un singur fișier, `index.html`: fără CDN, fără fonturi sau scripturi externe, fără urmărire, fără conturi. O politică CSP strictă (`default-src 'none'`) blochează conexiunile de rețea; un service worker memorează aplicația pentru pornire offline. Jocul în doi opțional conectează jucătorii direct (WebRTC, semnalizare manuală).
 
 ## Licență
 
