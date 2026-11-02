@@ -14,8 +14,8 @@
   "storageKeys": [
     "scopone.prefs.v1"
   ],
-  "sizeBytes": 601049,
-  "sha256": "4a2673bf69e0ec44a50aa85e432f16b214c226750d78f8bc3847a78de3b4fe39",
+  "sizeBytes": 632370,
+  "sha256": "fd89762ee6c8ce65736086af1af71292a57cd2d97d84f2b9fa9f9fb1c8abc6a3",
   "csp": {
     "present": true,
     "directives": {
@@ -56,6 +56,8 @@
       "bundle",
       "qr",
       "p2p",
+      "sync",
+      "history",
       "tts"
     ]
   },
@@ -69,6 +71,8 @@
       "bundle",
       "qr",
       "p2p",
+      "sync",
+      "history",
       "tts"
     ]
   },
