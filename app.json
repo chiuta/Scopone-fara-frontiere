@@ -2,25 +2,28 @@
   "schema": 1,
   "slug": "scopone",
   "name": "Scopone fără frontiere",
-  "version": "2.0.1",
-  "updated": "2026-10-27",
+  "version": "2.0.2",
+  "updated": "2026-11-03",
   "description": "Atlas al familiei Scopa/Scopone cu pachetul italian de 40 de cărți: Scopa, Scopone (9+4 și 10 cărți), Scopa a 15, Cirulla, Rubamazzo și altele, jucabile contra AI, offline.",
   "egress": [],
   "permissions": [
+    "speechSynthesis",
+    "clipboard",
     "serviceWorker",
     "localStorage",
-    "Web Crypto"
+    "Web Crypto",
+    "BroadcastChannel"
   ],
   "storageKeys": [
     "scopone.prefs.v1"
   ],
-  "sizeBytes": 632370,
-  "sha256": "fd89762ee6c8ce65736086af1af71292a57cd2d97d84f2b9fa9f9fb1c8abc6a3",
+  "sizeBytes": 754140,
+  "sha256": "730fb81047477c46b0b0b7a5774aa6976ebae307ace38aa268bb9c093d69d950",
   "csp": {
     "present": true,
     "directives": {
       "default-src": "'none'",
-      "script-src": "sha256×4",
+      "script-src": "sha256×7",
       "style-src": "'unsafe-inline'",
       "img-src": "'self' data:",
       "base-uri": "'none'",
