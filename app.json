@@ -12,18 +12,19 @@
     "serviceWorker",
     "localStorage",
     "Web Crypto",
+    "WebGL",
     "BroadcastChannel"
   ],
   "storageKeys": [
     "scopone.prefs.v1"
   ],
-  "sizeBytes": 808250,
-  "sha256": "dd9ffeea3fe58820577b7e5410b54cf8ebc2d3915cde91619fa79236f3b1c5bb",
+  "sizeBytes": 860259,
+  "sha256": "5fa64ef4bc4f63284fdacc1f05e01aea1582f30e71979013b6147c794b5e372b",
   "csp": {
     "present": true,
     "directives": {
       "default-src": "'none'",
-      "script-src": "sha256×7",
+      "script-src": "sha256×8",
       "style-src": "'unsafe-inline'",
       "img-src": "'self' data:",
       "base-uri": "'none'",
