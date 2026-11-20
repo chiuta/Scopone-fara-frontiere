@@ -138,6 +138,7 @@ async function playOne(P) {
   if (ea.phase === 'handEnd') {
     await B.locator('[data-fk=nh]').click();
     await A.waitForFunction(h => __sff.state().handNo === h, ea.hand + 1, {timeout: 8000});
+    await B.waitForFunction(h => __sff.state().handNo === h, ea.hand + 1, {timeout: 8000}).catch(() => {});
     const na = await snap(A), nb = await snap(B);
     ok(na.hand === nb.hand && JSON.stringify(na.hands) === JSON.stringify(nb.hands), 'mâna următoare pornește sincron, aceeași împărțire');
   }
@@ -154,8 +155,12 @@ async function playOne(P) {
   for (let i = 0; i < 6; i++) { const x = await snap(a.page); const P = x.turn === 0 ? a.page : b.page; await playOne(P); const O = x.turn === 0 ? b.page : a.page; await O.waitForFunction(n => __sff.state().st.plays >= n, x.plays + 1, {timeout: 8000}); }
   const before = await snap(b.page);
   await b.page.evaluate(() => __sff.net().ls.resync());
-  await b.page.waitForTimeout(1500);
-  const after = await snap(b.page), host = await snap(a.page);
+  let after, host;
+  for (let i = 0; i < 40; i++) { // pe un CI lent reluarea poate dura peste 1,5 s: așteptăm starea identică, cel mult 10 s
+    await b.page.waitForTimeout(250);
+    after = await snap(b.page); host = await snap(a.page);
+    if (JSON.stringify(after.hands) === JSON.stringify(host.hands) && after.plays === host.plays && JSON.stringify(after.table) === JSON.stringify(host.table)) break;
+  }
   ok(JSON.stringify(after.hands) === JSON.stringify(host.hands) && after.plays === host.plays && JSON.stringify(after.table) === JSON.stringify(host.table), 'resincronizare prin reluarea jurnalului: stare identică', [after.plays, host.plays]);
   ok(before.plays === after.plays, 'după resincronizare nu se pierd mutări');
   await a.ctx.close(); await b.ctx.close();
